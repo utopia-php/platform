@@ -3,6 +3,10 @@
 namespace Utopia\Platform;
 
 abstract class Service {
+    public const TYPE_HTTP = 'http';
+    public const TYPE_GRAPHQL = 'GraphQL';
+    public const TYPE_CLI = 'CLI';
+    
     protected array $actions;
     protected string $type;
 
@@ -10,6 +14,11 @@ abstract class Service {
     {
         $this->type = $type;
         return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
     }
 
     public function addAction(string $key, Action $service): Service

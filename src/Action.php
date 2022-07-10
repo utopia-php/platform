@@ -140,9 +140,7 @@ abstract class Action {
             'validator' => $validator,
             'description' => $description,
             'optional' => $optional,
-            'injections' => $injections,
-            'value' => null,
-            'order' => count($this->params) + count($this->injections),
+            'injections' => $injections
         ];
 
         return $this;
@@ -171,10 +169,7 @@ abstract class Action {
             throw new Exception('Injection already declared for ' . $injection);
         }
 
-        $this->injections[$injection] = [
-            'name' => $injection,
-            'order' => count($this->params) + count($this->injections),
-        ];
+        $this->injections[] = $injection;
 
         return $this;
     }
