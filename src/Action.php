@@ -17,14 +17,14 @@ abstract class Action {
     protected array $injections = [];
     protected array $labels = [];
 
-    /**
-     * Set the value of httpMethod
-     * 
-     * @param string $httpMethod
-     * 
-     * @return Action
-     */
-    public function http(String $path, string $method): self
+   /**
+    * Set Http method and path
+    *
+    * @param String $path
+    * @param string $method
+    * @return self
+    */
+    public function http(string $method, String $path): self
     {
         $this->httpMethod = $method;
         $this->httpPath = $path;
@@ -33,7 +33,9 @@ abstract class Action {
     }
 
     /**
-     * Get the value of httpPath
+     * Get httpPath
+     * 
+     * @return string
      */
     public function getHttpPath(): string
     {
@@ -42,6 +44,8 @@ abstract class Action {
 
     /**
      * Get the value of httpAliasPath
+     * 
+     * @return string
      */
     public function getHttpAliasPath(): string
     {
@@ -49,7 +53,11 @@ abstract class Action {
     }
 
     /**
-     * Set the value of httpAliasPath
+     * Set httpAlias path and params
+     *
+     * @param string $path
+     * @param array $params
+     * @return self
      */
     public function httpAlias(string $path, array $params =[]): self
     {
@@ -61,6 +69,8 @@ abstract class Action {
 
     /**
      * Get the value of description
+     * 
+     * @return string
      */
     public function getDescription(): string
     {
@@ -69,6 +79,10 @@ abstract class Action {
 
     /**
      * Set the value of description
+     * 
+     * @param string $description
+     * 
+     * @return self
      */
     public function desc(string $description): self
     {
@@ -79,6 +93,8 @@ abstract class Action {
 
     /**
      * Get the value of httpAliasParams
+     * 
+     * @return array
      */
     public function getHttpAliasParams(): array
     {
@@ -88,6 +104,8 @@ abstract class Action {
 
     /**
      * Get the value of groups
+     * 
+     * @return array
      */
     public function getGroups(): array
     {
@@ -95,7 +113,10 @@ abstract class Action {
     }
 
     /**
-     * Set the value of groups
+     * Set Groups
+     *
+     * @param array $groups
+     * @return self
      */
     public function groups(array $groups): self
     {
@@ -106,16 +127,21 @@ abstract class Action {
 
     /**
      * Get the value of callback
+     * 
+     * @return mixed
      */
-    public function getCallback()
+    public function getCallback(): mixed
     {
         return $this->callback;
     }
 
     /**
-     * Set the value of callback
+     * Set Callback
+     *
+     * @param mixed $callback
+     * @return self
      */
-    public function callback($callback): self
+    public function callback(mixed $callback): self
     {
         $this->callback = $callback;
 
@@ -124,6 +150,8 @@ abstract class Action {
 
     /**
      * Get the value of params
+     * 
+     * @return array
      */
     public function getParams(): array
     {
@@ -131,7 +159,15 @@ abstract class Action {
     }
 
     /**
-     * Set the value of params
+     * Set Param
+     *
+     * @param string $key
+     * @param mixed $default
+     * @param Validator|callable $validator
+     * @param string $description
+     * @param boolean $optional
+     * @param array $injections
+     * @return self
      */
     public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = []): self
     {
@@ -148,6 +184,8 @@ abstract class Action {
 
     /**
      * Get the value of injections
+     * 
+     * @return array
      */
     public function getInjections(): array
     {
@@ -176,6 +214,8 @@ abstract class Action {
 
     /**
      * Get the value of labels
+     * 
+     * @return array
      */
     public function getLabels(): array
     {
@@ -188,7 +228,7 @@ abstract class Action {
      * @param string $key
      * @param mixed $value
      *
-     * @return $this
+     * @return self
      */
     public function label(string $key, mixed $value): self
     {
@@ -199,6 +239,8 @@ abstract class Action {
 
     /**
      * Get the value of httpMethod
+     * 
+     * @return string
      */
     public function getHttpMethod(): string
     {
