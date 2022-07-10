@@ -7,6 +7,11 @@ use Utopia\App;
 abstract class Platform {
     protected array $services = [];
 
+    /**
+     * Initialize Application
+     *
+     * @return void
+     */
     public function init():void
     {
         foreach ($this->services as $key => $service) {
@@ -17,19 +22,17 @@ abstract class Platform {
         }
     }
 
+    /**
+     * Init HTTP service
+     *
+     * @param Service $service
+     * @return void
+     */
     protected function initHttp(Service $service): void
     {
         foreach ($service->getActions() as $key => $action) {
             /** @var Action $action */
-            switch($action->getHttpMethod()) {
-                // should I make App::addRoute(method, path) public, it's protected now
-                case 'post':
-                    $route = App::post($action->getHttpPath());
-                case 'get':
-                default:
-                    $route = App::get($action->getHttpPath());
-                    break;
-            }
+            $route = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
 
             $route->groups($action->getGroups());
             $route->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
@@ -50,23 +53,49 @@ abstract class Platform {
         }
     }
 
+    /**
+     * Add Service
+     *
+     * @param string $key
+     * @param Service $service
+     * @return Platform
+     */
     public function addService(string $key, Service $service): Platform
     {
         $this->services[$key] = $service;
         return $this;
     }
 
+    /**
+     * Remove Service
+     *
+     * @param string $key
+     * @return Platform
+     */
     public function removeService(string $key): Platform
     {
         unset($this->services[$key]);
         return $this;
     }
 
+
+    /**
+     * Get Service
+     *
+     * @param string $key
+     * @return Service|null
+     */
     public function getService(string $key): ?Service
     {
         return $this->services[$key] ?? null;
     }
 
+
+    /**
+     * Get Services
+     *
+     * @return array
+     */
     public function getServices(): array
     {
         return $this->services;

@@ -21,7 +21,7 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "0.19.*"
+        "utopia-php/framework": "dev-feat-public-add-route"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.3",
