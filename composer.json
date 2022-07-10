@@ -1,0 +1,30 @@
+{
+    "name": "utopia-php/platform",
+    "description": "Light and Fast Platform Library",
+    "type": "library",
+    "keywords": ["php","framework", "upf", "utopia", "cache"],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Eldad Fux",
+            "email": "eldad@appwrite.io"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Utopia\\Cache\\": "src/Cache"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Utopia\\Tests\\": "tests/Cache"}
+    },
+    "require": {
+        "php": ">=8.0",
+        "ext-json": "*",
+        "ext-redis": "*",
+        "utopia-php/framework": "0.19.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3",
+        "vimeo/psalm": "4.13.1"
+    }
+}
