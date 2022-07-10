@@ -115,7 +115,7 @@ abstract class Action {
     /**
      * Set the value of callback
      */
-    public function setCallback($callback): self
+    public function callback($callback): self
     {
         $this->callback = $callback;
 
