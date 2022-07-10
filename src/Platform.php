@@ -34,17 +34,3 @@ abstract class Platform {
         return $this->services;
     }
 }
-
-/*
-
-
-Service class:
-    type of service: http, cli,
-    container of action
-    name, addAction-> action instance
-
-action class:
-    addParam
-    addLabel
-    addDependency
-*/
