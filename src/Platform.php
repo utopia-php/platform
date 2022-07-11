@@ -24,7 +24,7 @@ abstract class Platform
      */
     public function init(string $type): void
     {
-        switch($type){
+        switch ($type) {
             case Service::TYPE_HTTP:
                 $this->initHttp();
                 break;
@@ -51,26 +51,26 @@ abstract class Platform
      */
     protected function initHttp(): void
     {
-        foreach($this->services[Service::TYPE_HTTP] as $service) {
+        foreach ($this->services[Service::TYPE_HTTP] as $service) {
             foreach ($service->getActions() as $action) {
                 /** @var Action $action */
                 $route = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
                 $route
                     ->groups($action->getGroups())
                     ->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
-    
+
                 foreach ($action->getParams() as $key => $param) {
                     $route->param($key, $param['default'], $param['validator'], $param['description'], $param['optional'], $param['injections']);
                 }
-    
+
                 foreach ($action->getInjections() as $injection) {
                     $route->inject($injection);
                 }
-    
+
                 foreach ($action->getLabels() as $key => $label) {
                     $route->label($key, $label);
                 }
-    
+
                 $route->action($action->getCallback());
             }
         }
@@ -94,7 +94,7 @@ abstract class Platform
                 foreach ($action->getParams() as $key => $param) {
                     $task->param($key, $param['default'], $param['validator'], $param['description'], $param['optional'], $param['injections']);
                 }
-    
+
                 foreach ($action->getLabels() as $key => $label) {
                     $task->label($key, $label);
                 }
@@ -109,7 +109,6 @@ abstract class Platform
      */
     protected function initGraphQL(): void
     {
-
     }
 
     /**
