@@ -146,7 +146,7 @@ abstract class Platform
      */
     public function getService(string $key): ?Service
     {
-        return $this->services[$key] ?? null;
+        return $this->services['all'][$key] ?? null;
     }
 
 
@@ -157,6 +157,6 @@ abstract class Platform
      */
     public function getServices(): array
     {
-        return $this->services;
+        return $this->services['all'];
     }
 }
