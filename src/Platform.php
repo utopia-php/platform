@@ -4,7 +4,8 @@ namespace Utopia\Platform;
 
 use Utopia\App;
 
-abstract class Platform {
+abstract class Platform
+{
     protected array $services = [];
 
     /**
@@ -12,10 +13,10 @@ abstract class Platform {
      *
      * @return void
      */
-    public function init():void
+    public function init(): void
     {
         foreach ($this->services as $key => $service) {
-            switch($service->getType()) {
+            switch ($service->getType()) {
                 case Service::TYPE_HTTP:
                     $this->initHttp($service);
             }
@@ -45,7 +46,7 @@ abstract class Platform {
                 $route->inject($injection);
             }
 
-            foreach($action->getLabels() as $key => $label) {
+            foreach ($action->getLabels() as $key => $label) {
                 $route->label($key, $label);
             }
 

@@ -2,11 +2,12 @@
 
 namespace Utopia\Platform;
 
-abstract class Service {
+abstract class Service
+{
     public const TYPE_HTTP = 'http';
     public const TYPE_GRAPHQL = 'GraphQL';
     public const TYPE_CLI = 'CLI';
-    
+
     protected array $actions;
     protected string $type;
 

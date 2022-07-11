@@ -5,7 +5,8 @@ namespace Utopia\Platform;
 use Utopia\Validator;
 use Exception;
 
-abstract class Action {
+abstract class Action
+{
     protected string $httpMethod;
     protected string $httpPath;
     protected string $httpAliasPath;
@@ -24,7 +25,7 @@ abstract class Action {
     * @param string $method
     * @return self
     */
-    public function http(string $method, String $path): self
+    public function http(string $method, string $path): self
     {
         $this->httpMethod = $method;
         $this->httpPath = $path;
@@ -34,7 +35,7 @@ abstract class Action {
 
     /**
      * Get httpPath
-     * 
+     *
      * @return string
      */
     public function getHttpPath(): string
@@ -44,7 +45,7 @@ abstract class Action {
 
     /**
      * Get the value of httpAliasPath
-     * 
+     *
      * @return string
      */
     public function getHttpAliasPath(): string
@@ -59,7 +60,7 @@ abstract class Action {
      * @param array $params
      * @return self
      */
-    public function httpAlias(string $path, array $params =[]): self
+    public function httpAlias(string $path, array $params = []): self
     {
         $this->httpAliasPath = $path;
         $this->httpAliasParams = $params;
@@ -69,7 +70,7 @@ abstract class Action {
 
     /**
      * Get the value of description
-     * 
+     *
      * @return string
      */
     public function getDescription(): string
@@ -79,9 +80,9 @@ abstract class Action {
 
     /**
      * Set the value of description
-     * 
+     *
      * @param string $description
-     * 
+     *
      * @return self
      */
     public function desc(string $description): self
@@ -93,7 +94,7 @@ abstract class Action {
 
     /**
      * Get the value of httpAliasParams
-     * 
+     *
      * @return array
      */
     public function getHttpAliasParams(): array
@@ -104,7 +105,7 @@ abstract class Action {
 
     /**
      * Get the value of groups
-     * 
+     *
      * @return array
      */
     public function getGroups(): array
@@ -127,7 +128,7 @@ abstract class Action {
 
     /**
      * Get the value of callback
-     * 
+     *
      * @return mixed
      */
     public function getCallback(): mixed
@@ -150,7 +151,7 @@ abstract class Action {
 
     /**
      * Get the value of params
-     * 
+     *
      * @return array
      */
     public function getParams(): array
@@ -184,7 +185,7 @@ abstract class Action {
 
     /**
      * Get the value of injections
-     * 
+     *
      * @return array
      */
     public function getInjections(): array
@@ -214,7 +215,7 @@ abstract class Action {
 
     /**
      * Get the value of labels
-     * 
+     *
      * @return array
      */
     public function getLabels(): array
@@ -239,7 +240,7 @@ abstract class Action {
 
     /**
      * Get the value of httpMethod
-     * 
+     *
      * @return string
      */
     public function getHttpMethod(): string
