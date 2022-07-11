@@ -2,7 +2,6 @@
 
 namespace Utopia\Platform;
 
-use Exception;
 use Utopia\App;
 use Utopia\CLI\CLI;
 
