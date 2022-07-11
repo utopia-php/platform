@@ -7,10 +7,10 @@ use Exception;
 
 abstract class Action
 {
-    protected string $httpMethod;
-    protected string $httpPath;
-    protected string $httpAliasPath;
-    protected string $desc;
+    protected ?string $httpMethod = null;
+    protected ?string $httpPath = null;
+    protected ?string $httpAliasPath = null;
+    protected ?string $desc = null;
     protected array $httpAliasParams = [];
     protected array $groups = [];
     protected $callback;
@@ -48,7 +48,7 @@ abstract class Action
      *
      * @return string
      */
-    public function getHttpAliasPath(): string
+    public function getHttpAliasPath(): ?string
     {
         return $this->httpAliasPath;
     }
@@ -73,7 +73,7 @@ abstract class Action
      *
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }

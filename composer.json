@@ -12,10 +12,12 @@
         }
     ],
     "autoload": {
-        "psr-4": {"Utopia\\Cache\\": "src/Cache"}
+        "psr-4": {"Utopia\\Platform\\": "src/Platform"}
     },
     "autoload-dev": {
-        "psr-4": {"Utopia\\Tests\\": "tests/Cache"}
+        "psr-4": {
+            "Utopia\\Tests\\": "tests/Platform"
+        }
     },
     "require": {
         "php": ">=8.0",
@@ -29,6 +31,7 @@
         "squizlabs/php_codesniffer": "^3.6"
     },
     "scripts": {
-        "format": "vendor/bin/phpcbf"
+        "format": "vendor/bin/phpcbf",
+        "test": "docker-compose up -d && sleep 10 && docker-compose exec web vendor/bin/phpunit --configuration phpunit.xml"
     }
 }

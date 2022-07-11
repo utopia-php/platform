@@ -21,7 +21,7 @@ abstract class Platform
      *
      * @return void
      */
-    public function init(string $type): void
+    public function init(string $type = null): void
     {
         switch ($type) {
             case Service::TYPE_HTTP:
@@ -54,9 +54,11 @@ abstract class Platform
             foreach ($service->getActions() as $action) {
                 /** @var Action $action */
                 $route = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
-                $route
-                    ->groups($action->getGroups())
-                    ->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
+                $route->groups($action->getGroups());
+                
+                if(!empty($action->getHttpAliasPath())) {
+                    $route->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
+                }
 
                 foreach ($action->getParams() as $key => $param) {
                     $route->param($key, $param['default'], $param['validator'], $param['description'], $param['optional'], $param['injections']);
@@ -120,7 +122,7 @@ abstract class Platform
     public function addService(string $key, Service $service): Platform
     {
         $this->services['all'][$key] = $service;
-        $this->services[$service->getType()] = $service;
+        $this->services[$service->getType()][$key] = $service;
         return $this;
     }
 
