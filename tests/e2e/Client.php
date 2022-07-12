@@ -6,15 +6,15 @@ use Exception;
 
 class Client
 {
-    const METHOD_GET = 'GET';
-    const METHOD_POST = 'POST';
-    const METHOD_PUT = 'PUT';
-    const METHOD_PATCH = 'PATCH';
-    const METHOD_DELETE = 'DELETE';
-    const METHOD_HEAD = 'HEAD';
-    const METHOD_OPTIONS = 'OPTIONS';
-    const METHOD_CONNECT = 'CONNECT';
-    const METHOD_TRACE = 'TRACE';
+    protected const METHOD_GET = 'GET';
+    protected const METHOD_POST = 'POST';
+    protected const METHOD_PUT = 'PUT';
+    protected const METHOD_PATCH = 'PATCH';
+    protected const METHOD_DELETE = 'DELETE';
+    protected const METHOD_HEAD = 'HEAD';
+    protected const METHOD_OPTIONS = 'OPTIONS';
+    protected const METHOD_CONNECT = 'CONNECT';
+    protected const METHOD_TRACE = 'TRACE';
 
     /**
      * Service host name

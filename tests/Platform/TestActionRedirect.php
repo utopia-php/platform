@@ -11,7 +11,7 @@ class TestActionRedirect extends Action
         $this->httpPath = '/redirect';
         $this->httpMethod = 'GET';
         $this->inject('response');
-        $this->callback(function($response) {
+        $this->callback(function ($response) {
             $this->action($response);
         });
     }

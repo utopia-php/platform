@@ -55,8 +55,8 @@ abstract class Platform
                 /** @var Action $action */
                 $route = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
                 $route->groups($action->getGroups());
-                
-                if(!empty($action->getHttpAliasPath())) {
+
+                if (!empty($action->getHttpAliasPath())) {
                     $route->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
                 }
 

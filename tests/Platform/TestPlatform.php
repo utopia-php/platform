@@ -6,7 +6,7 @@ use Utopia\Platform\Platform;
 
 class TestPlatform extends Platform
 {
-    function __construct()
+    public function __construct()
     {
         $this->addService('testService', new TestService());
     }
