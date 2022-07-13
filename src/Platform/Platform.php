@@ -54,7 +54,9 @@ abstract class Platform
             foreach ($service->getActions() as $action) {
                 /** @var Action $action */
                 $route = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
-                $route->groups($action->getGroups());
+                $route
+                    ->groups($action->getGroups())
+                    ->desc($action->getDesc() ?? '');
 
                 if (!empty($action->getHttpAliasPath())) {
                     $route->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
@@ -90,14 +92,14 @@ abstract class Platform
     {
         $this->cli ??= new CLI();
         foreach ($this->services[Service::TYPE_CLI] as $service) {
-            foreach ($service as $key => $action) {
+            foreach ($service->getActions() as $key => $action) {
                 $task = $this->cli->task($key);
                 $task
-                    ->desc($action->getDesc())
+                    ->desc($action->getDesc() ?? '')
                     ->action($action->getCallback());
 
                 foreach ($action->getParams() as $key => $param) {
-                    $task->param($key, $param['default'], $param['validator'], $param['description'], $param['optional'], $param['injections']);
+                    $task->param($key, $param['default'], $param['validator'], $param['description'], $param['optional']);
                 }
 
                 foreach ($action->getLabels() as $key => $label) {
@@ -163,5 +165,23 @@ abstract class Platform
     public function getServices(): array
     {
         return $this->services['all'];
+    }
+
+    /**
+     * Get the value of cli
+     */
+    public function getCli(): CLI
+    {
+        return $this->cli;
+    }
+
+    /**
+     * Set the value of cli
+     */
+    public function setCli(CLI $cli): self
+    {
+        $this->cli = $cli;
+
+        return $this;
     }
 }

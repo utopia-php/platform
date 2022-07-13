@@ -85,9 +85,9 @@ abstract class Action
      *
      * @return string
      */
-    public function getDescription(): ?string
+    public function getDesc(): ?string
     {
-        return $this->description;
+        return $this->desc;
     }
 
     /**
