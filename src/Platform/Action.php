@@ -7,6 +7,17 @@ use Exception;
 
 abstract class Action
 {
+    /**
+     * Request method constants
+     */
+    public const REQUEST_METHOD_GET        = 'GET';
+    public const REQUEST_METHOD_POST       = 'POST';
+    public const REQUEST_METHOD_PUT        = 'PUT';
+    public const REQUEST_METHOD_PATCH      = 'PATCH';
+    public const REQUEST_METHOD_DELETE     = 'DELETE';
+    public const REQUEST_METHOD_OPTIONS    = 'OPTIONS';
+    public const REQUEST_METHOD_HEAD       = 'HEAD';
+
     protected ?string $httpMethod = null;
     protected ?string $httpPath = null;
     protected ?string $httpAliasPath = null;
@@ -14,6 +25,7 @@ abstract class Action
     protected array $httpAliasParams = [];
     protected array $groups = [];
     protected $callback;
+    protected array $httpOptions = [];
     protected array $params = [];
     protected array $injections = [];
     protected array $labels = [];
@@ -172,13 +184,15 @@ abstract class Action
      */
     public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = []): self
     {
-        $this->params[$key] = [
+        $param = [
             'default' => $default,
             'validator' => $validator,
             'description' => $description,
             'optional' => $optional,
             'injections' => $injections
         ];
+        $this->httpOptions['param:' . $key] = array_merge($param, ['type' => 'param']);
+        $this->params[$key] = $param;
 
         return $this;
     }
@@ -208,6 +222,10 @@ abstract class Action
             throw new Exception('Injection already declared for ' . $injection);
         }
 
+        $this->httpOptions['injection:' . $injection] = [
+            'name' => $injection,
+            'type' => 'injection'
+        ];
         $this->injections[] = $injection;
 
         return $this;
@@ -246,5 +264,15 @@ abstract class Action
     public function getHttpMethod(): string
     {
         return $this->httpMethod;
+    }
+
+    /**
+     * Get Http Options
+     *
+     * @return array
+     */
+    public function getHttpOptions(): array
+    {
+        return $this->httpOptions;
     }
 }

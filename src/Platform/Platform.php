@@ -60,12 +60,16 @@ abstract class Platform
                     $route->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
                 }
 
-                foreach ($action->getParams() as $key => $param) {
-                    $route->param($key, $param['default'], $param['validator'], $param['description'], $param['optional'], $param['injections']);
-                }
-
-                foreach ($action->getInjections() as $injection) {
-                    $route->inject($injection);
+                foreach ($action->getHttpOptions() as $key => $option) {
+                    switch ($option['type']) {
+                        case 'param':
+                            $key = substr($key, stripos($key, ':') + 1);
+                            $route->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                            break;
+                        case 'injection':
+                            $route->inject($option['name']);
+                            break;
+                    }
                 }
 
                 foreach ($action->getLabels() as $key => $label) {
