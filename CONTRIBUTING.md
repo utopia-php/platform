@@ -48,19 +48,37 @@ $ git checkout -b [name_of_your_new_branch]
 
 3. Work - commit - repeat ( be sure to be in your branch )
 
-4. Push changes to GitHub
+4. Before you push your changes, make sure your code follows the `PSR12` coding standards , which is the standard Appwrite follows currently. You can easily do this by running the formatter.
+
+```bash
+composer format <your file path>
+```
+
+Now, go a step further by running the linter by the following command to manually fix the issues the formatter wasn't able to fix.
+
+```bash
+composer lint <your file path>
+```
+
+This will give you a list of errors for you to rectify , if there is an instance you need more information on the errors being displayed you can pass in additional command line arguments. More list of available arguments can be found [here](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage). A very useful command line argument is `--report=diff`. This will give you the expected changes by the linter for easy fixing of formatting issues.
+
+```bash
+composer lint --report=diff <your file path>
+```
+
+5. Push changes to GitHub
 
 ```
 $ git push origin [name_of_your_new_branch]
 ```
 
-5. Submit your changes for review
+6. Submit your changes for review
    If you go to your repository on GitHub, you'll see a `Compare & pull request` button. Click on that button.
-6. Start a Pull Request
+7. Start a Pull Request
    Now submit the pull request and click on `Create pull request`.
-7. Get a code review approval/reject
-8. After approval, merge your PR
-9. GitHub will automatically delete the branch after the merge is done. (they can still be restored).
+8. Get a code review approval/reject
+9. After approval, merge your PR
+10. GitHub will automatically delete the branch after the merge is done. (they can still be restored).
 
 ## Introducing New Features
 
