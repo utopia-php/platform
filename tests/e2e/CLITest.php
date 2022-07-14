@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Utopia PHP Framework
  *
@@ -45,5 +46,4 @@ class CLITest extends TestCase
         $this->assertEquals('me@example.com-item1-item2', $result);
         $this->assertCount(2, $cli->getTasks());
     }
-
 }

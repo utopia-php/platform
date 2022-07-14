@@ -14,12 +14,12 @@ class TestActionCLI extends Action
             ->param('email', null, new Text(0), '')
             ->param('list', null, new ArrayList(new Text(256)), 'List of strings')
             ->callback(function ($email, $list) {
-            $this->action($email, $list);
-        });
+                $this->action($email, $list);
+            });
     }
 
     public function action($email, $list)
     {
-        echo $email.'-'.implode('-', $list);
+        echo $email . '-' . implode('-', $list);
     }
 }
