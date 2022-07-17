@@ -7,6 +7,8 @@ use Exception;
 
 abstract class Action
 {
+    use HttpScope;
+
     /**
      * Request method constants
      */
@@ -18,67 +20,14 @@ abstract class Action
     public const REQUEST_METHOD_OPTIONS    = 'OPTIONS';
     public const REQUEST_METHOD_HEAD       = 'HEAD';
 
-    protected ?string $httpMethod = null;
-    protected ?string $httpPath = null;
-    protected ?string $httpAliasPath = null;
     protected ?string $desc = null;
-    protected array $httpAliasParams = [];
     protected array $groups = [];
     protected $callback;
-    protected array $httpOptions = [];
+    protected array $options = [];
     protected array $params = [];
     protected array $injections = [];
     protected array $labels = [];
 
-   /**
-    * Set Http method and path
-    *
-    * @param String $path
-    * @param string $method
-    * @return self
-    */
-    public function http(string $method, string $path): self
-    {
-        $this->httpMethod = $method;
-        $this->httpPath = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get httpPath
-     *
-     * @return string
-     */
-    public function getHttpPath(): string
-    {
-        return $this->httpPath;
-    }
-
-    /**
-     * Get the value of httpAliasPath
-     *
-     * @return string
-     */
-    public function getHttpAliasPath(): ?string
-    {
-        return $this->httpAliasPath;
-    }
-
-    /**
-     * Set httpAlias path and params
-     *
-     * @param string $path
-     * @param array $params
-     * @return self
-     */
-    public function httpAlias(string $path, array $params = []): self
-    {
-        $this->httpAliasPath = $path;
-        $this->httpAliasParams = $params;
-
-        return $this;
-    }
 
     /**
      * Get the value of description
@@ -103,17 +52,6 @@ abstract class Action
 
         return $this;
     }
-
-    /**
-     * Get the value of httpAliasParams
-     *
-     * @return array
-     */
-    public function getHttpAliasParams(): array
-    {
-        return $this->httpAliasParams;
-    }
-
 
     /**
      * Get the value of groups
@@ -191,7 +129,7 @@ abstract class Action
             'optional' => $optional,
             'injections' => $injections
         ];
-        $this->httpOptions['param:' . $key] = array_merge($param, ['type' => 'param']);
+        $this->options['param:' . $key] = array_merge($param, ['type' => 'param']);
         $this->params[$key] = $param;
 
         return $this;
@@ -222,7 +160,7 @@ abstract class Action
             throw new Exception('Injection already declared for ' . $injection);
         }
 
-        $this->httpOptions['injection:' . $injection] = [
+        $this->options['injection:' . $injection] = [
             'name' => $injection,
             'type' => 'injection'
         ];
@@ -257,22 +195,12 @@ abstract class Action
     }
 
     /**
-     * Get the value of httpMethod
-     *
-     * @return string
-     */
-    public function getHttpMethod(): string
-    {
-        return $this->httpMethod;
-    }
-
-    /**
      * Get Http Options
      *
      * @return array
      */
-    public function getHttpOptions(): array
+    public function getOptions(): array
     {
-        return $this->httpOptions;
+        return $this->options;
     }
 }

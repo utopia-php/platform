@@ -4,6 +4,7 @@ namespace Utopia\Platform;
 
 use Utopia\App;
 use Utopia\CLI\CLI;
+use Exception;
 
 abstract class Platform
 {
@@ -62,7 +63,7 @@ abstract class Platform
                     $route->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
                 }
 
-                foreach ($action->getHttpOptions() as $key => $option) {
+                foreach ($action->getOptions() as $key => $option) {
                     switch ($option['type']) {
                         case 'param':
                             $key = substr($key, stripos($key, ':') + 1);
@@ -149,10 +150,13 @@ abstract class Platform
      * Get Service
      *
      * @param string $key
-     * @return Service|null
+     * @return Service
      */
-    public function getService(string $key): ?Service
+    public function getService(string $key): Service
     {
+        if (empty($this->services['all'][$key])) {
+            throw new Exception('Service ' . $key . ' not found');
+        }
         return $this->services['all'][$key] ?? null;
     }
 
