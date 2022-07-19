@@ -35,7 +35,7 @@ abstract class Platform
                 $this->initGraphQL();
                 break;
             default:
-                throw new Exception("Please provide which type of initialization you want to carry out.")
+                throw new Exception("Please provide which type of initialization you want to carry out.");
         }
     }
 
