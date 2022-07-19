@@ -2,7 +2,7 @@
 
 namespace Utopia\Platform\Scope;
 
-trait HttpScope
+trait Http
 {
     protected ?string $httpMethod = null;
     protected ?string $httpPath = null;

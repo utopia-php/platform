@@ -4,22 +4,22 @@ namespace Utopia\Platform;
 
 use Utopia\Validator;
 use Exception;
-use Utopia\Platform\Scope\HttpScope;
+use Utopia\Platform\Scope\Http;
 
 abstract class Action
 {
-    use HttpScope;
+    use Http;
 
     /**
      * Request method constants
      */
-    public const REQUEST_METHOD_GET        = 'GET';
-    public const REQUEST_METHOD_POST       = 'POST';
-    public const REQUEST_METHOD_PUT        = 'PUT';
-    public const REQUEST_METHOD_PATCH      = 'PATCH';
-    public const REQUEST_METHOD_DELETE     = 'DELETE';
-    public const REQUEST_METHOD_OPTIONS    = 'OPTIONS';
-    public const REQUEST_METHOD_HEAD       = 'HEAD';
+    public const HTTP_REQUEST_METHOD_GET        = 'GET';
+    public const HTTP_REQUEST_METHOD_POST       = 'POST';
+    public const HTTP_REQUEST_METHOD_PUT        = 'PUT';
+    public const HTTP_REQUEST_METHOD_PATCH      = 'PATCH';
+    public const HTTP_REQUEST_METHOD_DELETE     = 'DELETE';
+    public const HTTP_REQUEST_METHOD_OPTIONS    = 'OPTIONS';
+    public const HTTP_REQUEST_METHOD_HEAD       = 'HEAD';
 
     protected ?string $desc = null;
     protected array $groups = [];
