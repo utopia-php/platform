@@ -22,7 +22,7 @@ abstract class Platform
      *
      * @return void
      */
-    public function init(string $type = null): void
+    public function init(string $type): void
     {
         switch ($type) {
             case Service::TYPE_HTTP:
@@ -34,12 +34,8 @@ abstract class Platform
             case Service::TYPE_GRAPHQL:
                 $this->initGraphQL();
                 break;
-            case 'all':
             default:
-                $this->initHttp();
-                $this->initCli();
-                $this->initGraphQL();
-                break;
+                throw new Exception("Please provide which type of initialization you want to carry out.")
         }
     }
 
