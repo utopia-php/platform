@@ -38,4 +38,15 @@ class ResponseTest extends TestCase
         $response = $this->client->call(Client::METHOD_GET, '/redirect');
         $this->assertEquals('Hello World!', $response['body']);
     }
+
+    public function testHook()
+    {
+        $response = $this->client->call(Client::METHOD_GET, '/');
+        $this->assertEquals('Hello World!', $response['body']);
+        $this->assertEquals('init-called', $response['headers']['x-init']);
+
+        $response = $this->client->call(Client::METHOD_GET, '/chunked');
+        $this->assertEquals('Hello World!', $response['body']);
+        $this->assertEquals('', ($response['headers']['x-init'] ?? ''));
+    }
 }

@@ -3,22 +3,23 @@
 namespace Utopia\Tests;
 
 use Utopia\Platform\Action;
+use Utopia\Response;
 
-class TestActionRoot extends Action
+class TestActionInit extends Action
 {
     public function __construct()
     {
-        $this->httpPath = '/';
+        $this->type = Action::TYPE_INIT;
         $this->groups(['test']);
-        $this->httpMethod = 'GET';
         $this->inject('response');
         $this->callback(function ($response) {
             $this->action($response);
         });
     }
 
-    public function action($response)
+    public function action(Response $response)
     {
-        $response->send('Hello World!');
+
+        $response->addHeader('x-init', 'init-called');
     }
 }
