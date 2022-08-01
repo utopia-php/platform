@@ -6,8 +6,6 @@ use Utopia\Platform\Scope\HttpService;
 
 abstract class Service
 {
-    use HttpService;
-
     public const TYPE_HTTP = 'http';
     public const TYPE_GRAPHQL = 'GraphQL';
     public const TYPE_CLI = 'CLI';
