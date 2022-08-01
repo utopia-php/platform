@@ -21,6 +21,12 @@ abstract class Action
     public const HTTP_REQUEST_METHOD_OPTIONS    = 'OPTIONS';
     public const HTTP_REQUEST_METHOD_HEAD       = 'HEAD';
 
+    public const TYPE_DEFAULT           = 'Default';
+    public const TYPE_INIT              = 'Init';
+    public const TYPE_SHUTDOWN          = 'Shutdown';
+    public const TYPE_ERROR             = 'Error';
+    public const TYPE_OPTIONS           = 'Options';
+
     protected ?string $desc = null;
     protected array $groups = [];
     protected $callback;
@@ -28,7 +34,29 @@ abstract class Action
     protected array $params = [];
     protected array $injections = [];
     protected array $labels = [];
+    protected string $type = self::TYPE_DEFAULT;
 
+    /**
+     * Set Type
+     *
+     * @param string $type
+     * @return self
+     */
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * Get Type
+     *
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
 
     /**
      * Get the value of description

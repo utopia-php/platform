@@ -5,6 +5,7 @@ namespace Utopia\Platform;
 use Utopia\App;
 use Utopia\CLI\CLI;
 use Exception;
+use Utopia\Route;
 
 abstract class Platform
 {
@@ -48,68 +49,56 @@ abstract class Platform
     protected function initHttp(): void
     {
         foreach ($this->services[Service::TYPE_HTTP] as $service) {
-            foreach ($service->getHooks() as $key => $actions) {
-                foreach ($actions as $action) {
-                    /** @var Action $action */
-                    switch ($key) {
-                        case 'init':
-                            $hook = App::init();
-                            break;
-                        case 'error':
-                            $hook = App::error();
-                            break;
-                        case 'option':
-                            $hook = App::options();
-                            break;
-                        case 'shutdown':
-                            $hook = App::shutdown();
-                            break;
-                    }
-                    $hook
-                        ->desc($action->getDesc())
-                        ->groups($action->getGroups());
-                    foreach ($action->getOptions() as $key => $option) {
-                        switch ($option['type']) {
-                            case 'param':
-                                $key = substr($key, stripos($key, ':') + 1);
-                                $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
-                                break;
-                            case 'injection':
-                                $hook->inject($option['name']);
-                                break;
-                        }
-                    }
-                    $hook->action($action->getCallback());
-                }
-            }
             foreach ($service->getActions() as $action) {
                 /** @var Action $action */
-                $route = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
-                $route
+                switch ($action->getType()) {
+                    case Action::TYPE_INIT:
+                        $hook = App::init();
+                        break;
+                    case Action::TYPE_ERROR:
+                        $hook = App::error();
+                        break;
+                    case Action::TYPE_OPTIONS:
+                        $hook = App::options();
+                        break;
+                    case Action::TYPE_SHUTDOWN:
+                        $hook = App::shutdown();
+                        break;
+                    case Action::TYPE_DEFAULT:
+                    default:
+                        $hook = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
+                        break;
+                }
+
+                $hook
                     ->groups($action->getGroups())
                     ->desc($action->getDesc() ?? '');
 
-                if (!empty($action->getHttpAliasPath())) {
-                    $route->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
+                if ($hook instanceof Route) {
+                    if (!empty($action->getHttpAliasPath())) {
+                        $hook->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
+                    }
                 }
 
                 foreach ($action->getOptions() as $key => $option) {
                     switch ($option['type']) {
                         case 'param':
                             $key = substr($key, stripos($key, ':') + 1);
-                            $route->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
                             break;
                         case 'injection':
-                            $route->inject($option['name']);
+                            $hook->inject($option['name']);
                             break;
                     }
                 }
 
-                foreach ($action->getLabels() as $key => $label) {
-                    $route->label($key, $label);
+                if ($hook instanceof Route) {
+                    foreach ($action->getLabels() as $key => $label) {
+                        $hook->label($key, $label);
+                    }
                 }
 
-                $route->action($action->getCallback());
+                $hook->action($action->getCallback());
             }
         }
     }
