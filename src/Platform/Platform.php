@@ -48,6 +48,40 @@ abstract class Platform
     protected function initHttp(): void
     {
         foreach ($this->services[Service::TYPE_HTTP] as $service) {
+            foreach ($service->getHooks() as $key => $actions) {
+                foreach ($actions as $action) {
+                    /** @var Action $action */
+                    switch ($key) {
+                        case 'init':
+                            $hook = App::init();
+                            break;
+                        case 'error':
+                            $hook = App::error();
+                            break;
+                        case 'option':
+                            $hook = App::options();
+                            break;
+                        case 'shutdown':
+                            $hook = App::shutdown();
+                            break;
+                    }
+                    $hook
+                        ->desc($action->getDesc())
+                        ->groups($action->getGroups());
+                    foreach ($action->getOptions() as $key => $option) {
+                        switch ($option['type']) {
+                            case 'param':
+                                $key = substr($key, stripos($key, ':') + 1);
+                                $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                                break;
+                            case 'injection':
+                                $hook->inject($option['name']);
+                                break;
+                        }
+                    }
+                    $hook->action($action->getCallback());
+                }
+            }
             foreach ($service->getActions() as $action) {
                 /** @var Action $action */
                 $route = App::addRoute($action->getHttpMethod(), $action->getHttpPath());

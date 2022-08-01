@@ -23,7 +23,7 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "dev-feat-public-add-route as 0.19.21",
+        "utopia-php/framework": "dev-master as 0.19.21",
         "utopia-php/cli": "0.13.*"
     },
     "require-dev": {
