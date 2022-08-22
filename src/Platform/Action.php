@@ -4,11 +4,11 @@ namespace Utopia\Platform;
 
 use Utopia\Validator;
 use Exception;
-use Utopia\Platform\Scope\Http;
+use Utopia\Platform\Scope\HTTP;
 
 abstract class Action
 {
-    use Http;
+    use HTTP;
 
     /**
      * Request method constants
