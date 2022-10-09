@@ -15,7 +15,7 @@ This library contains abstract classes that assist in implementing services and 
 Install using composer
 
 ```
-composer require utopia-php/config
+composer require utopia-php/platform
 ```
 
 Implementing a HTTP services using platform.
