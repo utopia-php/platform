@@ -85,13 +85,6 @@ All code contributions - including those of people having commit access - must g
 
 We truly ❤️ pull requests! If you wish to help, you can learn more about how you can contribute to this project in the [contribution guide](CONTRIBUTING.md).
 
-## Authors
-
-**Damodar Lohani**
-
-+ [https://twitter.com/lohanidamodar](https://twitter.com/lohanidamodar)
-+ [https://github.com/lohanidamodar](https://github.com/lohanidamodar)
-
 ## Copyright and license
 
 The MIT License (MIT) [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
