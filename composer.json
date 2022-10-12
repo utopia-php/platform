@@ -33,7 +33,7 @@
     },
     "scripts": {
         "format": "vendor/bin/pint",
-        "lint": "vendor/bin/pint",
+        "lint": "vendor/bin/pint --test",
         "test": "docker-compose up -d && sleep 10 && docker-compose exec web vendor/bin/phpunit --configuration phpunit.xml"
     }
 }
