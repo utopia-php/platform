@@ -2,9 +2,9 @@
 
 namespace Utopia\Platform;
 
-use Utopia\Validator;
 use Exception;
 use Utopia\Platform\Scope\HTTP;
+use Utopia\Validator;
 
 abstract class Action
 {
@@ -13,38 +13,56 @@ abstract class Action
     /**
      * Request method constants
      */
-    public const HTTP_REQUEST_METHOD_GET        = 'GET';
-    public const HTTP_REQUEST_METHOD_POST       = 'POST';
-    public const HTTP_REQUEST_METHOD_PUT        = 'PUT';
-    public const HTTP_REQUEST_METHOD_PATCH      = 'PATCH';
-    public const HTTP_REQUEST_METHOD_DELETE     = 'DELETE';
-    public const HTTP_REQUEST_METHOD_OPTIONS    = 'OPTIONS';
-    public const HTTP_REQUEST_METHOD_HEAD       = 'HEAD';
+    public const HTTP_REQUEST_METHOD_GET = 'GET';
 
-    public const TYPE_DEFAULT           = 'Default';
-    public const TYPE_INIT              = 'Init';
-    public const TYPE_SHUTDOWN          = 'Shutdown';
-    public const TYPE_ERROR             = 'Error';
-    public const TYPE_OPTIONS           = 'Options';
+    public const HTTP_REQUEST_METHOD_POST = 'POST';
+
+    public const HTTP_REQUEST_METHOD_PUT = 'PUT';
+
+    public const HTTP_REQUEST_METHOD_PATCH = 'PATCH';
+
+    public const HTTP_REQUEST_METHOD_DELETE = 'DELETE';
+
+    public const HTTP_REQUEST_METHOD_OPTIONS = 'OPTIONS';
+
+    public const HTTP_REQUEST_METHOD_HEAD = 'HEAD';
+
+    public const TYPE_DEFAULT = 'Default';
+
+    public const TYPE_INIT = 'Init';
+
+    public const TYPE_SHUTDOWN = 'Shutdown';
+
+    public const TYPE_ERROR = 'Error';
+
+    public const TYPE_OPTIONS = 'Options';
 
     protected ?string $desc = null;
+
     protected array $groups = [];
+
     protected $callback;
+
     protected array $options = [];
+
     protected array $params = [];
+
     protected array $injections = [];
+
     protected array $labels = [];
+
     protected string $type = self::TYPE_DEFAULT;
 
     /**
      * Set Type
      *
-     * @param string $type
+     * @param  string  $type
      * @return self
      */
     public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -71,8 +89,7 @@ abstract class Action
     /**
      * Set the value of description
      *
-     * @param string $description
-     *
+     * @param  string  $description
      * @return self
      */
     public function desc(string $description): self
@@ -95,7 +112,7 @@ abstract class Action
     /**
      * Set Groups
      *
-     * @param array $groups
+     * @param  array  $groups
      * @return self
      */
     public function groups(array $groups): self
@@ -118,7 +135,7 @@ abstract class Action
     /**
      * Set Callback
      *
-     * @param mixed $callback
+     * @param  mixed  $callback
      * @return self
      */
     public function callback(mixed $callback): self
@@ -141,12 +158,12 @@ abstract class Action
     /**
      * Set Param
      *
-     * @param string $key
-     * @param mixed $default
-     * @param Validator|callable $validator
-     * @param string $description
-     * @param boolean $optional
-     * @param array $injections
+     * @param  string  $key
+     * @param  mixed  $default
+     * @param  Validator|callable  $validator
+     * @param  string  $description
+     * @param  bool  $optional
+     * @param  array  $injections
      * @return self
      */
     public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = []): self
@@ -156,9 +173,9 @@ abstract class Action
             'validator' => $validator,
             'description' => $description,
             'optional' => $optional,
-            'injections' => $injections
+            'injections' => $injections,
         ];
-        $this->options['param:' . $key] = array_merge($param, ['type' => 'param']);
+        $this->options['param:'.$key] = array_merge($param, ['type' => 'param']);
         $this->params[$key] = $param;
 
         return $this;
@@ -177,21 +194,20 @@ abstract class Action
     /**
      * Inject
      *
-     * @param string $injection
+     * @param  string  $injection
+     * @return self
      *
      * @throws Exception
-     *
-     * @return self
      */
     public function inject(string $injection): self
     {
         if (array_key_exists($injection, $this->injections)) {
-            throw new Exception('Injection already declared for ' . $injection);
+            throw new Exception('Injection already declared for '.$injection);
         }
 
-        $this->options['injection:' . $injection] = [
+        $this->options['injection:'.$injection] = [
             'name' => $injection,
-            'type' => 'injection'
+            'type' => 'injection',
         ];
         $this->injections[] = $injection;
 
@@ -211,9 +227,8 @@ abstract class Action
     /**
      * Add Label
      *
-     * @param string $key
-     * @param mixed $value
-     *
+     * @param  string  $key
+     * @param  mixed  $value
      * @return self
      */
     public function label(string $key, mixed $value): self

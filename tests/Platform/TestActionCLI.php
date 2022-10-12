@@ -3,8 +3,8 @@
 namespace Utopia\Tests;
 
 use Utopia\Platform\Action;
-use Utopia\Validator\Text;
 use Utopia\Validator\ArrayList;
+use Utopia\Validator\Text;
 
 class TestActionCLI extends Action
 {
@@ -20,6 +20,6 @@ class TestActionCLI extends Action
 
     public function action($email, $list)
     {
-        echo $email . '-' . implode('-', $list);
+        echo $email.'-'.implode('-', $list);
     }
 }

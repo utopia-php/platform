@@ -19,7 +19,6 @@ class TestActionInit extends Action
 
     public function action(Response $response)
     {
-
         $response->addHeader('x-init', 'init-called');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Utopia\Platform;
 
+use Exception;
 use Utopia\App;
 use Utopia\CLI\CLI;
-use Exception;
 use Utopia\Route;
 
 abstract class Platform
@@ -13,7 +13,7 @@ abstract class Platform
         'all' => [],
         Service::TYPE_CLI => [],
         Service::TYPE_HTTP => [],
-        Service::TYPE_GRAPHQL => []
+        Service::TYPE_GRAPHQL => [],
     ];
 
     protected CLI $cli;
@@ -36,14 +36,14 @@ abstract class Platform
                 $this->initGraphQL();
                 break;
             default:
-                throw new Exception("Please provide which type of initialization you want to carry out.");
+                throw new Exception('Please provide which type of initialization you want to carry out.');
         }
     }
 
     /**
      * Init HTTP service
      *
-     * @param Service $service
+     * @param  Service  $service
      * @return void
      */
     protected function initHttp(): void
@@ -75,7 +75,7 @@ abstract class Platform
                     ->desc($action->getDesc() ?? '');
 
                 if ($hook instanceof Route) {
-                    if (!empty($action->getHttpAliasPath())) {
+                    if (! empty($action->getHttpAliasPath())) {
                         $hook->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
                     }
                 }
@@ -141,44 +141,45 @@ abstract class Platform
     /**
      * Add Service
      *
-     * @param string $key
-     * @param Service $service
+     * @param  string  $key
+     * @param  Service  $service
      * @return Platform
      */
     public function addService(string $key, Service $service): Platform
     {
         $this->services['all'][$key] = $service;
         $this->services[$service->getType()][$key] = $service;
+
         return $this;
     }
 
     /**
      * Remove Service
      *
-     * @param string $key
+     * @param  string  $key
      * @return Platform
      */
     public function removeService(string $key): Platform
     {
         unset($this->services[$key]);
+
         return $this;
     }
-
 
     /**
      * Get Service
      *
-     * @param string $key
+     * @param  string  $key
      * @return Service
      */
     public function getService(string $key): Service
     {
         if (empty($this->services['all'][$key])) {
-            throw new Exception('Service ' . $key . ' not found');
+            throw new Exception('Service '.$key.' not found');
         }
+
         return $this->services['all'][$key] ?? null;
     }
-
 
     /**
      * Get Services
