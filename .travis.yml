@@ -33,4 +33,4 @@ install:
 script:
   - docker ps -a
   - docker-compose exec web vendor/bin/phpunit --configuration phpunit.xml
-  - docker-compose exec web vendor/bin/phpcs -p
+  - docker-compose exec web vendor/bin/pint --test
