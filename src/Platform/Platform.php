@@ -92,10 +92,8 @@ abstract class Platform
                     }
                 }
 
-                if ($hook instanceof Route) {
-                    foreach ($action->getLabels() as $key => $label) {
-                        $hook->label($key, $label);
-                    }
+                foreach ($action->getLabels() as $key => $label) {
+                    $hook->label($key, $label);
                 }
 
                 $hook->action($action->getCallback());
@@ -113,18 +111,42 @@ abstract class Platform
         $this->cli ??= new CLI();
         foreach ($this->services[Service::TYPE_CLI] as $service) {
             foreach ($service->getActions() as $key => $action) {
-                $task = $this->cli->task($key);
-                $task
-                    ->desc($action->getDesc() ?? '')
-                    ->action($action->getCallback());
+                switch ($action->getType()) {
+                    case Action::TYPE_INIT:
+                        $hook = $this->cli->init();
+                        break;
+                    case Action::TYPE_ERROR:
+                        $hook = $this->cli->error();
+                        break;
+                    case Action::TYPE_SHUTDOWN:
+                        $hook = $this->cli->shutdown();
+                        break;
+                    case Action::TYPE_DEFAULT:
+                    default:
+                        $hook = $this->cli->task($key);
+                        break;
+                }
+                $hook
+                    ->groups($action->getGroups())
+                    ->desc($action->getDesc() ?? '');
 
-                foreach ($action->getParams() as $key => $param) {
-                    $task->param($key, $param['default'], $param['validator'], $param['description'], $param['optional']);
+                foreach ($action->getOptions() as $key => $option) {
+                    switch ($option['type']) {
+                        case 'param':
+                            $key = substr($key, stripos($key, ':') + 1);
+                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                            break;
+                        case 'injection':
+                            $hook->inject($option['name']);
+                            break;
+                    }
                 }
 
                 foreach ($action->getLabels() as $key => $label) {
-                    $task->label($key, $label);
+                    $hook->label($key, $label);
                 }
+
+                $hook->action($action->getCallback());
             }
         }
     }
