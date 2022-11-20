@@ -46,7 +46,7 @@ abstract class Platform
      * @param Service $service
      * @return void
      */
-    protected function initHttp(): void
+    protected function initHttp($service): void
     {
         foreach ($this->services[Service::TYPE_HTTP] as $service) {
             foreach ($service->getActions() as $action) {
