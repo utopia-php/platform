@@ -17,7 +17,7 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "0.25.*",
+        "utopia-php/framework": "0.26.*",
         "utopia-php/cli": "0.14.*"
     },
     "require-dev": {
