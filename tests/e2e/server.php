@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 
 use Utopia\App;
 use Utopia\Request;
@@ -16,8 +16,8 @@ error_reporting(E_ALL);
 $platform = new TestPlatform();
 $platform->init('http');
 
-$request    = new Request();
-$response   = new Response();
+$request = new Request();
+$response = new Response();
 
 $app = new App('UTC');
 $app->run($request, $response);
