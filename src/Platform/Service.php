@@ -10,6 +10,8 @@ abstract class Service
 
     public const TYPE_CLI = 'CLI';
 
+    public const TYPE_WORKER = 'Worker';
+
     protected array $actions;
 
     protected string $type;

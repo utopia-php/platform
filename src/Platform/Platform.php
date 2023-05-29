@@ -5,6 +5,8 @@ namespace Utopia\Platform;
 use Exception;
 use Utopia\App;
 use Utopia\CLI\CLI;
+use Utopia\Queue\Adapter\Swoole;
+use Utopia\Queue\Server;
 use Utopia\Route;
 
 abstract class Platform
@@ -14,16 +16,19 @@ abstract class Platform
         Service::TYPE_CLI => [],
         Service::TYPE_HTTP => [],
         Service::TYPE_GRAPHQL => [],
+        Service::TYPE_WORKER => [],
     ];
 
     protected CLI $cli;
+
+    protected Server $worker;
 
     /**
      * Initialize Application
      *
      * @return void
      */
-    public function init(string $type): void
+    public function init(string $type, array $params = []): void
     {
         switch ($type) {
             case Service::TYPE_HTTP:
@@ -34,6 +39,9 @@ abstract class Platform
                 break;
             case Service::TYPE_GRAPHQL:
                 $this->initGraphQL();
+                break;
+            case Service::TYPE_WORKER:
+                $this->initWorker($params);
                 break;
             default:
                 throw new Exception('Please provide which type of initialization you want to carry out.');
@@ -152,6 +160,73 @@ abstract class Platform
     }
 
     /**
+     * Init worker Services
+     *
+     * @param array $params
+     * @return void
+     */
+    protected function initWorker(array $params): void
+    {
+
+        $connection = $params['connection'] ?? null;
+        $workerNumber = $params['workerNumber'] ?? 0;
+        $queue = $params['queue'] ?? null;
+        $name  = $params['name'] ?? null;
+
+        if (empty($queue)) {
+            throw new Exception('Please configure "QUEUE" environemnt variable.');
+        }
+
+        $adapter = new Swoole($connection, $workerNumber, $queue);
+
+        $this->worker ??= new Server($adapter);
+        foreach ($this->services[Service::TYPE_WORKER] as $service) {
+            foreach ($service->getActions() as $key => $action) {
+                if($name !== $key){
+                    continue;
+                }
+
+                switch ($action->getType()) {
+                    case Action::TYPE_INIT:
+                        $hook = $this->worker->init();
+                        break;
+                    case Action::TYPE_ERROR:
+                        $hook = $this->worker->error();
+                        break;
+                    case Action::TYPE_SHUTDOWN:
+                        $hook = $this->worker->shutdown();
+                        break;
+                    case Action::TYPE_DEFAULT:
+                    default:
+                        $hook = $this->worker->job();
+                        break;
+                }
+                $hook
+                    ->groups($action->getGroups())
+                    ->desc($action->getDesc() ?? '');
+
+                foreach ($action->getOptions() as $key => $option) {
+                    switch ($option['type']) {
+                        case 'param':
+                            $key = substr($key, stripos($key, ':') + 1);
+                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                            break;
+                        case 'injection':
+                            $hook->inject($option['name']);
+                            break;
+                    }
+                }
+
+                foreach ($action->getLabels() as $key => $label) {
+                    $hook->label($key, $label);
+                }
+
+                $hook->action($action->getCallback());
+            }
+        }
+    }
+
+    /**
      * Initialize GraphQL Services
      *
      * @return void
@@ -192,9 +267,9 @@ abstract class Platform
      * Get Service
      *
      * @param  string  $key
-     * @return Service
+     * @return Service|null
      */
-    public function getService(string $key): Service
+    public function getService(string $key): ?Service
     {
         if (empty($this->services['all'][$key])) {
             throw new Exception('Service '.$key.' not found');
@@ -230,4 +305,23 @@ abstract class Platform
 
         return $this;
     }
+
+    /**
+     * Get the value of worker
+     */
+    public function getWorker(): Server
+    {
+        return $this->worker;
+    }
+
+    /**
+     * Set the value of worker
+     */
+    public function setWorker(Server $worker): self
+    {
+        $this->worker = $worker;
+
+        return $this;
+    }
+
 }
