@@ -167,22 +167,14 @@ abstract class Platform
      */
     protected function initWorker(array $params): void
     {
-
         $connection = $params['connection'] ?? null;
-        $workerNumber = $params['workerNumber'] ?? 0;
-        $queue = $params['queue'] ?? null;
-        $name  = $params['name'] ?? null;
-
-        if (empty($queue)) {
-            throw new Exception('Please configure "QUEUE" environemnt variable.');
-        }
-
-        $adapter = new Swoole($connection, $workerNumber, $queue);
-
+        $workersNumber = $params['workersNumber'] ?? 0;
+        $workerName  = $params['workerName'] ?? '';
+        $adapter = new Swoole($connection, $workersNumber, 'v1-'. $workerName);
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if($name !== $key){
+                if($workerName !== $key){
                     continue;
                 }
 
