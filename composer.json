@@ -2,7 +2,7 @@
     "name": "utopia-php/platform",
     "description": "Light and Fast Platform Library",
     "type": "library",
-    "keywords": ["php","framework", "upf", "utopia", "cache"],
+    "keywords": ["php","framework", "upf", "utopia", "platform"],
     "license": "MIT",
     "minimum-stability": "stable",
     "autoload": {
@@ -17,7 +17,7 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "0.26.*",
+        "utopia-php/framework": "0.28.*",
         "utopia-php/cli": "0.15.*"
     },
     "require-dev": {
