@@ -174,12 +174,12 @@ abstract class Platform
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if($workerName !== $key){
+                if($workerName !== strtolower($key)){
                     continue;
                 }
 
                 switch ($action->getType()) {
-                    case Action::TYPE_INIT:
+                    case Action::TYPE_INIT:.
                         $hook = $this->worker->init();
                         break;
                     case Action::TYPE_ERROR:
