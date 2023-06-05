@@ -179,7 +179,7 @@ abstract class Platform
                 }
 
                 switch ($action->getType()) {
-                    case Action::TYPE_INIT:.
+                    case Action::TYPE_INIT:
                         $hook = $this->worker->init();
                         break;
                     case Action::TYPE_ERROR:
