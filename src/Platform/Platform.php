@@ -174,7 +174,7 @@ abstract class Platform
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if($workerName !== strtolower($key)){
+                if(!str_contains(strtolower($key), $workerName)){
                     continue;
                 }
 
