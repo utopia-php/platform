@@ -188,6 +188,9 @@ abstract class Platform
                     case Action::TYPE_SHUTDOWN:
                         $hook = $this->worker->shutdown();
                         break;
+                    case Action::TYPE_WORKER_START:
+                        $hook = $this->worker->workerStart();
+                        break;
                     case Action::TYPE_DEFAULT:
                     default:
                         $hook = $this->worker->job();
