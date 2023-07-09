@@ -174,7 +174,7 @@ abstract class Platform
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if($workerName !== strtolower($key)){
+                if(!str_contains(strtolower($key), $workerName)){
                     continue;
                 }
 
@@ -187,6 +187,9 @@ abstract class Platform
                         break;
                     case Action::TYPE_SHUTDOWN:
                         $hook = $this->worker->shutdown();
+                        break;
+                    case Action::TYPE_WORKER_START:
+                        $hook = $this->worker->workerStart();
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
