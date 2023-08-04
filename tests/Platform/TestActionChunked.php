@@ -18,7 +18,7 @@ class TestActionChunked extends Action
 
     public function action($response)
     {
-        foreach (["Hello ", "World!"] as $key => $word) {
+        foreach (['Hello ', 'World!'] as $key => $word) {
             $response->chunk($word, $key == 1);
         }
     }

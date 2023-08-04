@@ -60,11 +60,7 @@ Now, go a step further by running the linter by the following command to manuall
 composer lint <your file path>
 ```
 
-This will give you a list of errors for you to rectify , if there is an instance you need more information on the errors being displayed you can pass in additional command line arguments. More list of available arguments can be found [here](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage). A very useful command line argument is `--report=diff`. This will give you the expected changes by the linter for easy fixing of formatting issues.
-
-```bash
-composer lint --report=diff <your file path>
-```
+This will give you a list of errors for you to rectify , if there is an instance you need more information on the errors being displayed you can pass in additional command line arguments.
 
 5. Push changes to GitHub
 

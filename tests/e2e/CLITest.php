@@ -2,8 +2,8 @@
 
 namespace Utopia\Tests;
 
-use Utopia\CLI\CLI;
 use PHPUnit\Framework\TestCase;
+use Utopia\CLI\CLI;
 use Utopia\Platform\Service;
 
 class CLITest extends TestCase
