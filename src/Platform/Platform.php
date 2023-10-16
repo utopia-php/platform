@@ -168,9 +168,9 @@ abstract class Platform
     protected function initWorker(array $params): void
     {
         $connection   = $params['connection'] ?? null;
-        $workersNum   = $params['workersNum'] ?? 0;
+        $workerCount   = $params['workerCount'] ?? 0;
         $workerName   = $params['workerName'] ?? null;
-        $adapter      = new Swoole($connection, $workersNum, 'v1-' . $workerName);
+        $adapter      = new Swoole($connection, $workerCount, 'v1-' . $workerName);
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
