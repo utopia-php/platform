@@ -170,13 +170,15 @@ abstract class Platform
         $connection   = $params['connection'] ?? null;
         $workersNum   = $params['workersNum'] ?? 0;
         $workerName   = $params['workerName'] ?? null;
-        $adapter      = new Swoole($connection, $workersNum, 'v1-' . $workerName);
+        $queueName    = $params['queueName'] ?? 'v1-' . $workerName;
+        $adapter      = new Swoole($connection, $workersNum, $queueName);
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
                 if(!str_contains(strtolower($key), $workerName)){
                     continue;
                 }
+
 
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
