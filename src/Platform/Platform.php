@@ -170,7 +170,7 @@ abstract class Platform
         $connection   = $params['connection'] ?? null;
         $workerCount   = $params['workerCount'] ?? 0;
         $workerName   = $params['workerName'] ?? null;
-        $adapter      = new Swoole($connection, $workerCount, 'v1-' . $workerName);
+        $adapter      = new Swoole($connection, $workerCount, $workerName);
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
