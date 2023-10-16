@@ -162,23 +162,22 @@ abstract class Platform
     /**
      * Init worker Services
      *
-     * @param array $params
+     * @param  array  $params
      * @return void
      */
     protected function initWorker(array $params): void
     {
-        $connection   = $params['connection'] ?? null;
-        $workersNum   = $params['workersNum'] ?? 0;
-        $workerName   = $params['workerName'] ?? null;
-        $queueName    = $params['queueName'] ?? 'v1-' . $workerName;
-        $adapter      = new Swoole($connection, $workersNum, $queueName);
+        $connection = $params['connection'] ?? null;
+        $workersNum = $params['workersNum'] ?? 0;
+        $workerName = $params['workerName'] ?? null;
+        $queueName = $params['queueName'] ?? 'v1-'.$workerName;
+        $adapter = new Swoole($connection, $workersNum, $queueName);
         $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if(!str_contains(strtolower($key), $workerName)){
+                if (! str_contains(strtolower($key), $workerName)) {
                     continue;
                 }
-
 
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
@@ -320,5 +319,4 @@ abstract class Platform
 
         return $this;
     }
-
 }
