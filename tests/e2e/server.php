@@ -2,10 +2,9 @@
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
-use Utopia\App;
-use Utopia\Http\Adapter\Swoole\Request;
-use Utopia\Http\Adapter\Swoole\Response;
-use Utopia\Http\Adapter\Swoole\Server;
+use Utopia\Http\Adapter\FPM\Request;
+use Utopia\Http\Adapter\FPM\Response;
+use Utopia\Http\Adapter\FPM\Server;
 use Utopia\Http\Http;
 use Utopia\Tests\TestPlatform;
 
@@ -18,5 +17,8 @@ error_reporting(E_ALL);
 $platform = new TestPlatform();
 $platform->init('http');
 
-$app = new Http(new Server('0.0.0.0', 9999), 'UTC');
-$app->start();
+$request = new Request();
+$response = new Response();
+
+$app = new Http(new Server(), 'UTC');
+$app->run($request, $response, '0');

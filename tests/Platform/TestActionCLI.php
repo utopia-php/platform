@@ -2,10 +2,9 @@
 
 namespace Utopia\Tests;
 
-use Utopia\Platform\Action;
 use Utopia\Http\Validator\ArrayList;
 use Utopia\Http\Validator\Text;
-
+use Utopia\Platform\Action;
 
 class TestActionCLI extends Action
 {
