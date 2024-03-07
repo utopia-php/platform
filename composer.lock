@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1abd99f3b9deebf383d80dad42aed81",
+    "content-hash": "29e78adad2800d509392386c29463d5d",
     "packages": [
         {
             "name": "utopia-php/cli",
-            "version": "0.15.0",
+            "version": "0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/cli.git",
-                "reference": "ccb7c8125ffe0254fef8f25744bfa376eb7bd0ea"
+                "reference": "0829fd5215afe88f53f3091cedc808da801fd1bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/cli/zipball/ccb7c8125ffe0254fef8f25744bfa376eb7bd0ea",
-                "reference": "ccb7c8125ffe0254fef8f25744bfa376eb7bd0ea",
+                "url": "https://api.github.com/repos/utopia-php/cli/zipball/0829fd5215afe88f53f3091cedc808da801fd1bb",
+                "reference": "0829fd5215afe88f53f3091cedc808da801fd1bb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4",
-                "utopia-php/framework": "0.*.*"
+                "utopia-php/framework": "0.34.*"
             },
             "require-dev": {
                 "laravel/pint": "1.2.*",
@@ -51,9 +51,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/cli/issues",
-                "source": "https://github.com/utopia-php/cli/tree/0.15.0"
+                "source": "https://github.com/utopia-php/cli/tree/0.17.0"
             },
-            "time": "2023-03-01T05:55:14+00:00"
+            "time": "2024-01-24T11:37:29+00:00"
         },
         {
             "name": "utopia-php/framework",
@@ -105,22 +105,22 @@
         },
         {
             "name": "utopia-php/queue",
-            "version": "0.7.0",
+            "version": "dev-feat-framework-v2-v2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/queue.git",
-                "reference": "917565256eb94bcab7246f7a746b1a486813761b"
+                "reference": "e613ccc1d4da4219b60576ddfe79dadb182bb74e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/queue/zipball/917565256eb94bcab7246f7a746b1a486813761b",
-                "reference": "917565256eb94bcab7246f7a746b1a486813761b",
+                "url": "https://api.github.com/repos/utopia-php/queue/zipball/e613ccc1d4da4219b60576ddfe79dadb182bb74e",
+                "reference": "e613ccc1d4da4219b60576ddfe79dadb182bb74e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
-                "utopia-php/cli": "0.15.*",
-                "utopia-php/framework": "0.*.*"
+                "utopia-php/cli": "0.17.*",
+                "utopia-php/framework": "0.34.*"
             },
             "require-dev": {
                 "laravel/pint": "^0.2.3",
@@ -160,9 +160,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/queue/issues",
-                "source": "https://github.com/utopia-php/queue/tree/0.7.0"
+                "source": "https://github.com/utopia-php/queue/tree/feat-framework-v2-v2"
             },
-            "time": "2024-01-17T19:00:43+00:00"
+            "time": "2024-03-07T15:43:35+00:00"
         }
     ],
     "packages-dev": [
@@ -1974,9 +1974,18 @@
             "time": "2024-03-03T12:36:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "utopia-php/queue",
+            "version": "dev-feat-framework-v2-v2",
+            "alias": "0.7.99",
+            "alias_normalized": "0.7.99.0"
+        }
+    ],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "utopia-php/queue": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
