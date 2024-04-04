@@ -13,7 +13,7 @@ abstract class Platform
 {
     protected array $services = [
         'all' => [],
-        Service::TYPE_CLI => [],
+        Service::TYPE_TASK => [],
         Service::TYPE_HTTP => [],
         Service::TYPE_GRAPHQL => [],
         Service::TYPE_WORKER => [],
@@ -34,7 +34,7 @@ abstract class Platform
             case Service::TYPE_HTTP:
                 $this->initHttp();
                 break;
-            case Service::TYPE_CLI:
+            case Service::TYPE_TASK:
                 $this->initCLI();
                 break;
             case Service::TYPE_GRAPHQL:
@@ -117,7 +117,7 @@ abstract class Platform
     protected function initCLI(): void
     {
         $this->cli ??= new CLI();
-        foreach ($this->services[Service::TYPE_CLI] as $service) {
+        foreach ($this->services[Service::TYPE_TASK] as $service) {
             foreach ($service->getActions() as $key => $action) {
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
