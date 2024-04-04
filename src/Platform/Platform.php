@@ -3,9 +3,11 @@
 namespace Utopia\Platform;
 
 use Exception;
+use Utopia\App;
 use Utopia\CLI\CLI;
 use Utopia\Queue\Adapter\Swoole;
 use Utopia\Queue\Server;
+use Utopia\Route;
 
 abstract class Platform
 {
@@ -36,16 +38,17 @@ abstract class Platform
     public function init(string $type, array $params = []): void
     {
         foreach ($this->modules as $module) {
+            $services = $module->getServicesByType($type);
             switch ($type) {
                 case Service::TYPE_HTTP:
-                    $module->initHttp();
+                    $this->initHttp($services);
                     break;
                 case Service::TYPE_TASK:
                     $this->cli ??= new CLI();
-                    $module->initCLI($this->cli);
+                    $this->initCLI($services);
                     break;
                 case Service::TYPE_GRAPHQL:
-                    $module->initGraphQL();
+                    $this->initGraphQL();
                     break;
                 case Service::TYPE_WORKER:
                     $workerName = $params['workerName'] ?? null;
@@ -57,12 +60,189 @@ abstract class Platform
                         $adapter = new Swoole($connection, $workersNum, $queueName);
                         $this->worker = new Server($adapter);
                     }
-                    $module->initWorker($this->worker, $workerName);
+                    $this->initWorker($services, $workerName);
                     break;
                 default:
                     throw new Exception('Please provide which type of initialization you want to carry out.');
             }
         }
+    }
+
+    /**
+     * Init HTTP service
+     *
+     * @param  Service  $service
+     * @return void
+     */
+    protected function initHttp(array $services): void
+    {
+        foreach ($services as $service) {
+            foreach ($service->getActions() as $action) {
+                /** @var Action $action */
+                switch ($action->getType()) {
+                    case Action::TYPE_INIT:
+                        $hook = App::init();
+                        break;
+                    case Action::TYPE_ERROR:
+                        $hook = App::error();
+                        break;
+                    case Action::TYPE_OPTIONS:
+                        $hook = App::options();
+                        break;
+                    case Action::TYPE_SHUTDOWN:
+                        $hook = App::shutdown();
+                        break;
+                    case Action::TYPE_DEFAULT:
+                    default:
+                        $hook = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
+                        break;
+                }
+
+                $hook
+                    ->groups($action->getGroups())
+                    ->desc($action->getDesc() ?? '');
+
+                if ($hook instanceof Route) {
+                    if (! empty($action->getHttpAliasPath())) {
+                        $hook->alias($action->getHttpAliasPath());
+                    }
+                }
+
+                foreach ($action->getOptions() as $key => $option) {
+                    switch ($option['type']) {
+                        case 'param':
+                            $key = substr($key, stripos($key, ':') + 1);
+                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                            break;
+                        case 'injection':
+                            $hook->inject($option['name']);
+                            break;
+                    }
+                }
+
+                foreach ($action->getLabels() as $key => $label) {
+                    $hook->label($key, $label);
+                }
+
+                $hook->action($action->getCallback());
+            }
+        }
+    }
+
+    /**
+     * Init CLI Services
+     *
+     * @return void
+     */
+    protected function initCLI(array $services): void
+    {
+        $cli = $this->cli;
+        foreach ($services as $service) {
+            foreach ($service->getActions() as $key => $action) {
+                switch ($action->getType()) {
+                    case Action::TYPE_INIT:
+                        $hook = $cli->init();
+                        break;
+                    case Action::TYPE_ERROR:
+                        $hook = $cli->error();
+                        break;
+                    case Action::TYPE_SHUTDOWN:
+                        $hook = $cli->shutdown();
+                        break;
+                    case Action::TYPE_DEFAULT:
+                    default:
+                        $hook = $cli->task($key);
+                        break;
+                }
+                $hook
+                    ->groups($action->getGroups())
+                    ->desc($action->getDesc() ?? '');
+
+                foreach ($action->getOptions() as $key => $option) {
+                    switch ($option['type']) {
+                        case 'param':
+                            $key = substr($key, stripos($key, ':') + 1);
+                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                            break;
+                        case 'injection':
+                            $hook->inject($option['name']);
+                            break;
+                    }
+                }
+
+                foreach ($action->getLabels() as $key => $label) {
+                    $hook->label($key, $label);
+                }
+
+                $hook->action($action->getCallback());
+            }
+        }
+    }
+
+    /**
+     * Init worker Services
+     *
+     * @param  array  $params
+     * @return void
+     */
+    protected function initWorker(array $services, string $workerName): void
+    {
+        $worker = $this->worker;
+        foreach ($services as $service) {
+            foreach ($service->getActions() as $key => $action) {
+                if ($action->getType() == Action::TYPE_DEFAULT && ! str_contains(strtolower($key), $workerName)) {
+                    continue;
+                }
+                switch ($action->getType()) {
+                    case Action::TYPE_INIT:
+                        $hook = $worker->init();
+                        break;
+                    case Action::TYPE_ERROR:
+                        $hook = $worker->error();
+                        break;
+                    case Action::TYPE_SHUTDOWN:
+                        $hook = $worker->shutdown();
+                        break;
+                    case Action::TYPE_WORKER_START:
+                        $hook = $worker->workerStart();
+                        break;
+                    case Action::TYPE_DEFAULT:
+                    default:
+                        $hook = $worker->job();
+                        break;
+                }
+                $hook
+                    ->groups($action->getGroups())
+                    ->desc($action->getDesc() ?? '');
+
+                foreach ($action->getOptions() as $key => $option) {
+                    switch ($option['type']) {
+                        case 'param':
+                            $key = substr($key, stripos($key, ':') + 1);
+                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections']);
+                            break;
+                        case 'injection':
+                            $hook->inject($option['name']);
+                            break;
+                    }
+                }
+
+                foreach ($action->getLabels() as $key => $label) {
+                    $hook->label($key, $label);
+                }
+
+                $hook->action($action->getCallback());
+            }
+        }
+    }
+
+    /**
+     * Initialize GraphQL Services
+     *
+     * @return void
+     */
+    protected function initGraphQL(): void
+    {
     }
 
     /**

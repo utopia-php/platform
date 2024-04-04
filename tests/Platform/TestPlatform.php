@@ -2,8 +2,8 @@
 
 namespace Utopia\Tests;
 
-use Utopia\Platform\Platform;
 use Utopia\Platform\Module;
+use Utopia\Platform\Platform;
 
 class TestPlatform extends Platform
 {
