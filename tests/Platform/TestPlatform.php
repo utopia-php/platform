@@ -2,14 +2,13 @@
 
 namespace Utopia\Tests;
 
-use Utopia\Platform\Module;
 use Utopia\Platform\Platform;
 
 class TestPlatform extends Platform
 {
     public function __construct()
     {
-        $module = new Module();
+        $module = new TestModule();
         parent::__construct($module);
 
         $this->addService('testService', new TestService());

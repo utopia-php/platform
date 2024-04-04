@@ -4,7 +4,7 @@ namespace Utopia\Platform;
 
 use Exception;
 
-class Module
+abstract class Module
 {
     protected array $services = [
         'all' => [],
