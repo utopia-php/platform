@@ -13,7 +13,7 @@ RUN composer update --ignore-platform-reqs --optimize-autoloader \
     --no-plugins --no-scripts --prefer-dist \
     `if [ "$TESTING" != "true" ]; then echo "--no-dev"; fi`
 
-FROM php:8.0-cli-alpine as final
+FROM php:8.0-fpm-alpine as final
 LABEL maintainer="team@appwrite.io"
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -21,7 +21,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN \
   apk add --no-cache --virtual .deps \
-  supervisor php$PHP_VERSION php$PHP_VERSION-fpm nginx bash
+  supervisor nginx bash
 
 
 # Nginx Configuration (with self-signed ssl certificates)
