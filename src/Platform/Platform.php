@@ -327,9 +327,9 @@ abstract class Platform
      *
      * @param  string  $key
      * @param  string|null  $default
-     * @return string|null
+     * @return mixed
      */
-    public function getServer(string $key, string $default = null): ?string
+    public function getServer(string $key, string $default = null): mixed
     {
         return $_SERVER[$key] ?? $default;
     }
