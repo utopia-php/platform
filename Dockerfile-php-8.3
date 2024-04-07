@@ -17,11 +17,11 @@ FROM php:8.3-cli-alpine as final
 LABEL maintainer="team@appwrite.io"
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    PHP_VERSION=8
+    PHP_VERSION=8.3
 
 RUN \
   apk add --no-cache --virtual .deps \
-  supervisor php$PHP_VERSION php$PHP_VERSION-fpm nginx bash
+  supervisor php php-fpm nginx bash
 
 
 # Nginx Configuration (with self-signed ssl certificates)
