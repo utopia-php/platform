@@ -319,4 +319,18 @@ abstract class Platform
 
         return $this;
     }
+
+    /**
+     * Get server
+     *
+     * Method for querying server parameters. If $key is not found $default value will be returned.
+     *
+     * @param  string  $key
+     * @param  string|null  $default
+     * @return string|null
+     */
+    public function getServer(string $key, string $default = null): ?string
+    {
+        return $_SERVER[$key] ?? $default;
+    }
 }
