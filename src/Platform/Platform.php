@@ -53,7 +53,7 @@ abstract class Platform
                 case Service::TYPE_WORKER:
                     $workerName = $params['workerName'] ?? null;
 
-                    if ($this->worker == null) {
+                    if (!isset($this->worker)) {
                         $connection = $params['connection'] ?? null;
                         $workersNum = $params['workersNum'] ?? 0;
                         $queueName = $params['queueName'] ?? 'v1-'.$workerName;
