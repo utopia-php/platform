@@ -45,7 +45,7 @@ abstract class Platform
                     break;
                 case Service::TYPE_TASK:
                     $this->cli ??= new CLI();
-                    $this->initCLI($services);
+                    $this->initTasks($services);
                     break;
                 case Service::TYPE_GRAPHQL:
                     $this->initGraphQL();
@@ -134,7 +134,7 @@ abstract class Platform
      *
      * @return void
      */
-    protected function initCLI(array $services): void
+    protected function initTasks(array $services): void
     {
         $cli = $this->cli;
         foreach ($services as $service) {
