@@ -27,11 +27,11 @@ class ResponseTest extends TestCase
         $this->assertEquals('Hello World!', $response['body']);
     }
 
-    // public function testChunkedAction()
-    // {
-    //     $response = $this->client->call(Client::METHOD_GET, '/chunked');
-    //     $this->assertEquals('Hello World!', $response['body']);
-    // }
+    public function testChunkedAction()
+    {
+        $response = $this->client->call(Client::METHOD_GET, '/chunked');
+        $this->assertEquals('Hello World!', $response['body']);
+    }
 
     public function testRedirectAction()
     {
@@ -45,8 +45,8 @@ class ResponseTest extends TestCase
         $this->assertEquals('Hello World!', $response['body']);
         $this->assertEquals('init-called', $response['headers']['x-init']);
 
-        // $response = $this->client->call(Client::METHOD_GET, '/chunked');
-        // $this->assertEquals('Hello World!', $response['body']);
-        // $this->assertEquals('', ($response['headers']['x-init'] ?? ''));
+        $response = $this->client->call(Client::METHOD_GET, '/chunked');
+        $this->assertEquals('Hello World!', $response['body']);
+        $this->assertEquals('', ($response['headers']['x-init'] ?? ''));
     }
 }
