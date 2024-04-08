@@ -24,7 +24,7 @@ class CLITest extends TestCase
 
         $platform = new TestPlatform();
         $platform->setCli($cli);
-        $platform->init(Service::TYPE_CLI);
+        $platform->init(Service::TYPE_TASK);
 
         $cli = $platform->getCli();
         $cli->run();
