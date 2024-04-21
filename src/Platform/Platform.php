@@ -6,8 +6,8 @@ use Exception;
 use Utopia\CLI\CLI;
 use Utopia\Http\Http;
 use Utopia\Http\Route;
-use Utopia\Queue\Adapter\Swoole;
-use Utopia\Queue\Server;
+use Utopia\Queue\Adapter\Swoole\Server;
+use Utopia\Queue\Worker;
 
 abstract class Platform
 {
@@ -21,7 +21,7 @@ abstract class Platform
 
     protected CLI $cli;
 
-    protected Server $worker;
+    protected Worker $worker;
 
     /**
      * Initialize Application
@@ -171,8 +171,8 @@ abstract class Platform
         $workersNum = $params['workersNum'] ?? 0;
         $workerName = $params['workerName'] ?? null;
         $queueName = $params['queueName'] ?? 'v1-'.$workerName;
-        $adapter = new Swoole($connection, $workersNum, $queueName);
-        $this->worker ??= new Server($adapter);
+        $adapter = new Server($connection, $workersNum, $queueName);
+        $this->worker ??= new Worker($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
                 if (! str_contains(strtolower($key), $workerName)) {
@@ -188,9 +188,6 @@ abstract class Platform
                         break;
                     case Action::TYPE_SHUTDOWN:
                         $hook = $this->worker->shutdown();
-                        break;
-                    case Action::TYPE_WORKER_START:
-                        $hook = $this->worker->workerStart();
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
@@ -305,7 +302,7 @@ abstract class Platform
     /**
      * Get the value of worker
      */
-    public function getWorker(): Server
+    public function getWorker(): Worker
     {
         return $this->worker;
     }
@@ -313,7 +310,7 @@ abstract class Platform
     /**
      * Set the value of worker
      */
-    public function setWorker(Server $worker): self
+    public function setWorker(Worker $worker): self
     {
         $this->worker = $worker;
 
