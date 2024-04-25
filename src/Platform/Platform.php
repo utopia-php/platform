@@ -11,17 +11,24 @@ use Utopia\Route;
 
 abstract class Platform
 {
-    protected array $services = [
-        'all' => [],
-        Service::TYPE_CLI => [],
-        Service::TYPE_HTTP => [],
-        Service::TYPE_GRAPHQL => [],
-        Service::TYPE_WORKER => [],
-    ];
+    protected Module $core;
+
+    /**
+     * Modules
+     *
+     * @var array<Module>
+     */
+    protected array $modules = [];
 
     protected CLI $cli;
 
     protected Server $worker;
+
+    public function __construct(Module $module)
+    {
+        $this->core = $module;
+        $this->modules[] = $module;
+    }
 
     /**
      * Initialize Application
@@ -30,21 +37,34 @@ abstract class Platform
      */
     public function init(string $type, array $params = []): void
     {
-        switch ($type) {
-            case Service::TYPE_HTTP:
-                $this->initHttp();
-                break;
-            case Service::TYPE_CLI:
-                $this->initCLI();
-                break;
-            case Service::TYPE_GRAPHQL:
-                $this->initGraphQL();
-                break;
-            case Service::TYPE_WORKER:
-                $this->initWorker($params);
-                break;
-            default:
-                throw new Exception('Please provide which type of initialization you want to carry out.');
+        foreach ($this->modules as $module) {
+            $services = $module->getServicesByType($type);
+            switch ($type) {
+                case Service::TYPE_HTTP:
+                    $this->initHttp($services);
+                    break;
+                case Service::TYPE_TASK:
+                    $this->cli ??= new CLI();
+                    $this->initTasks($services);
+                    break;
+                case Service::TYPE_GRAPHQL:
+                    $this->initGraphQL();
+                    break;
+                case Service::TYPE_WORKER:
+                    $workerName = $params['workerName'] ?? null;
+
+                    if (! isset($this->worker)) {
+                        $connection = $params['connection'] ?? null;
+                        $workersNum = $params['workersNum'] ?? 0;
+                        $queueName = $params['queueName'] ?? 'v1-'.$workerName;
+                        $adapter = new Swoole($connection, $workersNum, $queueName);
+                        $this->worker = new Server($adapter);
+                    }
+                    $this->initWorker($services, $workerName);
+                    break;
+                default:
+                    throw new Exception('Please provide which type of initialization you want to carry out.');
+            }
         }
     }
 
@@ -54,9 +74,9 @@ abstract class Platform
      * @param  Service  $service
      * @return void
      */
-    protected function initHttp(): void
+    protected function initHttp(array $services): void
     {
-        foreach ($this->services[Service::TYPE_HTTP] as $service) {
+        foreach ($services as $service) {
             foreach ($service->getActions() as $action) {
                 /** @var Action $action */
                 switch ($action->getType()) {
@@ -84,7 +104,7 @@ abstract class Platform
 
                 if ($hook instanceof Route) {
                     if (! empty($action->getHttpAliasPath())) {
-                        $hook->alias($action->getHttpAliasPath(), $action->getHttpAliasParams());
+                        $hook->alias($action->getHttpAliasPath());
                     }
                 }
 
@@ -114,24 +134,24 @@ abstract class Platform
      *
      * @return void
      */
-    protected function initCLI(): void
+    protected function initTasks(array $services): void
     {
-        $this->cli ??= new CLI();
-        foreach ($this->services[Service::TYPE_CLI] as $service) {
+        $cli = $this->cli;
+        foreach ($services as $service) {
             foreach ($service->getActions() as $key => $action) {
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
-                        $hook = $this->cli->init();
+                        $hook = $cli->init();
                         break;
                     case Action::TYPE_ERROR:
-                        $hook = $this->cli->error();
+                        $hook = $cli->error();
                         break;
                     case Action::TYPE_SHUTDOWN:
-                        $hook = $this->cli->shutdown();
+                        $hook = $cli->shutdown();
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
-                        $hook = $this->cli->task($key);
+                        $hook = $cli->task($key);
                         break;
                 }
                 $hook
@@ -165,36 +185,30 @@ abstract class Platform
      * @param  array  $params
      * @return void
      */
-    protected function initWorker(array $params): void
+    protected function initWorker(array $services, string $workerName): void
     {
-        $connection = $params['connection'] ?? null;
-        $workersNum = $params['workersNum'] ?? 0;
-        $workerName = $params['workerName'] ?? null;
-        $queueName = $params['queueName'] ?? 'v1-'.$workerName;
-        $adapter = new Swoole($connection, $workersNum, $queueName);
-        $this->worker ??= new Server($adapter);
-        foreach ($this->services[Service::TYPE_WORKER] as $service) {
+        $worker = $this->worker;
+        foreach ($services as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if (! str_contains(strtolower($key), $workerName)) {
+                if ($action->getType() == Action::TYPE_DEFAULT && ! str_contains(strtolower($key), $workerName)) {
                     continue;
                 }
-
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
-                        $hook = $this->worker->init();
+                        $hook = $worker->init();
                         break;
                     case Action::TYPE_ERROR:
-                        $hook = $this->worker->error();
+                        $hook = $worker->error();
                         break;
                     case Action::TYPE_SHUTDOWN:
-                        $hook = $this->worker->shutdown();
+                        $hook = $worker->shutdown();
                         break;
                     case Action::TYPE_WORKER_START:
-                        $hook = $this->worker->workerStart();
+                        $hook = $worker->workerStart();
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
-                        $hook = $this->worker->job();
+                        $hook = $worker->job();
                         break;
                 }
                 $hook
@@ -232,16 +246,28 @@ abstract class Platform
     }
 
     /**
+     * Add module
+     *
+     * @param  Module  $module
+     * @return self
+     */
+    public function addModule(Module $module): self
+    {
+        $this->modules[] = $module;
+
+        return $this;
+    }
+
+    /**
      * Add Service
      *
      * @param  string  $key
      * @param  Service  $service
      * @return Platform
      */
-    public function addService(string $key, Service $service): Platform
+    public function addService(string $key, Service $service): self
     {
-        $this->services['all'][$key] = $service;
-        $this->services[$service->getType()][$key] = $service;
+        $this->core->addService($key, $service);
 
         return $this;
     }
@@ -252,9 +278,9 @@ abstract class Platform
      * @param  string  $key
      * @return Platform
      */
-    public function removeService(string $key): Platform
+    public function removeService(string $key): self
     {
-        unset($this->services[$key]);
+        $this->core->removeService($key);
 
         return $this;
     }
@@ -267,11 +293,7 @@ abstract class Platform
      */
     public function getService(string $key): ?Service
     {
-        if (empty($this->services['all'][$key])) {
-            throw new Exception('Service '.$key.' not found');
-        }
-
-        return $this->services['all'][$key] ?? null;
+        return $this->core->getService($key);
     }
 
     /**
@@ -281,7 +303,7 @@ abstract class Platform
      */
     public function getServices(): array
     {
-        return $this->services['all'];
+        return $this->core->getServices();
     }
 
     /**
