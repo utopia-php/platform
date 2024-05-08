@@ -4,10 +4,8 @@ namespace Utopia\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-
 class GetEnvTest extends TestCase
 {
-
     public function testGetEnv()
     {
         $platform = new Mock();
