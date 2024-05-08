@@ -7,7 +7,7 @@ abstract class Service
     public const TYPE_HTTP = 'http';
 
     public const TYPE_GRAPHQL = 'GraphQL';
-    
+
     public const TYPE_TASK = 'Task';
 
     public const TYPE_CLI = 'CLI';
