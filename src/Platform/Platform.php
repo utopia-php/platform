@@ -341,4 +341,18 @@ abstract class Platform
 
         return $this;
     }
+
+    /**
+     * Get env
+     *
+     * Method for querying env parameters. If $key is not found $default value will be returned.
+     *
+     * @param  string  $key
+     * @param  string|null  $default
+     * @return mixed
+     */
+    public function getEnv(string $key, string $default = null): mixed
+    {
+        return $_SERVER[$key] ?? $default;
+    }
 }
