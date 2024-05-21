@@ -10,7 +10,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Utopia\\Tests\\": "tests/Platform"
+            "Utopia\\Tests\\": "tests/Platform",
+            "Utopia\\Unit\\": "tests/unit"
         }
     },
     "require": {
@@ -28,6 +29,6 @@
     "scripts": {
         "format": "vendor/bin/pint",
         "lint": "vendor/bin/pint --test",
-        "test": "docker-compose up -d && sleep 10 && docker-compose exec web vendor/bin/phpunit --configuration phpunit.xml"
+        "test": "vendor/bin/phpunit --configuration phpunit.xml"
     }
 }
