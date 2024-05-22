@@ -190,7 +190,7 @@ abstract class Platform
         $worker = $this->worker;
         foreach ($services as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if ($action->getType() == Action::TYPE_DEFAULT && ! str_contains(strtolower($key), $workerName)) {
+                if ($action->getType() == Action::TYPE_DEFAULT && strtolower($key) !== $workerName) {
                     continue;
                 }
                 switch ($action->getType()) {
