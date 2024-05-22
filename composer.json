@@ -10,14 +10,15 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Utopia\\Tests\\": "tests/Platform"
+            "Utopia\\Tests\\": "tests/Platform",
+            "Utopia\\Unit\\": "tests/unit"
         }
     },
     "require": {
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "0.*.*",
+        "utopia-php/framework": "0.33.*",
         "utopia-php/cli": "0.15.*"
     },
     "require-dev": {
