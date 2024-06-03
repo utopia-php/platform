@@ -17,8 +17,8 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "0.34.*",
-        "utopia-php/cli": "0.17.*",
+        "utopia-php/framework": "dev-feat-di-upgrade as 0.34.99",
+        "utopia-php/cli": "dev-dev-coroutines as 0.17.99",
         "utopia-php/queue": "dev-feat-coroutine-and-di as 0.7.99"
     },
     "require-dev": {

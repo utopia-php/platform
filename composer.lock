@@ -4,31 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "264865255c785bf2b81348a23a1f1ca4",
+    "content-hash": "b6ee128e0aedd09e311a9610ed8b322a",
     "packages": [
         {
             "name": "utopia-php/cli",
-            "version": "0.17.0",
+            "version": "dev-dev-coroutines",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/cli.git",
-                "reference": "0829fd5215afe88f53f3091cedc808da801fd1bb"
+                "reference": "c9b049160aff2eecea7dd1ff041165ae15f41f76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/cli/zipball/0829fd5215afe88f53f3091cedc808da801fd1bb",
-                "reference": "0829fd5215afe88f53f3091cedc808da801fd1bb",
+                "url": "https://api.github.com/repos/utopia-php/cli/zipball/c9b049160aff2eecea7dd1ff041165ae15f41f76",
+                "reference": "c9b049160aff2eecea7dd1ff041165ae15f41f76",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4",
-                "utopia-php/framework": "0.34.*"
+                "utopia-php/di": "dev-main",
+                "utopia-php/framework": "dev-feat-di-upgrade as 0.34.99"
             },
             "require-dev": {
                 "laravel/pint": "1.2.*",
+                "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9.3",
                 "squizlabs/php_codesniffer": "^3.6",
-                "vimeo/psalm": "4.0.1"
+                "swoole/ide-helper": "4.8.8"
             },
             "type": "library",
             "autoload": {
@@ -51,9 +53,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/cli/issues",
-                "source": "https://github.com/utopia-php/cli/tree/0.17.0"
+                "source": "https://github.com/utopia-php/cli/tree/dev-coroutines"
             },
-            "time": "2024-01-24T11:37:29+00:00"
+            "time": "2024-06-03T17:55:34+00:00"
         },
         {
             "name": "utopia-php/di",
@@ -61,12 +63,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/di.git",
-                "reference": "fb3c45b268018b87dcbbf87ad943ced9eea3bbe2"
+                "reference": "a0c8be65c19570c80e904d58f54bdd901d1d5d9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/di/zipball/fb3c45b268018b87dcbbf87ad943ced9eea3bbe2",
-                "reference": "fb3c45b268018b87dcbbf87ad943ced9eea3bbe2",
+                "url": "https://api.github.com/repos/utopia-php/di/zipball/a0c8be65c19570c80e904d58f54bdd901d1d5d9c",
+                "reference": "a0c8be65c19570c80e904d58f54bdd901d1d5d9c",
                 "shasum": ""
             },
             "require": {
@@ -115,27 +117,29 @@
                 "source": "https://github.com/utopia-php/di/tree/main",
                 "issues": "https://github.com/utopia-php/di/issues"
             },
-            "time": "2024-04-18T20:06:02+00:00"
+            "time": "2024-04-22T21:22:44+00:00"
         },
         {
             "name": "utopia-php/framework",
-            "version": "0.34.2",
+            "version": "dev-feat-di-upgrade",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/http.git",
-                "reference": "fd126c02b78cc80678c9638f7b335dfb4a841b78"
+                "reference": "cc3341f13d6b90f3104f197acb9136abe2fc708a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/http/zipball/fd126c02b78cc80678c9638f7b335dfb4a841b78",
-                "reference": "fd126c02b78cc80678c9638f7b335dfb4a841b78",
+                "url": "https://api.github.com/repos/utopia-php/http/zipball/cc3341f13d6b90f3104f197acb9136abe2fc708a",
+                "reference": "cc3341f13d6b90f3104f197acb9136abe2fc708a",
                 "shasum": ""
             },
             "require": {
                 "ext-swoole": "*",
-                "php": ">=8.0"
+                "php": ">=8.0",
+                "utopia-php/servers": "dev-dev"
             },
             "require-dev": {
+                "ext-xdebug": "*",
                 "laravel/pint": "^1.2",
                 "phpbench/phpbench": "^1.2",
                 "phpstan/phpstan": "^1.10",
@@ -145,7 +149,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Utopia\\Http\\": "src/Http"
+                    "Utopia\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -161,9 +165,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/http/issues",
-                "source": "https://github.com/utopia-php/http/tree/0.34.2"
+                "source": "https://github.com/utopia-php/http/tree/feat-di-upgrade"
             },
-            "time": "2024-02-20T11:36:56+00:00"
+            "time": "2024-04-22T21:25:06+00:00"
         },
         {
             "name": "utopia-php/queue",
@@ -171,12 +175,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/queue.git",
-                "reference": "c1655007ccbbfec8b02ea308e62061407fb97066"
+                "reference": "2133eb6da85156ff4abf0d0940715fa3975424f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/queue/zipball/c1655007ccbbfec8b02ea308e62061407fb97066",
-                "reference": "c1655007ccbbfec8b02ea308e62061407fb97066",
+                "url": "https://api.github.com/repos/utopia-php/queue/zipball/2133eb6da85156ff4abf0d0940715fa3975424f2",
+                "reference": "2133eb6da85156ff4abf0d0940715fa3975424f2",
                 "shasum": ""
             },
             "require": {
@@ -226,7 +230,7 @@
                 "issues": "https://github.com/utopia-php/queue/issues",
                 "source": "https://github.com/utopia-php/queue/tree/feat-coroutine-and-di"
             },
-            "time": "2024-04-21T17:46:39+00:00"
+            "time": "2024-04-22T21:24:21+00:00"
         },
         {
             "name": "utopia-php/servers",
@@ -234,12 +238,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/servers.git",
-                "reference": "43881ed83f97cb31af7f940db74c520c70b914ab"
+                "reference": "e7eee7f82399c89adc28cf79912a9a41d7bb3233"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/servers/zipball/43881ed83f97cb31af7f940db74c520c70b914ab",
-                "reference": "43881ed83f97cb31af7f940db74c520c70b914ab",
+                "url": "https://api.github.com/repos/utopia-php/servers/zipball/e7eee7f82399c89adc28cf79912a9a41d7bb3233",
+                "reference": "e7eee7f82399c89adc28cf79912a9a41d7bb3233",
                 "shasum": ""
             },
             "require": {
@@ -297,7 +301,7 @@
                 "source": "https://github.com/utopia-php/servers/tree/dev",
                 "issues": "https://github.com/utopia-php/servers/issues"
             },
-            "time": "2024-04-18T20:51:43+00:00"
+            "time": "2024-04-22T21:23:28+00:00"
         }
     ],
     "packages-dev": [
@@ -307,12 +311,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e"
+                "reference": "9955122a490d18ce723cf9014b196c126222c180"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e",
-                "reference": "6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/9955122a490d18ce723cf9014b196c126222c180",
+                "reference": "9955122a490d18ce723cf9014b196c126222c180",
                 "shasum": ""
             },
             "require": {
@@ -370,7 +374,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-09T14:19:21+00:00"
+            "time": "2024-05-05T15:09:38+00:00"
         },
         {
             "name": "laravel/pint",
@@ -505,12 +509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c5ee33df86c06b3278c670f64273b1ba768a0744"
+                "reference": "daaadc3bae458908aa477b90a8932e7da9253f22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c5ee33df86c06b3278c670f64273b1ba768a0744",
-                "reference": "c5ee33df86c06b3278c670f64273b1ba768a0744",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/daaadc3bae458908aa477b90a8932e7da9253f22",
+                "reference": "daaadc3bae458908aa477b90a8932e7da9253f22",
                 "shasum": ""
             },
             "require": {
@@ -556,7 +560,7 @@
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
                 "source": "https://github.com/nikic/PHP-Parser/tree/master"
             },
-            "time": "2024-04-19T12:04:10+00:00"
+            "time": "2024-06-03T06:24:19+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -1002,12 +1006,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "33a0610878994fc134c74c25d5276d606d49079b"
+                "reference": "bfe55ab9f51514c30870772e70d825eb160508bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/33a0610878994fc134c74c25d5276d606d49079b",
-                "reference": "33a0610878994fc134c74c25d5276d606d49079b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bfe55ab9f51514c30870772e70d825eb160508bf",
+                "reference": "bfe55ab9f51514c30870772e70d825eb160508bf",
                 "shasum": ""
             },
             "require": {
@@ -1097,7 +1101,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-20T06:05:08+00:00"
+            "time": "2024-06-03T05:41:34+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2116,6 +2120,18 @@
     ],
     "aliases": [
         {
+            "package": "utopia-php/cli",
+            "version": "dev-dev-coroutines",
+            "alias": "0.17.99",
+            "alias_normalized": "0.17.99.0"
+        },
+        {
+            "package": "utopia-php/framework",
+            "version": "dev-feat-di-upgrade",
+            "alias": "0.34.99",
+            "alias_normalized": "0.34.99.0"
+        },
+        {
             "package": "utopia-php/queue",
             "version": "dev-feat-coroutine-and-di",
             "alias": "0.7.99",
@@ -2124,6 +2140,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "utopia-php/framework": 20,
+        "utopia-php/cli": 20,
         "utopia-php/queue": 20
     },
     "prefer-stable": false,

@@ -3,6 +3,7 @@
 namespace Utopia\Platform;
 
 use Exception;
+use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
 use Utopia\Http\Http;
 use Utopia\Http\Route;
@@ -35,7 +36,7 @@ abstract class Platform
                 $this->initHttp();
                 break;
             case Service::TYPE_CLI:
-                $this->initCLI();
+                $this->initCLI($params);
                 break;
             case Service::TYPE_GRAPHQL:
                 $this->initGraphQL();
@@ -114,9 +115,11 @@ abstract class Platform
      *
      * @return void
      */
-    protected function initCLI(): void
+    protected function initCLI($params = []): void
     {
-        $this->cli ??= new CLI();
+        $adapter = $params['adapter'] ?? new Generic();
+
+        $this->cli ??= new CLI($adapter);
         foreach ($this->services[Service::TYPE_CLI] as $service) {
             foreach ($service->getActions() as $key => $action) {
                 switch ($action->getType()) {
