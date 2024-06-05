@@ -7,7 +7,8 @@ use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
 use Utopia\Http\Http;
 use Utopia\Http\Route;
-use Utopia\Queue\Adapter\Swoole\Server;
+use Utopia\Queue\Adapter\Swoole;
+use Utopia\Queue\Server;
 use Utopia\Queue\Worker;
 
 abstract class Platform
@@ -22,7 +23,7 @@ abstract class Platform
 
     protected CLI $cli;
 
-    protected Worker $worker;
+    protected Server $worker;
 
     /**
      * Initialize Application
@@ -117,9 +118,7 @@ abstract class Platform
      */
     protected function initCLI($params = []): void
     {
-        $adapter = $params['adapter'] ?? new Generic();
-
-        $this->cli ??= new CLI($adapter);
+        $this->cli ??= new CLI();
         foreach ($this->services[Service::TYPE_CLI] as $service) {
             foreach ($service->getActions() as $key => $action) {
                 switch ($action->getType()) {
@@ -174,8 +173,8 @@ abstract class Platform
         $workersNum = $params['workersNum'] ?? 0;
         $workerName = $params['workerName'] ?? null;
         $queueName = $params['queueName'] ?? 'v1-'.$workerName;
-        $adapter = new Server($connection, $workersNum, $queueName);
-        $this->worker ??= new Worker($adapter);
+        $adapter = new Swoole($connection, $workersNum, $queueName);
+        $this->worker ??= new Server($adapter);
         foreach ($this->services[Service::TYPE_WORKER] as $service) {
             foreach ($service->getActions() as $key => $action) {
                 if (! str_contains(strtolower($key), $workerName)) {
@@ -305,7 +304,7 @@ abstract class Platform
     /**
      * Get the value of worker
      */
-    public function getWorker(): Worker
+    public function getWorker(): Server
     {
         return $this->worker;
     }
@@ -313,7 +312,7 @@ abstract class Platform
     /**
      * Set the value of worker
      */
-    public function setWorker(Worker $worker): self
+    public function setWorker(Server $worker): self
     {
         $this->worker = $worker;
 

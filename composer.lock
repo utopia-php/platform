@@ -4,33 +4,31 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6ee128e0aedd09e311a9610ed8b322a",
+    "content-hash": "1172f57d189c135553e48c2c0ee56909",
     "packages": [
         {
             "name": "utopia-php/cli",
-            "version": "dev-dev-coroutines",
+            "version": "0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/cli.git",
-                "reference": "c9b049160aff2eecea7dd1ff041165ae15f41f76"
+                "reference": "0829fd5215afe88f53f3091cedc808da801fd1bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/cli/zipball/c9b049160aff2eecea7dd1ff041165ae15f41f76",
-                "reference": "c9b049160aff2eecea7dd1ff041165ae15f41f76",
+                "url": "https://api.github.com/repos/utopia-php/cli/zipball/0829fd5215afe88f53f3091cedc808da801fd1bb",
+                "reference": "0829fd5215afe88f53f3091cedc808da801fd1bb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4",
-                "utopia-php/di": "dev-main",
-                "utopia-php/framework": "dev-feat-di-upgrade as 0.34.99"
+                "utopia-php/framework": "0.34.*"
             },
             "require-dev": {
                 "laravel/pint": "1.2.*",
-                "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9.3",
                 "squizlabs/php_codesniffer": "^3.6",
-                "swoole/ide-helper": "4.8.8"
+                "vimeo/psalm": "4.0.1"
             },
             "type": "library",
             "autoload": {
@@ -53,93 +51,29 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/cli/issues",
-                "source": "https://github.com/utopia-php/cli/tree/dev-coroutines"
+                "source": "https://github.com/utopia-php/cli/tree/0.17.0"
             },
-            "time": "2024-06-03T17:55:34+00:00"
-        },
-        {
-            "name": "utopia-php/di",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/utopia-php/di.git",
-                "reference": "a0c8be65c19570c80e904d58f54bdd901d1d5d9c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/di/zipball/a0c8be65c19570c80e904d58f54bdd901d1d5d9c",
-                "reference": "a0c8be65c19570c80e904d58f54bdd901d1d5d9c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.2",
-                "phpbench/phpbench": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.5.25",
-                "swoole/ide-helper": "4.8.3"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Utopia\\": "src/",
-                    "Tests\\E2E\\": "tests/e2e"
-                }
-            },
-            "scripts": {
-                "lint": [
-                    "vendor/bin/pint --test"
-                ],
-                "format": [
-                    "vendor/bin/pint"
-                ],
-                "check": [
-                    "vendor/bin/phpstan analyse -c phpstan.neon"
-                ],
-                "test": [
-                    "vendor/bin/phpunit --configuration phpunit.xml"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "A simple and lite library for managing dependency injections",
-            "keywords": [
-                "framework",
-                "http",
-                "php",
-                "upf"
-            ],
-            "support": {
-                "source": "https://github.com/utopia-php/di/tree/main",
-                "issues": "https://github.com/utopia-php/di/issues"
-            },
-            "time": "2024-04-22T21:22:44+00:00"
+            "time": "2024-01-24T11:37:29+00:00"
         },
         {
             "name": "utopia-php/framework",
-            "version": "dev-feat-di-upgrade",
+            "version": "0.34.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/http.git",
-                "reference": "cc3341f13d6b90f3104f197acb9136abe2fc708a"
+                "reference": "fd126c02b78cc80678c9638f7b335dfb4a841b78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/http/zipball/cc3341f13d6b90f3104f197acb9136abe2fc708a",
-                "reference": "cc3341f13d6b90f3104f197acb9136abe2fc708a",
+                "url": "https://api.github.com/repos/utopia-php/http/zipball/fd126c02b78cc80678c9638f7b335dfb4a841b78",
+                "reference": "fd126c02b78cc80678c9638f7b335dfb4a841b78",
                 "shasum": ""
             },
             "require": {
                 "ext-swoole": "*",
-                "php": ">=8.0",
-                "utopia-php/servers": "dev-dev"
+                "php": ">=8.0"
             },
             "require-dev": {
-                "ext-xdebug": "*",
                 "laravel/pint": "^1.2",
                 "phpbench/phpbench": "^1.2",
                 "phpstan/phpstan": "^1.10",
@@ -149,7 +83,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Utopia\\": "src/"
+                    "Utopia\\Http\\": "src/Http"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -165,29 +99,28 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/http/issues",
-                "source": "https://github.com/utopia-php/http/tree/feat-di-upgrade"
+                "source": "https://github.com/utopia-php/http/tree/0.34.2"
             },
-            "time": "2024-04-22T21:25:06+00:00"
+            "time": "2024-02-20T11:36:56+00:00"
         },
         {
             "name": "utopia-php/queue",
-            "version": "dev-feat-coroutine-and-di",
+            "version": "dev-feat-framework-v2-v2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/queue.git",
-                "reference": "2133eb6da85156ff4abf0d0940715fa3975424f2"
+                "reference": "0e9ba1b32169d64a78909fd77891db4d64344a63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/queue/zipball/2133eb6da85156ff4abf0d0940715fa3975424f2",
-                "reference": "2133eb6da85156ff4abf0d0940715fa3975424f2",
+                "url": "https://api.github.com/repos/utopia-php/queue/zipball/0e9ba1b32169d64a78909fd77891db4d64344a63",
+                "reference": "0e9ba1b32169d64a78909fd77891db4d64344a63",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
                 "utopia-php/cli": "0.17.*",
-                "utopia-php/di": "dev-main",
-                "utopia-php/servers": "dev-dev"
+                "utopia-php/framework": "0.34.*"
             },
             "require-dev": {
                 "laravel/pint": "^0.2.3",
@@ -197,7 +130,6 @@
                 "workerman/workerman": "^4.0"
             },
             "suggest": {
-                "ext-redis": "Needed to support Redis connections",
                 "ext-swoole": "Needed to support Swoole.",
                 "workerman/workerman": "Needed to support Workerman."
             },
@@ -228,80 +160,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/queue/issues",
-                "source": "https://github.com/utopia-php/queue/tree/feat-coroutine-and-di"
+                "source": "https://github.com/utopia-php/queue/tree/feat-framework-v2-v2"
             },
-            "time": "2024-04-22T21:24:21+00:00"
-        },
-        {
-            "name": "utopia-php/servers",
-            "version": "dev-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/utopia-php/servers.git",
-                "reference": "e7eee7f82399c89adc28cf79912a9a41d7bb3233"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/servers/zipball/e7eee7f82399c89adc28cf79912a9a41d7bb3233",
-                "reference": "e7eee7f82399c89adc28cf79912a9a41d7bb3233",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0",
-                "utopia-php/di": "dev-main"
-            },
-            "require-dev": {
-                "laravel/pint": "^0.2.3",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Utopia\\Servers\\": "src/Servers"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\E2E\\": "tests/Servers/Unit"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "analyse": [
-                    "vendor/bin/phpstan analyse"
-                ],
-                "format": [
-                    "vendor/bin/pint"
-                ],
-                "lint": [
-                    "vendor/bin/pint --test"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Team Appwrite",
-                    "email": "team@appwrite.io"
-                }
-            ],
-            "description": "A base library for building Utopia style servers.",
-            "keywords": [
-                "framework",
-                "php",
-                "servers",
-                "upf",
-                "utopia"
-            ],
-            "support": {
-                "source": "https://github.com/utopia-php/servers/tree/dev",
-                "issues": "https://github.com/utopia-php/servers/issues"
-            },
-            "time": "2024-04-22T21:23:28+00:00"
+            "time": "2024-03-08T09:29:41+00:00"
         }
     ],
     "packages-dev": [
@@ -2118,30 +1979,9 @@
             "time": "2024-03-03T12:36:25+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "utopia-php/cli",
-            "version": "dev-dev-coroutines",
-            "alias": "0.17.99",
-            "alias_normalized": "0.17.99.0"
-        },
-        {
-            "package": "utopia-php/framework",
-            "version": "dev-feat-di-upgrade",
-            "alias": "0.34.99",
-            "alias_normalized": "0.34.99.0"
-        },
-        {
-            "package": "utopia-php/queue",
-            "version": "dev-feat-coroutine-and-di",
-            "alias": "0.7.99",
-            "alias_normalized": "0.7.99.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "utopia-php/framework": 20,
-        "utopia-php/cli": 20,
         "utopia-php/queue": 20
     },
     "prefer-stable": false,
