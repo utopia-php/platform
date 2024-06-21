@@ -7,8 +7,6 @@ use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
 use Utopia\Http\Http;
 use Utopia\Http\Route;
-use Utopia\Queue\Adapter\Swoole;
-use Utopia\Queue\Server;
 use Utopia\Queue\Adapter\Swoole\Server;
 use Utopia\Queue\Worker;
 
