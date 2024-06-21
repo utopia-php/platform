@@ -10,7 +10,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Utopia\\Tests\\": "tests/Platform"
+            "Utopia\\Tests\\": "tests/Platform",
+            "Utopia\\Unit\\": "tests/unit"
         }
     },
     "require": {
