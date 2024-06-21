@@ -46,7 +46,7 @@ abstract class Platform
                     break;
             case Service::TYPE_TASK:
                 $adapter = $params['adapter'] ?? new Generic();
-                $this->cli ??= new CLI();
+                $this->cli ??= new CLI($adapter);
                 $this->initTasks($services);
                     break;
                 case Service::TYPE_GRAPHQL:
