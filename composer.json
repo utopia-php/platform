@@ -18,9 +18,9 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "dev-feat-di-upgrade as 0.34.99",
-        "utopia-php/cli": "dev-dev-coroutines as 0.17.99",
-        "utopia-php/queue": "dev-feat-coroutine-and-di as 0.7.99"
+        "utopia-php/framework": "1.0.*",
+        "utopia-php/cli": "1.0.*",
+        "utopia-php/queue": "1.0.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.3",
@@ -30,15 +30,5 @@
         "format": "vendor/bin/pint",
         "lint": "vendor/bin/pint --test",
         "test": "docker-compose up -d && sleep 10 && docker-compose exec web vendor/bin/phpunit --configuration phpunit.xml"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/utopia-php/di"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/utopia-php/servers"
-        }
-    ]
+    }
 }
