@@ -18,6 +18,7 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
+        "utopia-php/servers": "0.1.0",
         "utopia-php/framework": "1.0.*",
         "utopia-php/cli": "1.0.*",
         "utopia-php/queue": "dev-feat-coroutine-and-di"
@@ -29,6 +30,6 @@
     "scripts": {
         "format": "vendor/bin/pint",
         "lint": "vendor/bin/pint --test",
-        "test": "docker-compose up -d && sleep 10 && docker-compose exec web vendor/bin/phpunit --configuration phpunit.xml"
+        "test": "vendor/bin/phpunit --configuration phpunit.xml"
     }
 }

@@ -3,29 +3,36 @@
 namespace Utopia\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Utopia\App;
-use Utopia\Request;
+use Utopia\DI\Container;
+use Utopia\DI\Dependency;
+use Utopia\Http\Adapter\FPM\Request;
+use Utopia\Http\Adapter\FPM\Response;
+use Utopia\Http\Adapter\FPM\Server;
+use Utopia\Http\Http;
 
 class HttpServicesTest extends TestCase
 {
-    protected ?App $app = null;
-
     protected ?string $method;
 
     protected ?string $uri;
 
+    protected ?Http $http;
+
     public function setUp(): void
     {
-        App::reset();
+        Http::reset();
         $platform = new TestPlatform();
         $platform->init('http');
 
-        $this->app = new App('UTC');
+        $server = new Server();
+        $this->http = new Http($server, new Container(), 'UTC');
+        $this->http->setRequestClass(Request::class);
+        $this->http->setResponseClass(Response::class);
     }
 
     public function tearDown(): void
     {
-        $this->app = null;
+        $this->http = null;
     }
 
     public function testRootAction()
@@ -33,9 +40,13 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
 
-        $res = new MockResponse();
+
+        $context = new Container();
+        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  new MockResponse()));
+        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+
         \ob_start();
-        $this->app->run(new Request(), $res);
+        $this->http->run($context);
         $response = \ob_get_contents();
         \ob_end_clean();
 
@@ -47,8 +58,13 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
 
+        $res = new MockResponse();
+        $context = new Container();
+        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res));
+        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+
         \ob_start();
-        $this->app->run(new Request(), new MockResponse());
+        $this->http->run($context);
         $response = \ob_get_contents();
         \ob_end_clean();
 
@@ -61,7 +77,11 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_URI'] = '/redirect';
 
         $res = new MockResponse();
-        $this->app->run(new Request(), $res);
+        $context = new Container();
+        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res));
+        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+
+        $this->http->run($context);
 
         $this->assertEquals('/', $res->getHeaders()['Location']);
     }
@@ -72,21 +92,28 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_URI'] = '/';
 
         $res = new MockResponse();
+        $context = new Container();
+        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res));
+        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+
         \ob_start();
-        $this->app->run(new Request(), $res);
+        $this->http->run($context);
         $response = \ob_get_contents();
         \ob_end_clean();
 
         $this->assertEquals('Hello World!', $response);
         $this->assertEquals('init-called', $res->getHeaders()['x-init']);
-        App::reset();
 
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
 
         $res1 = new MockResponse();
+        $context = new Container();
+        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res1));
+        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+
         \ob_start();
-        $this->app->run(new Request(), $res1);
+        $this->http->run($context);
         $response = \ob_get_contents();
         \ob_end_clean();
 
