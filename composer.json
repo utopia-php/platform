@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["php","framework", "upf", "utopia", "platform"],
     "license": "MIT",
-    "minimum-stability": "RC",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {"Utopia\\Platform\\": "src/Platform"}
     },
@@ -20,7 +20,7 @@
         "ext-redis": "*",
         "utopia-php/servers": "0.1.0",
         "utopia-php/framework": "1.0.*",
-        "utopia-php/cli": "1.0.*",
+        "utopia-php/cli": "0.19.*",
         "utopia-php/queue": "0.8.*"
     },
     "require-dev": {
