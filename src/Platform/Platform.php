@@ -44,10 +44,10 @@ abstract class Platform
                 case Service::TYPE_HTTP:
                     $this->initHttp($services);
                     break;
-            case Service::TYPE_TASK:
-                $adapter = $params['adapter'] ?? new Generic();
-                $this->cli ??= new CLI($adapter);
-                $this->initTasks($services);
+                case Service::TYPE_TASK:
+                    $adapter = $params['adapter'] ?? new Generic();
+                    $this->cli ??= new CLI($adapter);
+                    $this->initTasks($services);
                     break;
                 case Service::TYPE_GRAPHQL:
                     $this->initGraphQL();
@@ -55,7 +55,7 @@ abstract class Platform
                 case Service::TYPE_WORKER:
                     $workerName = $params['workerName'] ?? null;
 
-                    if (!isset($this->worker)) {
+                    if (! isset($this->worker)) {
                         $connection = $params['connection'] ?? null;
                         $workersNum = $params['workersNum'] ?? 0;
                         $workerName = $params['workerName'] ?? null;

@@ -40,10 +40,9 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
 
-
         $context = new Container();
-        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  new MockResponse()));
-        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+        $context->set((new Dependency())->setName('response')->setCallback(fn () => new MockResponse()));
+        $context->set((new Dependency())->setName('request')->setCallback(fn () => new Request()));
 
         \ob_start();
         $this->http->run($context);
@@ -60,8 +59,8 @@ class HttpServicesTest extends TestCase
 
         $res = new MockResponse();
         $context = new Container();
-        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res));
-        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+        $context->set((new Dependency())->setName('response')->setCallback(fn () => $res));
+        $context->set((new Dependency())->setName('request')->setCallback(fn () => new Request()));
 
         \ob_start();
         $this->http->run($context);
@@ -78,8 +77,8 @@ class HttpServicesTest extends TestCase
 
         $res = new MockResponse();
         $context = new Container();
-        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res));
-        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+        $context->set((new Dependency())->setName('response')->setCallback(fn () => $res));
+        $context->set((new Dependency())->setName('request')->setCallback(fn () => new Request()));
 
         $this->http->run($context);
 
@@ -93,8 +92,8 @@ class HttpServicesTest extends TestCase
 
         $res = new MockResponse();
         $context = new Container();
-        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res));
-        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+        $context->set((new Dependency())->setName('response')->setCallback(fn () => $res));
+        $context->set((new Dependency())->setName('request')->setCallback(fn () => new Request()));
 
         \ob_start();
         $this->http->run($context);
@@ -109,8 +108,8 @@ class HttpServicesTest extends TestCase
 
         $res1 = new MockResponse();
         $context = new Container();
-        $context->set( (new Dependency())->setName('response')->setCallback(fn () =>  $res1));
-        $context->set( (new Dependency())->setName('request')->setCallback(fn () => new Request()));
+        $context->set((new Dependency())->setName('response')->setCallback(fn () => $res1));
+        $context->set((new Dependency())->setName('request')->setCallback(fn () => new Request()));
 
         \ob_start();
         $this->http->run($context);

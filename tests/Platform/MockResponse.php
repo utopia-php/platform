@@ -35,6 +35,7 @@ class MockResponse extends Response
         if (! is_null($content)) {
             echo $content;
         }
+
         return true;
     }
 
