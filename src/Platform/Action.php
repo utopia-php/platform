@@ -3,8 +3,8 @@
 namespace Utopia\Platform;
 
 use Exception;
+use Utopia\Http\Validator;
 use Utopia\Platform\Scope\HTTP;
-use Utopia\Validator;
 
 abstract class Action
 {

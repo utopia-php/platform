@@ -3,6 +3,7 @@
 namespace Utopia\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
 use Utopia\Platform\Service;
 
@@ -20,7 +21,7 @@ class CLITest extends TestCase
     {
         ob_start();
 
-        $cli = new CLI(['test.php', 'build', '--email=me@example.com', '--list=item1', '--list=item2']); // Mock command request
+        $cli = new CLI(new Generic(), ['test.php', 'build', '--email=me@example.com', '--list=item1', '--list=item2']); // Mock command request
 
         $platform = new TestPlatform();
         $platform->setCli($cli);

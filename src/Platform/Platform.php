@@ -3,11 +3,12 @@
 namespace Utopia\Platform;
 
 use Exception;
-use Utopia\App;
+use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
-use Utopia\Queue\Adapter\Swoole;
-use Utopia\Queue\Server;
-use Utopia\Route;
+use Utopia\Http\Http;
+use Utopia\Http\Route;
+use Utopia\Queue\Adapter\Swoole\Server;
+use Utopia\Queue\Worker;
 
 abstract class Platform
 {
@@ -22,7 +23,7 @@ abstract class Platform
 
     protected CLI $cli;
 
-    protected Server $worker;
+    protected Worker $worker;
 
     public function __construct(Module $module)
     {
@@ -44,7 +45,8 @@ abstract class Platform
                     $this->initHttp($services);
                     break;
                 case Service::TYPE_TASK:
-                    $this->cli ??= new CLI();
+                    $adapter = $params['adapter'] ?? new Generic();
+                    $this->cli ??= new CLI($adapter);
                     $this->initTasks($services);
                     break;
                 case Service::TYPE_GRAPHQL:
@@ -56,9 +58,10 @@ abstract class Platform
                     if (! isset($this->worker)) {
                         $connection = $params['connection'] ?? null;
                         $workersNum = $params['workersNum'] ?? 0;
+                        $workerName = $params['workerName'] ?? null;
                         $queueName = $params['queueName'] ?? 'v1-'.$workerName;
-                        $adapter = new Swoole($connection, $workersNum, $queueName);
-                        $this->worker = new Server($adapter);
+                        $adapter = new Server($connection, $workersNum, $queueName);
+                        $this->worker ??= new Worker($adapter);
                     }
                     $this->initWorker($services, $workerName);
                     break;
@@ -81,20 +84,20 @@ abstract class Platform
                 /** @var Action $action */
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
-                        $hook = App::init();
+                        $hook = Http::init();
                         break;
                     case Action::TYPE_ERROR:
-                        $hook = App::error();
+                        $hook = Http::error();
                         break;
                     case Action::TYPE_OPTIONS:
-                        $hook = App::options();
+                        $hook = Http::options();
                         break;
                     case Action::TYPE_SHUTDOWN:
-                        $hook = App::shutdown();
+                        $hook = Http::shutdown();
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
-                        $hook = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
+                        $hook = Http::addRoute($action->getHttpMethod(), $action->getHttpPath());
                         break;
                 }
 
@@ -327,7 +330,7 @@ abstract class Platform
     /**
      * Get the value of worker
      */
-    public function getWorker(): Server
+    public function getWorker(): Worker
     {
         return $this->worker;
     }
@@ -335,7 +338,7 @@ abstract class Platform
     /**
      * Set the value of worker
      */
-    public function setWorker(Server $worker): self
+    public function setWorker(Worker $worker): self
     {
         $this->worker = $worker;
 
