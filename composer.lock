@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10fde8bf4686a02313d920cc207fa863",
+    "content-hash": "71069f1be53f227320bf6ecd834cedcf",
     "packages": [
         {
             "name": "utopia-php/cli",
@@ -220,16 +220,16 @@
         },
         {
             "name": "utopia-php/servers",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/servers.git",
-                "reference": "7d9e4f364fb1ab1889fb89ca96eb9946467cb09c"
+                "reference": "fd5c8d32778f265256c1936372a071b944f5ba8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/servers/zipball/7d9e4f364fb1ab1889fb89ca96eb9946467cb09c",
-                "reference": "7d9e4f364fb1ab1889fb89ca96eb9946467cb09c",
+                "url": "https://api.github.com/repos/utopia-php/servers/zipball/fd5c8d32778f265256c1936372a071b944f5ba8a",
+                "reference": "fd5c8d32778f265256c1936372a071b944f5ba8a",
                 "shasum": ""
             },
             "require": {
@@ -267,9 +267,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/servers/issues",
-                "source": "https://github.com/utopia-php/servers/tree/0.1.0"
+                "source": "https://github.com/utopia-php/servers/tree/0.1.1"
             },
-            "time": "2024-08-08T14:31:39+00:00"
+            "time": "2024-09-06T02:25:56+00:00"
         }
     ],
     "packages-dev": [
