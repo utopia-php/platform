@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71069f1be53f227320bf6ecd834cedcf",
+    "content-hash": "a5b8cd4192f20e0d11deaacbdd9f94b0",
     "packages": [
         {
             "name": "utopia-php/cli",
@@ -107,16 +107,16 @@
         },
         {
             "name": "utopia-php/framework",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/http.git",
-                "reference": "cc880ec41f7f163d4f9956fec26cc6be51b412cf"
+                "reference": "fc63ec61c720190a5ea5bb484c615145850951e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/http/zipball/cc880ec41f7f163d4f9956fec26cc6be51b412cf",
-                "reference": "cc880ec41f7f163d4f9956fec26cc6be51b412cf",
+                "url": "https://api.github.com/repos/utopia-php/http/zipball/fc63ec61c720190a5ea5bb484c615145850951e6",
+                "reference": "fc63ec61c720190a5ea5bb484c615145850951e6",
                 "shasum": ""
             },
             "require": {
@@ -151,9 +151,59 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/http/issues",
-                "source": "https://github.com/utopia-php/http/tree/1.0.0"
+                "source": "https://github.com/utopia-php/http/tree/1.0.2"
             },
-            "time": "2024-09-05T15:38:08+00:00"
+            "time": "2024-09-10T09:04:19+00:00"
+        },
+        {
+            "name": "utopia-php/http",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/utopia-php/http.git",
+                "reference": "fc63ec61c720190a5ea5bb484c615145850951e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/utopia-php/http/zipball/fc63ec61c720190a5ea5bb484c615145850951e6",
+                "reference": "fc63ec61c720190a5ea5bb484c615145850951e6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-swoole": "*",
+                "php": ">=8.0",
+                "utopia-php/servers": "0.1.*"
+            },
+            "require-dev": {
+                "ext-xdebug": "*",
+                "laravel/pint": "^1.2",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.5.25",
+                "swoole/ide-helper": "4.8.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Utopia\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A simple, light and advanced PHP HTTP framework",
+            "keywords": [
+                "framework",
+                "http",
+                "php",
+                "upf"
+            ],
+            "support": {
+                "issues": "https://github.com/utopia-php/http/issues",
+                "source": "https://github.com/utopia-php/http/tree/1.0.2"
+            },
+            "time": "2024-09-10T09:04:19+00:00"
         },
         {
             "name": "utopia-php/queue",
@@ -471,16 +521,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.1.0",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1"
+                "reference": "3abf7425cd284141dc5d8d14a9ee444de3345d1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/683130c2ff8c2739f4822ff7ac5c873ec529abd1",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3abf7425cd284141dc5d8d14a9ee444de3345d1a",
+                "reference": "3abf7425cd284141dc5d8d14a9ee444de3345d1a",
                 "shasum": ""
             },
             "require": {
@@ -523,9 +573,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.1.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.3.0"
             },
-            "time": "2024-07-01T20:03:41+00:00"
+            "time": "2024-09-29T13:56:26+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -966,16 +1016,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.20",
+            "version": "9.6.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "49d7820565836236411f5dc002d16dd689cde42f"
+                "reference": "de6abf3b6f8dd955fac3caad3af7a9504e8c2ffa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/49d7820565836236411f5dc002d16dd689cde42f",
-                "reference": "49d7820565836236411f5dc002d16dd689cde42f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/de6abf3b6f8dd955fac3caad3af7a9504e8c2ffa",
+                "reference": "de6abf3b6f8dd955fac3caad3af7a9504e8c2ffa",
                 "shasum": ""
             },
             "require": {
@@ -990,7 +1040,7 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=7.3",
-                "phpunit/php-code-coverage": "^9.2.31",
+                "phpunit/php-code-coverage": "^9.2.32",
                 "phpunit/php-file-iterator": "^3.0.6",
                 "phpunit/php-invoker": "^3.1.1",
                 "phpunit/php-text-template": "^2.0.4",
@@ -1049,7 +1099,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.20"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.21"
             },
             "funding": [
                 {
@@ -1065,7 +1115,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-10T11:45:39+00:00"
+            "time": "2024-09-19T10:50:18+00:00"
         },
         {
             "name": "sebastian/cli-parser",
