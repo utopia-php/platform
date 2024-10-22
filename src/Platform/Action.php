@@ -168,7 +168,7 @@ abstract class Action
      * @param  array  $injections
      * @return self
      */
-    public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = []): self
+    public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = [], bool $skipValidation = false): self
     {
         $param = [
             'default' => $default,
@@ -176,6 +176,7 @@ abstract class Action
             'description' => $description,
             'optional' => $optional,
             'injections' => $injections,
+            'skipValidation' => $skipValidation,
         ];
         $this->options['param:'.$key] = array_merge($param, ['type' => 'param']);
         $this->params[$key] = $param;
