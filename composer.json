@@ -20,11 +20,11 @@
         "ext-redis": "*",
         "utopia-php/framework": "0.33.*",
         "utopia-php/cli": "0.15.*",
-        "utopia-php/queue": "0.9.*"
+        "utopia-php/queue": "0.10.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.3",
-        "laravel/pint": "1.2.*"
+        "phpunit/phpunit": "9.*",
+        "laravel/pint": "1.*"
     },
     "scripts": {
         "format": "vendor/bin/pint",
