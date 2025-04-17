@@ -35,8 +35,11 @@ abstract class Platform
      *
      * @return void
      */
-    public function init(string $type, array $params = []): void
-    {
+    public function init(
+        string $type,
+        array $params = [],
+        ?Server $server = null
+    ): void {
         foreach ($this->modules as $module) {
             $services = $module->getServicesByType($type);
             switch ($type) {
@@ -53,7 +56,13 @@ abstract class Platform
                 case Service::TYPE_WORKER:
                     $workerName = $params['workerName'] ?? null;
 
-                    if (! isset($this->worker)) {
+                    if (!isset($this->worker)) {
+                        if ($server !== null) {
+                            $this->worker = $server;
+                            $this->initWorker($services, $workerName);
+                            break;
+                        }
+
                         $connection = $params['connection'] ?? null;
                         $workersNum = $params['workersNum'] ?? 0;
                         $queueName = $params['queueName'] ?? 'v1-'.$workerName;
