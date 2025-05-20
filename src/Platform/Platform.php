@@ -112,7 +112,7 @@ abstract class Platform
                     switch ($option['type']) {
                         case 'param':
                             $key = substr($key, stripos($key, ':') + 1);
-                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections'], $option['skipValidation']);
+                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections'], $option['skipValidation'], $option['deprecated']);
                             break;
                         case 'injection':
                             $hook->inject($option['name']);
