@@ -2329,12 +2329,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/queue.git",
-                "reference": "1185ef27d9587946a4f0ad720e6dc83729266383"
+                "reference": "2b85380ff37ab454eab6ff9369631227f8c44f85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/queue/zipball/1185ef27d9587946a4f0ad720e6dc83729266383",
-                "reference": "1185ef27d9587946a4f0ad720e6dc83729266383",
+                "url": "https://api.github.com/repos/utopia-php/queue/zipball/2b85380ff37ab454eab6ff9369631227f8c44f85",
+                "reference": "2b85380ff37ab454eab6ff9369631227f8c44f85",
                 "shasum": ""
             },
             "require": {
@@ -2347,14 +2347,15 @@
                 "utopia-php/telemetry": "0.1.*"
             },
             "require-dev": {
-                "ext-redis": "*",
-                "laravel/pint": "^0.2.3",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.5.5",
-                "swoole/ide-helper": "4.8.8",
-                "workerman/workerman": "^4.0"
+                "laravel/pint": "1.*",
+                "phpstan/phpstan": "1.*",
+                "phpunit/phpunit": "9.*",
+                "swoole/ide-helper": "5.1.7",
+                "workerman/workerman": "4.*"
             },
             "suggest": {
+                "ext-amqp": "Needed to support AMQP.",
+                "ext-redis": "Needed to support Redis.",
                 "ext-swoole": "Needed to support Swoole.",
                 "workerman/workerman": "Needed to support Workerman."
             },
@@ -2387,7 +2388,7 @@
                 "issues": "https://github.com/utopia-php/queue/issues",
                 "source": "https://github.com/utopia-php/queue/tree/fix-amqp"
             },
-            "time": "2025-07-04T20:55:31+00:00"
+            "time": "2025-07-04T22:56:37+00:00"
         },
         {
             "name": "utopia-php/telemetry",
