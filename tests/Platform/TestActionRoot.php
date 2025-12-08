@@ -17,7 +17,10 @@ class TestActionRoot extends Action
         });
     }
 
-    public function action($response)
+    /**
+     * @param mixed $response
+     */
+    public function action($response): void
     {
         $response->send('Hello World!');
     }

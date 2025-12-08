@@ -8,9 +8,9 @@ use Utopia\Response;
 use Utopia\Tests\TestPlatform;
 
 ini_set('memory_limit', '512M');
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-ini_set('display_socket_timeout', -1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+ini_set('display_socket_timeout', '-1');
 error_reporting(E_ALL);
 
 $platform = new TestPlatform();

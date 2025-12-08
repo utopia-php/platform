@@ -440,6 +440,9 @@ class ActionTest extends TestCase
                 $this->chainResult = $result;
             }
 
+            /**
+             * @var Action
+             */
             public $chainResult;
         };
 

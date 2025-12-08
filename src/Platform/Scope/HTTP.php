@@ -10,6 +10,9 @@ trait HTTP
 
     protected ?string $httpAliasPath = null;
 
+    /**
+     * @var array<string, mixed>
+     */
     protected array $httpAliasParams = [];
 
     /**
@@ -41,9 +44,9 @@ trait HTTP
     /**
      * Get httpPath
      *
-     * @return string
+     * @return string|null
      */
-    public function getHttpPath(): string
+    public function getHttpPath(): ?string
     {
         return $this->httpPath;
     }
@@ -61,7 +64,7 @@ trait HTTP
     /**
      * Get the value of httpAliasParams
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getHttpAliasParams(): array
     {
@@ -71,9 +74,9 @@ trait HTTP
     /**
      * Get the value of httpMethod
      *
-     * @return string
+     * @return string|null
      */
-    public function getHttpMethod(): string
+    public function getHttpMethod(): ?string
     {
         return $this->httpMethod;
     }
@@ -82,7 +85,7 @@ trait HTTP
      * Set httpAlias path and params
      *
      * @param  string  $path
-     * @param  array  $params
+     * @param  array<string, mixed>  $params
      * @return self
      */
     public function httpAlias(string $path, array $params = []): self

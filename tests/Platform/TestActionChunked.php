@@ -16,7 +16,10 @@ class TestActionChunked extends Action
         });
     }
 
-    public function action($response)
+    /**
+     * @param mixed $response
+     */
+    public function action($response): void
     {
         foreach (['Hello ', 'World!'] as $key => $word) {
             $response->chunk($word, $key == 1);

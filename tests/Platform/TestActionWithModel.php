@@ -67,7 +67,14 @@ class TestActionWithModel extends Action
             });
     }
 
-    public function action($user, $settings, $legacyData, $simpleField, $response)
+    /**
+     * @param mixed $user
+     * @param mixed $settings
+     * @param mixed $legacyData
+     * @param mixed $simpleField
+     * @param mixed $response
+     */
+    public function action($user, $settings, $legacyData, $simpleField, $response): void
     {
         $response->json([
             'success' => true,

@@ -18,7 +18,11 @@ class TestActionCLI extends Action
             });
     }
 
-    public function action($email, $list)
+    /**
+     * @param mixed $email
+     * @param mixed $list
+     */
+    public function action($email, $list): void
     {
         echo $email.'-'.implode('-', $list);
     }

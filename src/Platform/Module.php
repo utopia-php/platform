@@ -6,6 +6,9 @@ use Exception;
 
 abstract class Module
 {
+    /**
+     * @var array<string, array<string, Service>>
+     */
     protected array $services = [
         'all' => [],
         Service::TYPE_TASK => [],
@@ -19,7 +22,7 @@ abstract class Module
      *
      * @param  string  $key
      * @param  Service  $service
-     * @return Platform
+     * @return self
      */
     public function addService(string $key, Service $service): self
     {
@@ -33,7 +36,7 @@ abstract class Module
      * Remove Service
      *
      * @param  string  $key
-     * @return Platform
+     * @return self
      */
     public function removeService(string $key): self
     {
@@ -68,7 +71,7 @@ abstract class Module
     /**
      * Get Services
      *
-     * @return array
+     * @return array<string, Service>
      */
     public function getServices(): array
     {
@@ -79,7 +82,7 @@ abstract class Module
      * Get services by type
      *
      * @param  string  $type
-     * @return array<Service>
+     * @return array<string, Service>
      */
     public function getServicesByType(string $type): array
     {

@@ -45,9 +45,9 @@ class Client
      *
      * @param  string  $method
      * @param  string  $path
-     * @param  array  $params
-     * @param  array  $headers
-     * @return array|string
+     * @param  array<string, mixed>  $headers
+     * @param  array<string, mixed>  $params
+     * @return array<string, mixed>|string
      *
      * @throws Exception
      */
@@ -60,11 +60,12 @@ class Client
         $responseType = '';
         $responseBody = '';
 
+        /** @phpstan-ignore-next-line */
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array_values($headers));
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 15);
         curl_setopt($ch, CURLOPT_HEADERFUNCTION, function ($curl, $header) use (&$responseHeaders) {

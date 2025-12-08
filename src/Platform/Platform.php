@@ -33,6 +33,7 @@ abstract class Platform
     /**
      * Initialize Application
      *
+     * @param array<string, mixed> $params
      * @return void
      */
     public function init(string $type, array $params = []): void
@@ -71,7 +72,7 @@ abstract class Platform
     /**
      * Init HTTP service
      *
-     * @param  Service  $service
+     * @param  array<string, Service>  $services
      * @return void
      */
     protected function initHttp(array $services): void
@@ -94,7 +95,12 @@ abstract class Platform
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
-                        $hook = App::addRoute($action->getHttpMethod(), $action->getHttpPath());
+                        $httpMethod = $action->getHttpMethod();
+                        $httpPath = $action->getHttpPath();
+                        if ($httpMethod === null || $httpPath === null) {
+                            throw new Exception('HTTP method and path must be set for default actions');
+                        }
+                        $hook = App::addRoute($httpMethod, $httpPath);
                         break;
                 }
 
@@ -143,6 +149,7 @@ abstract class Platform
     /**
      * Init CLI Services
      *
+     * @param  array<string, Service>  $services
      * @return void
      */
     protected function initTasks(array $services): void
@@ -193,7 +200,7 @@ abstract class Platform
     /**
      * Init worker Services
      *
-     * @param  array  $params
+     * @param  array<string, Service>  $services
      * @return void
      */
     protected function initWorker(array $services, string $workerName): void
@@ -310,7 +317,7 @@ abstract class Platform
     /**
      * Get Services
      *
-     * @return array
+     * @return array<string, Service>
      */
     public function getServices(): array
     {
@@ -362,7 +369,7 @@ abstract class Platform
      * @param  string|null  $default
      * @return mixed
      */
-    public function getEnv(string $key, string $default = null): mixed
+    public function getEnv(string $key, ?string $default = null): mixed
     {
         return $_SERVER[$key] ?? $default;
     }
