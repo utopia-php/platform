@@ -51,8 +51,9 @@ abstract class Module
     /**
      * Get Service
      *
-     * @param  string  $key
+     * @param string $key
      * @return Service|null
+     * @throws Exception
      */
     public function getService(string $key): ?Service
     {

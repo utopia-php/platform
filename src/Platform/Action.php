@@ -160,19 +160,30 @@ abstract class Action
     /**
      * Set Param
      *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @param  Validator|callable  $validator
-     * @param  string  $description
-     * @param  bool  $optional
-     * @param  array  $injections
-     * @param  bool  $skipValidation
-     * @param  bool  $deprecated
-     * @param  string  $example
+     * @param string $key
+     * @param mixed $default
+     * @param Validator|callable $validator
+     * @param string $description
+     * @param bool $optional
+     * @param array $injections
+     * @param bool $skipValidation
+     * @param bool $deprecated
+     * @param string $example
+     * @param string|null $model
      * @return self
      */
-    public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = [], bool $skipValidation = false, bool $deprecated = false, string $example = ''): self
-    {
+    public function param(
+        string $key,
+        mixed $default,
+        Validator|callable $validator,
+        string $description = '',
+        bool $optional = false,
+        array $injections = [],
+        bool $skipValidation = false,
+        bool $deprecated = false,
+        string $example = '',
+        ?string $model = null
+    ): self {
         $param = [
             'default' => $default,
             'validator' => $validator,
@@ -180,8 +191,9 @@ abstract class Action
             'optional' => $optional,
             'injections' => $injections,
             'skipValidation' => $skipValidation,
-            'deprecated' => $deprecated, // TODO: @Meldiron implement tests
+            'deprecated' => $deprecated,
             'example' => $example,
+            'model' => $model,
         ];
         $this->options['param:'.$key] = array_merge($param, ['type' => 'param']);
         $this->params[$key] = $param;

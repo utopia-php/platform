@@ -111,8 +111,19 @@ abstract class Platform
                 foreach ($action->getOptions() as $key => $option) {
                     switch ($option['type']) {
                         case 'param':
-                            $key = substr($key, stripos($key, ':') + 1);
-                            $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections'], $option['skipValidation'], $option['deprecated'], $option['example']);
+                            $key = \substr($key, \stripos($key, ':') + 1);
+                            $hook->param(
+                                $key,
+                                $option['default'],
+                                $option['validator'],
+                                $option['description'],
+                                $option['optional'],
+                                $option['injections'],
+                                $option['skipValidation'],
+                                $option['deprecated'],
+                                $option['example'],
+                                $option['model'],
+                            );
                             break;
                         case 'injection':
                             $hook->inject($option['name']);
