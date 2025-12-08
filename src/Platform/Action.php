@@ -41,16 +41,34 @@ abstract class Action
 
     protected ?string $desc = null;
 
+    /**
+     * @var array<string>
+     */
     protected array $groups = [];
 
+    /**
+     * @var callable
+     */
     protected $callback;
 
+    /**
+     * @var array<string, mixed>
+     */
     protected array $options = [];
 
+    /**
+     * @var array<string, array<string, mixed>>
+     */
     protected array $params = [];
 
+    /**
+     * @var array<int, string>
+     */
     protected array $injections = [];
 
+    /**
+     * @var array<string, mixed>
+     */
     protected array $labels = [];
 
     protected string $type = self::TYPE_DEFAULT;
@@ -104,7 +122,7 @@ abstract class Action
     /**
      * Get the value of groups
      *
-     * @return array
+     * @return array<string>
      */
     public function getGroups(): array
     {
@@ -114,7 +132,7 @@ abstract class Action
     /**
      * Set Groups
      *
-     * @param  array  $groups
+     * @param  array<string>  $groups
      * @return self
      */
     public function groups(array $groups): self
@@ -150,7 +168,7 @@ abstract class Action
     /**
      * Get the value of params
      *
-     * @return array
+     * @return array<string, array<string, mixed>>
      */
     public function getParams(): array
     {
@@ -160,19 +178,30 @@ abstract class Action
     /**
      * Set Param
      *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @param  Validator|callable  $validator
-     * @param  string  $description
-     * @param  bool  $optional
-     * @param  array  $injections
-     * @param  bool  $skipValidation
-     * @param  bool  $deprecated
-     * @param  string  $example
+     * @param string $key
+     * @param mixed $default
+     * @param Validator|callable $validator
+     * @param string $description
+     * @param bool $optional
+     * @param array<string> $injections
+     * @param bool $skipValidation
+     * @param bool $deprecated
+     * @param string $example
+     * @param string|null $model
      * @return self
      */
-    public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = [], bool $skipValidation = false, bool $deprecated = false, string $example = ''): self
-    {
+    public function param(
+        string $key,
+        mixed $default,
+        Validator|callable $validator,
+        string $description = '',
+        bool $optional = false,
+        array $injections = [],
+        bool $skipValidation = false,
+        bool $deprecated = false,
+        string $example = '',
+        ?string $model = null
+    ): self {
         $param = [
             'default' => $default,
             'validator' => $validator,
@@ -180,8 +209,9 @@ abstract class Action
             'optional' => $optional,
             'injections' => $injections,
             'skipValidation' => $skipValidation,
-            'deprecated' => $deprecated, // TODO: @Meldiron implement tests
+            'deprecated' => $deprecated,
             'example' => $example,
+            'model' => $model,
         ];
         $this->options['param:'.$key] = array_merge($param, ['type' => 'param']);
         $this->params[$key] = $param;
@@ -192,7 +222,7 @@ abstract class Action
     /**
      * Get the value of injections
      *
-     * @return array
+     * @return array<int, string>
      */
     public function getInjections(): array
     {
@@ -225,7 +255,7 @@ abstract class Action
     /**
      * Get the value of labels
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getLabels(): array
     {
@@ -249,7 +279,7 @@ abstract class Action
     /**
      * Get Http Options
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getOptions(): array
     {

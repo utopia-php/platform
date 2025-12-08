@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class GetEnvTest extends TestCase
 {
-    public function testGetEnv()
+    public function testGetEnv(): void
     {
         $platform = new Mock();
         $this->assertEquals(3, $platform->getEnv('argc'));

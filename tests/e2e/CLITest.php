@@ -16,7 +16,7 @@ class CLITest extends TestCase
     {
     }
 
-    public function testCLISetup()
+    public function testCLISetup(): void
     {
         ob_start();
 

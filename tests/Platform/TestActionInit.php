@@ -17,7 +17,7 @@ class TestActionInit extends Action
         });
     }
 
-    public function action(Response $response)
+    public function action(Response $response): void
     {
         $response->addHeader('x-init', 'init-called');
     }

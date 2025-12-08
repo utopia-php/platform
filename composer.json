@@ -24,14 +24,19 @@
     },
     "require-dev": {
         "phpunit/phpunit": "9.*",
-        "laravel/pint": "1.*"
+        "laravel/pint": "1.*",
+        "phpstan/phpstan": "2.*"
     },
     "scripts": {
         "format": "vendor/bin/pint",
         "lint": "vendor/bin/pint --test",
+        "check": "vendor/bin/phpstan analyse --level 8 src tests --memory-limit=4G",
         "test": "docker-compose up -d && sleep 10 && docker-compose exec web vendor/bin/phpunit --configuration phpunit.xml"
     },
     "config": {
+      "platform": {
+        "php": "8.0"
+      },
         "allow-plugins": {
             "php-http/discovery": false,
             "tbachert/spi": false

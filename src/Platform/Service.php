@@ -12,6 +12,9 @@ abstract class Service
 
     public const TYPE_WORKER = 'Worker';
 
+    /**
+     * @var array<string, Action>
+     */
     protected array $actions;
 
     protected string $type;
@@ -80,7 +83,7 @@ abstract class Service
     /**
      * Get Actions
      *
-     * @return array
+     * @return array<string, Action>
      */
     public function getActions(): array
     {
