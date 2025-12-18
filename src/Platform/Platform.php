@@ -3,11 +3,11 @@
 namespace Utopia\Platform;
 
 use Exception;
-use Utopia\App;
 use Utopia\CLI\CLI;
+use Utopia\Http\Http;
+use Utopia\Http\Route;
 use Utopia\Queue\Adapter\Swoole;
 use Utopia\Queue\Server;
-use Utopia\Route;
 
 abstract class Platform
 {
@@ -82,16 +82,16 @@ abstract class Platform
                 /** @var Action $action */
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
-                        $hook = App::init();
+                        $hook = Http::init();
                         break;
                     case Action::TYPE_ERROR:
-                        $hook = App::error();
+                        $hook = Http::error();
                         break;
                     case Action::TYPE_OPTIONS:
-                        $hook = App::options();
+                        $hook = Http::options();
                         break;
                     case Action::TYPE_SHUTDOWN:
-                        $hook = App::shutdown();
+                        $hook = Http::shutdown();
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
@@ -100,7 +100,7 @@ abstract class Platform
                         if ($httpMethod === null || $httpPath === null) {
                             throw new Exception('HTTP method and path must be set for default actions');
                         }
-                        $hook = App::addRoute($httpMethod, $httpPath);
+                        $hook = Http::addRoute($httpMethod, $httpPath);
                         break;
                 }
 
@@ -125,10 +125,7 @@ abstract class Platform
                                 $option['description'],
                                 $option['optional'],
                                 $option['injections'],
-                                $option['skipValidation'],
-                                $option['deprecated'],
-                                $option['example'],
-                                $option['model'],
+                                $option['skipValidation']
                             );
                             break;
                         case 'injection':

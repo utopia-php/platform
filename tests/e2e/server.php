@@ -2,9 +2,8 @@
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
-use Utopia\App;
-use Utopia\Request;
-use Utopia\Response;
+use Utopia\Http\Adapter\FPM\Server;
+use Utopia\Http\Http;
 use Utopia\Tests\TestPlatform;
 
 ini_set('memory_limit', '512M');
@@ -16,8 +15,6 @@ error_reporting(E_ALL);
 $platform = new TestPlatform();
 $platform->init('http');
 
-$request = new Request();
-$response = new Response();
-
-$app = new App('UTC');
-$app->run($request, $response);
+$server = new Server();
+$http = new Http($server, 'UTC');
+$http->start();
