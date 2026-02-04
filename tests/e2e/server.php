@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
-use Utopia\App;
+use Utopia\Http;
 use Utopia\Request;
 use Utopia\Response;
 use Utopia\Tests\TestPlatform;
@@ -19,5 +19,5 @@ $platform->init('http');
 $request = new Request();
 $response = new Response();
 
-$app = new App('UTC');
+$app = new Http('UTC');
 $app->run($request, $response);
