@@ -5,9 +5,9 @@ namespace Utopia\Platform;
 use Exception;
 use Utopia\CLI\CLI;
 use Utopia\Http\Http;
+use Utopia\Http\Route;
 use Utopia\Queue\Adapter\Swoole;
 use Utopia\Queue\Server;
-use Utopia\Http\Route;
 
 abstract class Platform
 {

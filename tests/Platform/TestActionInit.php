@@ -2,8 +2,8 @@
 
 namespace Utopia\Tests;
 
-use Utopia\Platform\Action;
 use Utopia\Http\Response;
+use Utopia\Platform\Action;
 
 class TestActionInit extends Action
 {
