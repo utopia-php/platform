@@ -4,7 +4,7 @@ namespace Utopia\Platform;
 
 use Exception;
 use Utopia\CLI\CLI;
-use Utopia\Http;
+use Utopia\Http\Http;
 use Utopia\Queue\Adapter\Swoole;
 use Utopia\Queue\Server;
 use Utopia\Route;

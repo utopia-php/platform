@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
-use Utopia\Http;
+use Utopia\Http\Http;
 use Utopia\Request;
 use Utopia\Response;
 use Utopia\Tests\TestPlatform;
