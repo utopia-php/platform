@@ -6,7 +6,10 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {"Utopia\\Platform\\": "src/Platform"}
+        "psr-4": {
+            "Utopia\\Platform\\": "src/Platform",
+            "Utopia\\": "src"
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -18,8 +21,8 @@
         "php": ">=8.0",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/framework": "dev-backport-0.34-adapters as 0.33.38",
         "utopia-php/cli": "0.22.*",
+        "utopia-php/framework": "dev-backport-0.34-adapters as 0.33.38",
         "utopia-php/queue": "0.15.*"
     },
     "require-dev": {

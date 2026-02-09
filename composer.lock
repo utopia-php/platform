@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a495b6a9875ca775d4c345adcdf83205",
+    "content-hash": "736eb5ad12987e17c80ec289db423a9f",
     "packages": [
         {
             "name": "brick/math",
@@ -2415,12 +2415,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/http.git",
-                "reference": "d386463944ff9d228c89640b753a199f62eeb293"
+                "reference": "95ea85612d4db7cc30164aa54abb3befc4ba3ab8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/http/zipball/d386463944ff9d228c89640b753a199f62eeb293",
-                "reference": "d386463944ff9d228c89640b753a199f62eeb293",
+                "url": "https://api.github.com/repos/utopia-php/http/zipball/95ea85612d4db7cc30164aa54abb3befc4ba3ab8",
+                "reference": "95ea85612d4db7cc30164aa54abb3befc4ba3ab8",
                 "shasum": ""
             },
             "require": {
@@ -2455,7 +2455,7 @@
                 "issues": "https://github.com/utopia-php/http/issues",
                 "source": "https://github.com/utopia-php/http/tree/backport-0.34-adapters"
             },
-            "time": "2026-02-09T11:56:46+00:00"
+            "time": "2026-02-09T12:47:49+00:00"
         },
         {
             "name": "utopia-php/pools",

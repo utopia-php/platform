@@ -7,7 +7,7 @@ use Utopia\CLI\CLI;
 use Utopia\Http\Http;
 use Utopia\Queue\Adapter\Swoole;
 use Utopia\Queue\Server;
-use Utopia\Route;
+use Utopia\Http\Route;
 
 abstract class Platform
 {
