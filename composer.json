@@ -6,10 +6,7 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": {
-            "Utopia\\Platform\\": "src/Platform",
-            "Utopia\\": "src"
-        }
+        "psr-4": {"Utopia\\Platform\\": "src/Platform"}
     },
     "autoload-dev": {
         "psr-4": {
