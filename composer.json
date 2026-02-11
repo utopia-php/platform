@@ -22,7 +22,7 @@
         "ext-json": "*",
         "ext-redis": "*",
         "utopia-php/cli": "0.22.*",
-        "utopia-php/framework": "dev-backport-0.34-adapters as 0.33.38",
+        "utopia-php/framework": "0.33.*",
         "utopia-php/queue": "0.15.*"
     },
     "require-dev": {
