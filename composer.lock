@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1374d2bb24120a9ebdd77e8e38ce7d3",
+    "content-hash": "05eb1bc5eb0d1f44a6b30b6c50e5b4eb",
     "packages": [
         {
             "name": "brick/math",
@@ -1616,16 +1616,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v7.4.5",
+            "version": "v7.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "84bb634857a893cc146cceb467e31b3f02c5fe9f"
+                "reference": "1010624285470eb60e88ed10035102c75b4ea6af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/84bb634857a893cc146cceb467e31b3f02c5fe9f",
-                "reference": "84bb634857a893cc146cceb467e31b3f02c5fe9f",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/1010624285470eb60e88ed10035102c75b4ea6af",
+                "reference": "1010624285470eb60e88ed10035102c75b4ea6af",
                 "shasum": ""
             },
             "require": {
@@ -1693,7 +1693,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v7.4.5"
+                "source": "https://github.com/symfony/http-client/tree/v7.4.7"
             },
             "funding": [
                 {
@@ -1713,7 +1713,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-27T16:16:02+00:00"
+            "time": "2026-03-05T11:16:58+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -2179,21 +2179,21 @@
         },
         {
             "name": "utopia-php/cli",
-            "version": "0.22.0",
+            "version": "0.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/cli.git",
-                "reference": "a7ac387ee626fd27075a87e836fb72c5be38add4"
+                "reference": "4efef2662b27cdce0d6d09ea5c3a16a1cca2ba6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/cli/zipball/a7ac387ee626fd27075a87e836fb72c5be38add4",
-                "reference": "a7ac387ee626fd27075a87e836fb72c5be38add4",
+                "url": "https://api.github.com/repos/utopia-php/cli/zipball/4efef2662b27cdce0d6d09ea5c3a16a1cca2ba6c",
+                "reference": "4efef2662b27cdce0d6d09ea5c3a16a1cca2ba6c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4",
-                "utopia-php/servers": "0.2.*"
+                "utopia-php/servers": "0.3.*"
             },
             "require-dev": {
                 "laravel/pint": "1.2.*",
@@ -2224,9 +2224,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/cli/issues",
-                "source": "https://github.com/utopia-php/cli/tree/0.22.0"
+                "source": "https://github.com/utopia-php/cli/tree/0.23.0"
             },
-            "time": "2025-10-21T10:42:45+00:00"
+            "time": "2026-03-13T12:23:18+00:00"
         },
         {
             "name": "utopia-php/console",
@@ -2278,25 +2278,26 @@
         },
         {
             "name": "utopia-php/di",
-            "version": "0.1.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/di.git",
-                "reference": "22490c95f7ac3898ed1c33f1b1b5dd577305ee31"
+                "reference": "68873b7267842315d01d82a83b988bae525eab31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/di/zipball/22490c95f7ac3898ed1c33f1b1b5dd577305ee31",
-                "reference": "22490c95f7ac3898ed1c33f1b1b5dd577305ee31",
+                "url": "https://api.github.com/repos/utopia-php/di/zipball/68873b7267842315d01d82a83b988bae525eab31",
+                "reference": "68873b7267842315d01d82a83b988bae525eab31",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2"
+                "php": ">=8.2",
+                "psr/container": "^2.0"
             },
             "require-dev": {
-                "laravel/pint": "^1.2",
+                "laravel/pint": "^1.27",
                 "phpbench/phpbench": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^9.5.25",
                 "swoole/ide-helper": "4.8.3"
             },
@@ -2313,16 +2314,18 @@
             ],
             "description": "A simple and lite library for managing dependency injections",
             "keywords": [
-                "framework",
-                "http",
+                "PSR-11",
+                "container",
+                "dependency-injection",
+                "di",
                 "php",
-                "upf"
+                "utopia"
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/di/issues",
-                "source": "https://github.com/utopia-php/di/tree/0.1.0"
+                "source": "https://github.com/utopia-php/di/tree/0.3.1"
             },
-            "time": "2024-08-08T14:35:19+00:00"
+            "time": "2026-03-13T05:47:23+00:00"
         },
         {
             "name": "utopia-php/fetch",
@@ -2365,23 +2368,26 @@
         },
         {
             "name": "utopia-php/framework",
-            "version": "0.34.11",
+            "version": "0.34.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/http.git",
-                "reference": "2c652b60e388bafd07be936e4ca6658fadc6ef96"
+                "reference": "15d1195fc26cd542b1a5a7e5eb00a042bc7cf350"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/http/zipball/2c652b60e388bafd07be936e4ca6658fadc6ef96",
-                "reference": "2c652b60e388bafd07be936e4ca6658fadc6ef96",
+                "url": "https://api.github.com/repos/utopia-php/http/zipball/15d1195fc26cd542b1a5a7e5eb00a042bc7cf350",
+                "reference": "15d1195fc26cd542b1a5a7e5eb00a042bc7cf350",
                 "shasum": ""
             },
             "require": {
                 "ext-swoole": "*",
-                "php": ">=8.0"
+                "php": ">=8.2",
+                "utopia-php/di": "0.3.*",
+                "utopia-php/validators": "0.2.*"
             },
             "require-dev": {
+                "doctrine/instantiator": "^1.5",
                 "laravel/pint": "1.*",
                 "phpbench/phpbench": "^1.2",
                 "phpstan/phpstan": "1.*",
@@ -2408,9 +2414,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/http/issues",
-                "source": "https://github.com/utopia-php/http/tree/0.34.11"
+                "source": "https://github.com/utopia-php/http/tree/0.34.15"
             },
-            "time": "2025-12-11T13:03:54+00:00"
+            "time": "2026-03-13T11:28:26+00:00"
         },
         {
             "name": "utopia-php/pools",
@@ -2532,21 +2538,21 @@
         },
         {
             "name": "utopia-php/servers",
-            "version": "0.2.5",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/servers.git",
-                "reference": "4770e879a90685af4ba14e7e5d95d0a17c7fdf03"
+                "reference": "235be31200df9437fc96a1c270ffef4c64fafe52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/servers/zipball/4770e879a90685af4ba14e7e5d95d0a17c7fdf03",
-                "reference": "4770e879a90685af4ba14e7e5d95d0a17c7fdf03",
+                "url": "https://api.github.com/repos/utopia-php/servers/zipball/235be31200df9437fc96a1c270ffef4c64fafe52",
+                "reference": "235be31200df9437fc96a1c270ffef4c64fafe52",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0",
-                "utopia-php/di": "0.1.*",
+                "php": ">=8.2",
+                "utopia-php/di": "0.3.*",
                 "utopia-php/validators": "0.*"
             },
             "require-dev": {
@@ -2580,9 +2586,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/servers/issues",
-                "source": "https://github.com/utopia-php/servers/tree/0.2.5"
+                "source": "https://github.com/utopia-php/servers/tree/0.3.0"
             },
-            "time": "2026-02-10T04:21:53+00:00"
+            "time": "2026-03-13T11:31:42+00:00"
         },
         {
             "name": "utopia-php/telemetry",
@@ -2757,16 +2763,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.27.1",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "54cca2de13790570c7b6f0f94f37896bee4abcb5"
+                "reference": "bdec963f53172c5e36330f3a400604c69bf02d39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/54cca2de13790570c7b6f0f94f37896bee4abcb5",
-                "reference": "54cca2de13790570c7b6f0f94f37896bee4abcb5",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/bdec963f53172c5e36330f3a400604c69bf02d39",
+                "reference": "bdec963f53172c5e36330f3a400604c69bf02d39",
                 "shasum": ""
             },
             "require": {
@@ -2777,13 +2783,14 @@
                 "php": "^8.2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.93.1",
-                "illuminate/view": "^12.51.0",
-                "larastan/larastan": "^3.9.2",
+                "friendsofphp/php-cs-fixer": "^3.94.2",
+                "illuminate/view": "^12.54.1",
+                "larastan/larastan": "^3.9.3",
                 "laravel-zero/framework": "^12.0.5",
                 "mockery/mockery": "^1.6.12",
-                "nunomaduro/termwind": "^2.3.3",
-                "pestphp/pest": "^3.8.5"
+                "nunomaduro/termwind": "^2.4.0",
+                "pestphp/pest": "^3.8.6",
+                "shipfastlabs/agent-detector": "^1.1.0"
             },
             "bin": [
                 "builds/pint"
@@ -2820,7 +2827,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2026-02-10T20:00:20+00:00"
+            "time": "2026-03-12T15:51:39+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4617,5 +4624,5 @@
     "platform-overrides": {
         "php": "8.0"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
