@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
+use Utopia\DI\Container;
 use Utopia\Http\Adapter\FPM\Server;
 use Utopia\Http\Http;
 use Utopia\Tests\TestPlatform;
@@ -15,6 +16,6 @@ error_reporting(E_ALL);
 $platform = new TestPlatform();
 $platform->init('http');
 
-$server = new Server();
+$server = new Server(new Container());
 $http = new Http($server, 'UTC');
 $http->start();

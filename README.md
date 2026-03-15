@@ -77,7 +77,7 @@ $platform->init('http');
 
 ## System Requirements
 
-Utopia Framework requires PHP 8.0 or later. We recommend using the latest PHP version whenever possible.
+Utopia Framework requires PHP 8.2 or later. We recommend using the latest PHP version whenever possible.
 
 ## Contributing
 
