@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "463ef06deb39b5c67200105d7ea937cf",
+    "content-hash": "9ee311c634e1bc3244be2905c7136155",
     "packages": [
         {
             "name": "brick/math",
@@ -2275,54 +2275,6 @@
             "time": "2026-02-17T05:53:40+00:00"
         },
         {
-            "name": "utopia-php/console",
-            "version": "0.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/utopia-php/console.git",
-                "reference": "f77104e4a888fa9cb3e08f32955ec09479ab7a92"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/console/zipball/f77104e4a888fa9cb3e08f32955ec09479ab7a92",
-                "reference": "f77104e4a888fa9cb3e08f32955ec09479ab7a92",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.4"
-            },
-            "require-dev": {
-                "laravel/pint": "1.2.*",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.3",
-                "squizlabs/php_codesniffer": "^3.6",
-                "swoole/ide-helper": "4.8.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Utopia\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Console helpers for logging, prompting, and executing commands",
-            "keywords": [
-                "cli",
-                "console",
-                "php",
-                "terminal",
-                "utopia"
-            ],
-            "support": {
-                "issues": "https://github.com/utopia-php/console/issues",
-                "source": "https://github.com/utopia-php/console/tree/0.0.1"
-            },
-            "time": "2025-10-20T14:41:36+00:00"
-        },
-        {
             "name": "utopia-php/di",
             "version": "0.3.1",
             "source": {
@@ -2516,26 +2468,26 @@
         },
         {
             "name": "utopia-php/queue",
-            "version": "0.15.2",
+            "version": "0.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/queue.git",
-                "reference": "5051c08d9f50ff4aa78c0eb2f7ca74b328509c81"
+                "reference": "ffdc9315d2f5999960c95a5860f067ea2eaa36f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/queue/zipball/5051c08d9f50ff4aa78c0eb2f7ca74b328509c81",
-                "reference": "5051c08d9f50ff4aa78c0eb2f7ca74b328509c81",
+                "url": "https://api.github.com/repos/utopia-php/queue/zipball/ffdc9315d2f5999960c95a5860f067ea2eaa36f7",
+                "reference": "ffdc9315d2f5999960c95a5860f067ea2eaa36f7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3",
                 "php-amqplib/php-amqplib": "^3.7",
-                "utopia-php/console": "0.0.*",
                 "utopia-php/fetch": "0.5.*",
-                "utopia-php/framework": "0.33.*",
                 "utopia-php/pools": "1.*",
-                "utopia-php/telemetry": "*"
+                "utopia-php/servers": "0.3.*",
+                "utopia-php/telemetry": "0.2.*",
+                "utopia-php/validators": "0.2.*"
             },
             "require-dev": {
                 "ext-redis": "*",
@@ -2576,9 +2528,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/queue/issues",
-                "source": "https://github.com/utopia-php/queue/tree/0.15.2"
+                "source": "https://github.com/utopia-php/queue/tree/0.16.0"
             },
-            "time": "2026-02-02T11:56:51+00:00"
+            "time": "2026-03-13T12:23:30+00:00"
         },
         {
             "name": "utopia-php/servers",
