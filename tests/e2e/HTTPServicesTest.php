@@ -5,7 +5,6 @@ namespace Utopia\Tests;
 use PHPUnit\Framework\TestCase;
 use Utopia\DI\Container;
 use Utopia\Http\Adapter\FPM\Request;
-use Utopia\Http\Adapter\FPM\Response;
 use Utopia\Http\Adapter\FPM\Server;
 use Utopia\Http\Http;
 
@@ -23,10 +22,8 @@ class HttpServicesTest extends TestCase
         $platform = new TestPlatform();
         $platform->init('http');
 
-        $server = new Server();
-        $this->http = new Http($server, new Container(), 'UTC');
-        $this->http->setRequestClass(Request::class);
-        $this->http->setResponseClass(Response::class);
+        $server = new Server(new Container());
+        $this->http = new Http($server, 'UTC');
     }
 
     public function tearDown(): void
@@ -39,16 +36,15 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
 
-        $context = new Container();
-        $context->set('response', fn () => new MockResponse());
-        $context->set('request', fn () => new Request());
+        $request = new Request();
+        $response = new MockResponse();
 
         \ob_start();
-        $this->http->run($context);
-        $response = \ob_get_contents();
+        $this->http->run($request, $response);
+        $result = \ob_get_contents();
         \ob_end_clean();
 
-        $this->assertEquals('Hello World!', $response);
+        $this->assertEquals('Hello World!', $result);
     }
 
     public function testChunkedAction()
@@ -56,17 +52,15 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
 
-        $res = new MockResponse();
-        $context = new Container();
-        $context->set('response', fn () => $res);
-        $context->set('request', fn () => new Request());
+        $request = new Request();
+        $response = new MockResponse();
 
         \ob_start();
-        $this->http->run($context);
-        $response = \ob_get_contents();
+        $this->http->run($request, $response);
+        $result = \ob_get_contents();
         \ob_end_clean();
 
-        $this->assertEquals('Hello World!', $response);
+        $this->assertEquals('Hello World!', $result);
     }
 
     public function testRedirectAction()
@@ -74,14 +68,12 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/redirect';
 
-        $res = new MockResponse();
-        $context = new Container();
-        $context->set('response', fn () => $res);
-        $context->set('request', fn () => new Request());
+        $request = new Request();
+        $response = new MockResponse();
 
-        $this->http->run($context);
+        $this->http->run($request, $response);
 
-        $this->assertEquals('/', $res->getHeaders()['Location']);
+        $this->assertEquals('/', $response->getHeaders()['Location']);
     }
 
     public function testHook()
@@ -89,33 +81,29 @@ class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
 
-        $res = new MockResponse();
-        $context = new Container();
-        $context->set('response', fn () => $res);
-        $context->set('request', fn () => new Request());
+        $request = new Request();
+        $response = new MockResponse();
 
         \ob_start();
-        $this->http->run($context);
-        $response = \ob_get_contents();
+        $this->http->run($request, $response);
+        $result = \ob_get_contents();
         \ob_end_clean();
 
-        $this->assertEquals('Hello World!', $response);
-        $this->assertEquals('init-called', $res->getHeaders()['x-init']);
+        $this->assertEquals('Hello World!', $result);
+        $this->assertEquals('init-called', $response->getHeaders()['x-init']);
 
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
 
-        $res1 = new MockResponse();
-        $context = new Container();
-        $context->set('response', fn () => $res1);
-        $context->set('request', fn () => new Request());
+        $request1 = new Request();
+        $response1 = new MockResponse();
 
         \ob_start();
-        $this->http->run($context);
-        $response = \ob_get_contents();
+        $this->http->run($request1, $response1);
+        $result = \ob_get_contents();
         \ob_end_clean();
 
-        $this->assertEquals('Hello World!', $response);
-        $this->assertEquals('', ($res1->getHeaders()['x-init'] ?? ''));
+        $this->assertEquals('Hello World!', $result);
+        $this->assertEquals('', ($response1->getHeaders()['x-init'] ?? ''));
     }
 }
