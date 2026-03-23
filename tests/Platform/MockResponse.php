@@ -44,7 +44,7 @@ class MockResponse extends Response
         // TODO: Implement sendStatus() method.
     }
 
-    public function sendHeader(string $key, string $value): void
+    public function sendHeader(string $key, mixed $value): void
     {
         // TODO: Implement sendHeader() method.
     }
