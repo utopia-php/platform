@@ -6,27 +6,10 @@ use Utopia\Http\Response;
 
 class MockResponse extends Response
 {
-    public function end(string $content = null): void
+    public function end(?string $content = null): void
     {
         if (! is_null($content)) {
             echo $content;
-        }
-    }
-
-    public function send(string $body = ''): void
-    {
-        $this->sent = true;
-        $this->end($body);
-    }
-
-    public function chunk(string $body = '', bool $end = false): void
-    {
-        if ($end) {
-            $this->sent = true;
-        }
-        $this->write($body);
-        if ($end) {
-            $this->end();
         }
     }
 
@@ -39,12 +22,12 @@ class MockResponse extends Response
         return true;
     }
 
-    protected function sendStatus(int $statusCode, string $reason): void
+    protected function sendStatus(int $statusCode): void
     {
         // TODO: Implement sendStatus() method.
     }
 
-    public function sendHeader(string $key, string $value): void
+    public function sendHeader(string $key, mixed $value): void
     {
         // TODO: Implement sendHeader() method.
     }

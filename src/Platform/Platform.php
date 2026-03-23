@@ -7,8 +7,8 @@ use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
 use Utopia\Http\Http;
 use Utopia\Http\Route;
-use Utopia\Queue\Adapter\Swoole\Server;
-use Utopia\Queue\Worker;
+use Utopia\Queue\Adapter\Swoole;
+use Utopia\Queue\Server;
 
 abstract class Platform
 {
@@ -23,7 +23,7 @@ abstract class Platform
 
     protected CLI $cli;
 
-    protected Worker $worker;
+    protected Server $worker;
 
     public function __construct(Module $module)
     {
@@ -56,12 +56,12 @@ abstract class Platform
                     $workerName = $params['workerName'] ?? null;
 
                     if (! isset($this->worker)) {
-                        $connection = $params['connection'] ?? null;
+                        $consumer = $params['consumer'] ?? null;
                         $workersNum = $params['workersNum'] ?? 0;
                         $workerName = $params['workerName'] ?? null;
                         $queueName = $params['queueName'] ?? 'v1-'.$workerName;
-                        $adapter = new Server($connection, $workersNum, $queueName);
-                        $this->worker ??= new Worker($adapter);
+                        $adapter = new Swoole($consumer, $workersNum, $queueName);
+                        $this->worker ??= new Server($adapter);
                     }
                     $this->initWorker($services, $workerName);
                     break;
@@ -330,7 +330,7 @@ abstract class Platform
     /**
      * Get the value of worker
      */
-    public function getWorker(): Worker
+    public function getWorker(): Server
     {
         return $this->worker;
     }
@@ -338,7 +338,7 @@ abstract class Platform
     /**
      * Set the value of worker
      */
-    public function setWorker(Worker $worker): self
+    public function setWorker(Server $worker): self
     {
         $this->worker = $worker;
 
