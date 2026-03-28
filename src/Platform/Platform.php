@@ -354,7 +354,7 @@ abstract class Platform
      * @param  string|null  $default
      * @return mixed
      */
-    public function getEnv(string $key, string $default = null): mixed
+    public function getEnv(string $key, ?string $default = null): mixed
     {
         return $_SERVER[$key] ?? $default;
     }
