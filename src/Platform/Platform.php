@@ -344,5 +344,4 @@ abstract class Platform
 
         return $this;
     }
-
 }
