@@ -47,6 +47,11 @@ abstract class Platform
                 case Service::TYPE_TASK:
                     $adapter = $params['adapter'] ?? new Generic();
                     $this->cli ??= new CLI($adapter);
+
+                    if (isset($params['container'])) {
+                        $this->cli->setContainer($params['container']);
+                    }
+
                     $this->initTasks($services);
                     break;
                 case Service::TYPE_GRAPHQL:

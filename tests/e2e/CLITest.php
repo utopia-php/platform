@@ -5,6 +5,7 @@ namespace Utopia\Tests;
 use PHPUnit\Framework\TestCase;
 use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
+use Utopia\DI\Container;
 use Utopia\Platform\Service;
 
 class CLITest extends TestCase
@@ -33,6 +34,34 @@ class CLITest extends TestCase
         $result = ob_get_clean();
 
         $this->assertEquals('me@example.com-item1-item2', $result);
-        $this->assertCount(2, $cli->getTasks());
+        $this->assertCount(3, $cli->getTasks());
+    }
+
+    public function testCLISetupWithProvidedContainer()
+    {
+        $argv = $_SERVER['argv'] ?? [];
+
+        try {
+            $_SERVER['argv'] = ['test.php', 'inject'];
+            ob_start();
+
+            $container = new Container();
+            $container->set('test', fn () => 'test-value');
+
+            $platform = new TestPlatform();
+            $platform->init(Service::TYPE_TASK, [
+                'adapter' => new Generic(),
+                'container' => $container,
+            ]);
+
+            $cli = $platform->getCli();
+            $cli->run();
+
+            $result = ob_get_clean();
+        } finally {
+            $_SERVER['argv'] = $argv;
+        }
+
+        $this->assertEquals('test-value', $result);
     }
 }

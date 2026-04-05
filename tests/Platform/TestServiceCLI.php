@@ -11,5 +11,6 @@ class TestServiceCLI extends Service
         $this->type = Service::TYPE_TASK;
         $this->addAction('build', new TestActionCLI());
         $this->addAction('build2', new TestActionCLI());
+        $this->addAction('inject', new TestActionCLIInjection());
     }
 }
