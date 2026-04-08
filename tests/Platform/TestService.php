@@ -13,5 +13,6 @@ class TestService extends Service
         $this->addAction('chunked', new TestActionChunked());
         $this->addAction('redirect', new TestActionRedirect());
         $this->addAction('initHook', new TestActionInit());
+        $this->addAction('withParams', new TestActionWithParams());
     }
 }
