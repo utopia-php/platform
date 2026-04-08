@@ -106,4 +106,37 @@ class HttpServicesTest extends TestCase
         $this->assertEquals('Hello World!', $result);
         $this->assertEquals('', ($response1->getHeaders()['x-init'] ?? ''));
     }
+
+    public function testActionParamFieldsForwardedToRoute()
+    {
+        $routes = Http::getRoutes();
+
+        $route = null;
+        foreach ($routes as $method => $methodRoutes) {
+            foreach ($methodRoutes as $r) {
+                if ($r->getPath() === '/with-params') {
+                    $route = $r;
+                    break 2;
+                }
+            }
+        }
+
+        $this->assertNotNull($route, 'Route /with-params should be registered');
+
+        $params = $route->getParams();
+
+        // Verify all Action::param() fields are forwarded to the Route
+        $actionParamKeys = ['default', 'validator', 'description', 'optional', 'injections', 'skipValidation', 'deprecated', 'example'];
+
+        foreach ($params as $name => $param) {
+            foreach ($actionParamKeys as $key) {
+                $this->assertArrayHasKey($key, $param, "Param '{$name}' is missing '{$key}' on the Route. Platform must forward all Action param fields.");
+            }
+        }
+
+        $this->assertEquals('John Doe', $params['name']['example']);
+        $this->assertFalse($params['name']['deprecated']);
+        $this->assertEquals('true', $params['active']['example']);
+        $this->assertTrue($params['active']['deprecated']);
+    }
 }
