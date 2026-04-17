@@ -107,6 +107,26 @@ class HttpServicesTest extends TestCase
         $this->assertEquals('', ($response1->getHeaders()['x-init'] ?? ''));
     }
 
+    public function testAliasedAction()
+    {
+        $paths = ['/aliased', '/alias-one', '/alias-two', '/alias-three'];
+
+        foreach ($paths as $path) {
+            $_SERVER['REQUEST_METHOD'] = 'GET';
+            $_SERVER['REQUEST_URI'] = $path;
+
+            $request = new Request();
+            $response = new MockResponse();
+
+            \ob_start();
+            $this->http->run($request, $response);
+            $result = \ob_get_contents();
+            \ob_end_clean();
+
+            $this->assertEquals('Aliased!', $result, "Alias '{$path}' should resolve to the aliased action");
+        }
+    }
+
     public function testActionParamFieldsForwardedToRoute()
     {
         $routes = Http::getRoutes();
