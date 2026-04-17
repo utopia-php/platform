@@ -106,8 +106,8 @@ abstract class Platform
                     ->desc($action->getDesc() ?? '');
 
                 if ($hook instanceof Route) {
-                    if (! empty($action->getHttpAliasPath())) {
-                        $hook->alias($action->getHttpAliasPath());
+                    foreach ($action->getHttpAliases() as $alias) {
+                        $hook->alias($alias);
                     }
                 }
 

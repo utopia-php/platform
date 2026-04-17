@@ -8,9 +8,10 @@ trait HTTP
 
     protected ?string $httpPath = null;
 
-    protected ?string $httpAliasPath = null;
-
-    protected array $httpAliasParams = [];
+    /**
+     * @var array<string>
+     */
+    protected array $httpAliases = [];
 
     /**
      * Set Http path
@@ -49,23 +50,13 @@ trait HTTP
     }
 
     /**
-     * Get the value of httpAliasPath
+     * Get the value of httpAliases
      *
-     * @return string
+     * @return array<string>
      */
-    public function getHttpAliasPath(): ?string
+    public function getHttpAliases(): array
     {
-        return $this->httpAliasPath;
-    }
-
-    /**
-     * Get the value of httpAliasParams
-     *
-     * @return array
-     */
-    public function getHttpAliasParams(): array
-    {
-        return $this->httpAliasParams;
+        return $this->httpAliases;
     }
 
     /**
@@ -79,16 +70,14 @@ trait HTTP
     }
 
     /**
-     * Set httpAlias path and params
+     * Append an httpAlias path. Can be called multiple times to register several aliases.
      *
      * @param  string  $path
-     * @param  array  $params
      * @return self
      */
-    public function httpAlias(string $path, array $params = []): self
+    public function httpAlias(string $path): self
     {
-        $this->httpAliasPath = $path;
-        $this->httpAliasParams = $params;
+        $this->httpAliases[] = $path;
 
         return $this;
     }

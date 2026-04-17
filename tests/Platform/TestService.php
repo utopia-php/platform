@@ -14,5 +14,6 @@ class TestService extends Service
         $this->addAction('redirect', new TestActionRedirect());
         $this->addAction('initHook', new TestActionInit());
         $this->addAction('withParams', new TestActionWithParams());
+        $this->addAction('aliased', new TestActionAliased());
     }
 }
