@@ -169,9 +169,10 @@ abstract class Action
      * @param  bool  $skipValidation
      * @param  bool  $deprecated
      * @param  string  $example
+     * @param  array  $aliases
      * @return self
      */
-    public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = [], bool $skipValidation = false, bool $deprecated = false, string $example = ''): self
+    public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = [], bool $skipValidation = false, bool $deprecated = false, string $example = '', array $aliases = []): self
     {
         $param = [
             'default' => $default,
@@ -182,6 +183,7 @@ abstract class Action
             'skipValidation' => $skipValidation,
             'deprecated' => $deprecated, // TODO: @Meldiron implement tests
             'example' => $example,
+            'aliases' => $aliases,
         ];
         $this->options['param:'.$key] = array_merge($param, ['type' => 'param']);
         $this->params[$key] = $param;
