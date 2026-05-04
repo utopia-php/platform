@@ -2440,12 +2440,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/queue.git",
-                "reference": "a340c39c88e020413fe207e36c938985792d503c"
+                "reference": "32b0c439a8fa4fc06b8b8793800a04be894bf03c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/queue/zipball/a340c39c88e020413fe207e36c938985792d503c",
-                "reference": "a340c39c88e020413fe207e36c938985792d503c",
+                "url": "https://api.github.com/repos/utopia-php/queue/zipball/32b0c439a8fa4fc06b8b8793800a04be894bf03c",
+                "reference": "32b0c439a8fa4fc06b8b8793800a04be894bf03c",
                 "shasum": ""
             },
             "require": {
@@ -2498,7 +2498,7 @@
                 "issues": "https://github.com/utopia-php/queue/issues",
                 "source": "https://github.com/utopia-php/queue/tree/feat-param-aliases"
             },
-            "time": "2026-05-04T12:56:06+00:00"
+            "time": "2026-05-04T12:59:54+00:00"
         },
         {
             "name": "utopia-php/servers",
