@@ -146,7 +146,7 @@ class HttpServicesTest extends TestCase
         $params = $route->getParams();
 
         // Verify all Action::param() fields are forwarded to the Route
-        $actionParamKeys = ['default', 'validator', 'description', 'optional', 'injections', 'skipValidation', 'deprecated', 'example'];
+        $actionParamKeys = ['default', 'validator', 'description', 'optional', 'injections', 'skipValidation', 'deprecated', 'example', 'aliases'];
 
         foreach ($params as $name => $param) {
             foreach ($actionParamKeys as $key) {
@@ -158,5 +158,14 @@ class HttpServicesTest extends TestCase
         $this->assertFalse($params['name']['deprecated']);
         $this->assertEquals('true', $params['active']['example']);
         $this->assertTrue($params['active']['deprecated']);
+
+        // Verify aliases are forwarded
+        $this->assertArrayHasKey('email', $params, 'Param email should be registered');
+        $this->assertArrayHasKey('aliases', $params['email'], 'Param email should have aliases key');
+        $this->assertEquals(['emailAddress', 'userEmail'], $params['email']['aliases']);
+
+        // Verify params without aliases have empty array
+        $this->assertArrayHasKey('aliases', $params['name'], 'Param name should have aliases key');
+        $this->assertEquals([], $params['name']['aliases']);
     }
 }
