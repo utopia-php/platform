@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c1c6c6878c062a182a70cb78bb80f8c",
+    "content-hash": "e5b594cb7190724df576883925c53acb",
     "packages": [
         {
             "name": "brick/math",
@@ -2179,21 +2179,21 @@
         },
         {
             "name": "utopia-php/cli",
-            "version": "dev-feat-param-alias",
+            "version": "0.23.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/cli.git",
-                "reference": "c01a4af02249f20f5a9b3e23b6e8ee20f52857a2"
+                "reference": "3c45ae5bcdcd3c7916e1909d74c60b8e771610db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/cli/zipball/c01a4af02249f20f5a9b3e23b6e8ee20f52857a2",
-                "reference": "c01a4af02249f20f5a9b3e23b6e8ee20f52857a2",
+                "url": "https://api.github.com/repos/utopia-php/cli/zipball/3c45ae5bcdcd3c7916e1909d74c60b8e771610db",
+                "reference": "3c45ae5bcdcd3c7916e1909d74c60b8e771610db",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.4",
-                "utopia-php/servers": "dev-feat-param-aliases"
+                "utopia-php/servers": "0.4.0"
             },
             "require-dev": {
                 "laravel/pint": "1.2.*",
@@ -2224,9 +2224,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/cli/issues",
-                "source": "https://github.com/utopia-php/cli/tree/feat-param-alias"
+                "source": "https://github.com/utopia-php/cli/tree/0.23.3"
             },
-            "time": "2026-05-04T12:39:30+00:00"
+            "time": "2026-05-05T04:38:59+00:00"
         },
         {
             "name": "utopia-php/compression",
@@ -2327,23 +2327,23 @@
         },
         {
             "name": "utopia-php/http",
-            "version": "dev-feat-param-aliases",
+            "version": "0.34.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/http.git",
-                "reference": "4439705c8c2e81af826f4b6d694469c9ebc84a9f"
+                "reference": "76be330d4197bae680eb4ccc29c573456fe91904"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/http/zipball/4439705c8c2e81af826f4b6d694469c9ebc84a9f",
-                "reference": "4439705c8c2e81af826f4b6d694469c9ebc84a9f",
+                "url": "https://api.github.com/repos/utopia-php/http/zipball/76be330d4197bae680eb4ccc29c573456fe91904",
+                "reference": "76be330d4197bae680eb4ccc29c573456fe91904",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3",
                 "utopia-php/compression": "0.1.*",
                 "utopia-php/di": "0.3.*",
-                "utopia-php/servers": "dev-feat-param-aliases as 0.3.x-dev",
+                "utopia-php/servers": "0.4.0",
                 "utopia-php/telemetry": "0.2.*",
                 "utopia-php/validators": "0.2.*"
             },
@@ -2377,9 +2377,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/http/issues",
-                "source": "https://github.com/utopia-php/http/tree/feat-param-aliases"
+                "source": "https://github.com/utopia-php/http/tree/0.34.25"
             },
-            "time": "2026-05-04T11:52:49+00:00"
+            "time": "2026-05-05T04:39:15+00:00"
         },
         {
             "name": "utopia-php/pools",
@@ -2436,16 +2436,16 @@
         },
         {
             "name": "utopia-php/queue",
-            "version": "dev-feat-param-aliases",
+            "version": "0.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/queue.git",
-                "reference": "32b0c439a8fa4fc06b8b8793800a04be894bf03c"
+                "reference": "f85ca003c99ff475708c05466643d067403c0c22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/queue/zipball/32b0c439a8fa4fc06b8b8793800a04be894bf03c",
-                "reference": "32b0c439a8fa4fc06b8b8793800a04be894bf03c",
+                "url": "https://api.github.com/repos/utopia-php/queue/zipball/f85ca003c99ff475708c05466643d067403c0c22",
+                "reference": "f85ca003c99ff475708c05466643d067403c0c22",
                 "shasum": ""
             },
             "require": {
@@ -2453,7 +2453,7 @@
                 "php-amqplib/php-amqplib": "^3.7",
                 "utopia-php/di": "0.3.*",
                 "utopia-php/pools": "1.*",
-                "utopia-php/servers": "dev-feat-param-aliases as 0.3.99",
+                "utopia-php/servers": "0.4.0",
                 "utopia-php/telemetry": "0.2.*",
                 "utopia-php/validators": "0.2.*"
             },
@@ -2496,22 +2496,22 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/queue/issues",
-                "source": "https://github.com/utopia-php/queue/tree/feat-param-aliases"
+                "source": "https://github.com/utopia-php/queue/tree/0.18.2"
             },
-            "time": "2026-05-04T12:59:54+00:00"
+            "time": "2026-05-05T04:38:59+00:00"
         },
         {
             "name": "utopia-php/servers",
-            "version": "dev-feat-param-aliases",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/utopia-php/servers.git",
-                "reference": "24bbd8fbb6550bc72f2816d9b0c3b690e38e17fa"
+                "reference": "7db346ef377503efe0acafe0791085270cd9ed70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/utopia-php/servers/zipball/24bbd8fbb6550bc72f2816d9b0c3b690e38e17fa",
-                "reference": "24bbd8fbb6550bc72f2816d9b0c3b690e38e17fa",
+                "url": "https://api.github.com/repos/utopia-php/servers/zipball/7db346ef377503efe0acafe0791085270cd9ed70",
+                "reference": "7db346ef377503efe0acafe0791085270cd9ed70",
                 "shasum": ""
             },
             "require": {
@@ -2550,9 +2550,9 @@
             ],
             "support": {
                 "issues": "https://github.com/utopia-php/servers/issues",
-                "source": "https://github.com/utopia-php/servers/tree/feat-param-aliases"
+                "source": "https://github.com/utopia-php/servers/tree/0.4.0"
             },
-            "time": "2026-05-04T11:57:44+00:00"
+            "time": "2026-05-05T04:08:30+00:00"
         },
         {
             "name": "utopia-php/telemetry",
@@ -4519,39 +4519,9 @@
             "time": "2025-11-17T20:03:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "utopia-php/cli",
-            "version": "dev-feat-param-alias",
-            "alias": "0.23.99",
-            "alias_normalized": "0.23.99.0"
-        },
-        {
-            "package": "utopia-php/http",
-            "version": "dev-feat-param-aliases",
-            "alias": "0.34.99",
-            "alias_normalized": "0.34.99.0"
-        },
-        {
-            "package": "utopia-php/queue",
-            "version": "dev-feat-param-aliases",
-            "alias": "0.18.99",
-            "alias_normalized": "0.18.99.0"
-        },
-        {
-            "package": "utopia-php/servers",
-            "version": "dev-feat-param-aliases",
-            "alias": "0.3.99",
-            "alias_normalized": "0.3.99.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "utopia-php/cli": 20,
-        "utopia-php/http": 20,
-        "utopia-php/queue": 20,
-        "utopia-php/servers": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

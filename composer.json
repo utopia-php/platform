@@ -18,10 +18,10 @@
         "php": ">=8.3",
         "ext-json": "*",
         "ext-redis": "*",
-        "utopia-php/cli": "dev-feat-param-alias as 0.23.99",
-        "utopia-php/http": "dev-feat-param-aliases as 0.34.99",
-        "utopia-php/queue": "dev-feat-param-aliases as 0.18.99",
-        "utopia-php/servers": "dev-feat-param-aliases as 0.3.99"
+        "utopia-php/cli": "0.23.3",
+        "utopia-php/http": "0.34.25",
+        "utopia-php/queue": "0.18.2",
+        "utopia-php/servers": "0.4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.3",
