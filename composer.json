@@ -19,7 +19,7 @@
         "ext-json": "*",
         "ext-redis": "*",
         "utopia-php/cli": "0.23.*",
-        "utopia-php/http": "2.0.0-RC5",
+        "utopia-php/http": "^2.0@RC",
         "utopia-php/queue": "^0.20",
         "utopia-php/servers": "0.4.*"
     },
