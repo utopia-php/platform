@@ -73,7 +73,7 @@ class HttpServicesTest extends TestCase
 
         $this->http->run($request, $response);
 
-        $this->assertEquals('/', $response->getHeaders()['Location']);
+        $this->assertEquals('/', $response->getHeaderLine('Location'));
     }
 
     public function testHook()
@@ -90,7 +90,7 @@ class HttpServicesTest extends TestCase
         \ob_end_clean();
 
         $this->assertEquals('Hello World!', $result);
-        $this->assertEquals('init-called', $response->getHeaders()['x-init']);
+        $this->assertEquals('init-called', $response->getHeaderLine('x-init'));
 
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
@@ -104,7 +104,7 @@ class HttpServicesTest extends TestCase
         \ob_end_clean();
 
         $this->assertEquals('Hello World!', $result);
-        $this->assertEquals('', ($response1->getHeaders()['x-init'] ?? ''));
+        $this->assertEquals('', $response1->getHeaderLine('x-init'));
     }
 
     public function testAliasedAction()
