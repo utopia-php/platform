@@ -1,6 +1,6 @@
 # Utopia Platform
 
-[![Build Status](https://travis-ci.org/utopia-php/platform.svg?branch=master)](https://travis-ci.com/utopia-php/platform)
+[![Tests](https://github.com/utopia-php/monorepo/actions/workflows/tests.yml/badge.svg)](https://github.com/utopia-php/monorepo/actions/workflows/tests.yml)
 ![Total Downloads](https://img.shields.io/packagist/dt/utopia-php/platform.svg)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord)](https://appwrite.io/discord)
 
