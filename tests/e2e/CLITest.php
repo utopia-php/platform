@@ -9,13 +9,9 @@ use Utopia\Platform\Service;
 
 class CLITest extends TestCase
 {
-    public function setUp(): void
-    {
-    }
+    public function setUp(): void {}
 
-    public function tearDown(): void
-    {
-    }
+    public function tearDown(): void {}
 
     public function testCLISetup()
     {

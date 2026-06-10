@@ -59,7 +59,7 @@ abstract class Platform
                         $consumer = $params['consumer'] ?? null;
                         $workersNum = $params['workersNum'] ?? 0;
                         $workerName = $params['workerName'] ?? null;
-                        $queueName = $params['queueName'] ?? 'v1-'.$workerName;
+                        $queueName = $params['queueName'] ?? 'v1-' . $workerName;
                         $adapter = new Swoole($consumer, $workersNum, $queueName);
                         $this->worker ??= new Server($adapter);
                     }
@@ -244,9 +244,7 @@ abstract class Platform
      *
      * @return void
      */
-    protected function initGraphQL(): void
-    {
-    }
+    protected function initGraphQL(): void {}
 
     /**
      * Add module

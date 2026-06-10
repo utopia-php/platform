@@ -187,7 +187,7 @@ abstract class Action
             'aliases' => $aliases,
             'enum' => $enum,
         ];
-        $this->options['param:'.$key] = array_merge($param, ['type' => 'param']);
+        $this->options['param:' . $key] = array_merge($param, ['type' => 'param']);
         $this->params[$key] = $param;
 
         return $this;
@@ -213,11 +213,11 @@ abstract class Action
      */
     public function inject(string $injection): self
     {
-        if (array_key_exists($injection, $this->injections)) {
-            throw new Exception('Injection already declared for '.$injection);
+        if (\array_key_exists($injection, $this->injections)) {
+            throw new Exception('Injection already declared for ' . $injection);
         }
 
-        $this->options['injection:'.$injection] = [
+        $this->options['injection:' . $injection] = [
             'name' => $injection,
             'type' => 'injection',
         ];

@@ -58,7 +58,7 @@ abstract class Module
     {
         $service = $this->services['all'][$key] ?? null;
         if (empty($service)) {
-            throw new Exception('Service '.$key.' not found');
+            throw new Exception('Service ' . $key . ' not found');
         }
 
         return $service;

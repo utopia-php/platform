@@ -8,14 +8,14 @@ class MockResponse extends Response
 {
     public function end(?string $content = null): void
     {
-        if (! is_null($content)) {
+        if (! \is_null($content)) {
             echo $content;
         }
     }
 
     public function write(string $content): bool
     {
-        if (! is_null($content)) {
+        if (! \is_null($content)) {
             echo $content;
         }
 

@@ -39,10 +39,10 @@ class HttpServicesTest extends TestCase
         $request = new Request();
         $response = new MockResponse();
 
-        \ob_start();
+        ob_start();
         $this->http->run($request, $response);
-        $result = \ob_get_contents();
-        \ob_end_clean();
+        $result = ob_get_contents();
+        ob_end_clean();
 
         $this->assertEquals('Hello World!', $result);
     }
@@ -55,10 +55,10 @@ class HttpServicesTest extends TestCase
         $request = new Request();
         $response = new MockResponse();
 
-        \ob_start();
+        ob_start();
         $this->http->run($request, $response);
-        $result = \ob_get_contents();
-        \ob_end_clean();
+        $result = ob_get_contents();
+        ob_end_clean();
 
         $this->assertEquals('Hello World!', $result);
     }
@@ -84,10 +84,10 @@ class HttpServicesTest extends TestCase
         $request = new Request();
         $response = new MockResponse();
 
-        \ob_start();
+        ob_start();
         $this->http->run($request, $response);
-        $result = \ob_get_contents();
-        \ob_end_clean();
+        $result = ob_get_contents();
+        ob_end_clean();
 
         $this->assertEquals('Hello World!', $result);
         $this->assertEquals('init-called', $response->getHeaderLine('x-init'));
@@ -98,10 +98,10 @@ class HttpServicesTest extends TestCase
         $request1 = new Request();
         $response1 = new MockResponse();
 
-        \ob_start();
+        ob_start();
         $this->http->run($request1, $response1);
-        $result = \ob_get_contents();
-        \ob_end_clean();
+        $result = ob_get_contents();
+        ob_end_clean();
 
         $this->assertEquals('Hello World!', $result);
         $this->assertEquals('', $response1->getHeaderLine('x-init'));
@@ -118,10 +118,10 @@ class HttpServicesTest extends TestCase
             $request = new Request();
             $response = new MockResponse();
 
-            \ob_start();
+            ob_start();
             $this->http->run($request, $response);
-            $result = \ob_get_contents();
-            \ob_end_clean();
+            $result = ob_get_contents();
+            ob_end_clean();
 
             $this->assertEquals('Aliased!', $result, "Alias '{$path}' should resolve to the aliased action");
         }

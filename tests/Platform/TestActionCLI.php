@@ -20,6 +20,6 @@ class TestActionCLI extends Action
 
     public function action($email, $list)
     {
-        echo $email.'-'.implode('-', $list);
+        echo $email . '-' . implode('-', $list);
     }
 }
