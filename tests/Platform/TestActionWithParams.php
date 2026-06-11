@@ -14,7 +14,7 @@ class TestActionWithParams extends Action
     public function __construct()
     {
         $this->httpPath = '/with-params';
-        $this->httpMethod = 'GET';
+        $this->setHttpMethod('GET');
 
         $this
             ->param('name', '', new Text(128), 'User name.', false, example: 'John Doe')

@@ -97,7 +97,7 @@ abstract class Platform
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
-                        $hook = Http::addRoute($action->getHttpMethod(), $action->getHttpPath());
+                        $hook = Http::routes($action->getHttpMethods(), $action->getHttpPath());
                         break;
                 }
 

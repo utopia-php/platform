@@ -9,7 +9,7 @@ class TestActionAliased extends Action
     public function __construct()
     {
         $this->httpPath = '/aliased';
-        $this->httpMethod = 'GET';
+        $this->setHttpMethod('GET');
         $this->httpAlias('/alias-one');
         $this->httpAlias('/alias-two');
         $this->httpAlias('/alias-three');

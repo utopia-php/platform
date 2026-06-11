@@ -4,7 +4,10 @@ namespace Utopia\Platform\Scope;
 
 trait HTTP
 {
-    protected ?string $httpMethod = null;
+    /**
+     * @var array<string>
+     */
+    protected array $httpMethods = [];
 
     protected ?string $httpPath = null;
 
@@ -34,7 +37,20 @@ trait HTTP
      */
     public function setHttpMethod(string $method): self
     {
-        $this->httpMethod = $method;
+        $this->httpMethods = [$method];
+
+        return $this;
+    }
+
+    /**
+     * Set Http Methods
+     *
+     * @param  array<string>  $methods
+     * @return self
+     */
+    public function setHttpMethods(array $methods): self
+    {
+        $this->httpMethods = array_values(array_unique($methods));
 
         return $this;
     }
@@ -60,13 +76,23 @@ trait HTTP
     }
 
     /**
-     * Get the value of httpMethod
+     * Get the primary HTTP method.
      *
-     * @return string
+     * @deprecated Use getHttpMethods() instead.
      */
     public function getHttpMethod(): string
     {
-        return $this->httpMethod;
+        return $this->httpMethods[0] ?? '';
+    }
+
+    /**
+     * Get the value of httpMethods.
+     *
+     * @return array<string>
+     */
+    public function getHttpMethods(): array
+    {
+        return $this->httpMethods;
     }
 
     /**

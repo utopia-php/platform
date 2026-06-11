@@ -9,7 +9,7 @@ class TestActionChunked extends Action
     public function __construct()
     {
         $this->httpPath = '/chunked';
-        $this->httpMethod = 'GET';
+        $this->setHttpMethod('GET');
         $this->inject('response');
         $this->callback(function ($response) {
             $this->action($response);

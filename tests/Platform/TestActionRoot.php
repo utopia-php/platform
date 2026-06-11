@@ -10,7 +10,7 @@ class TestActionRoot extends Action
     {
         $this->httpPath = '/';
         $this->groups(['test']);
-        $this->httpMethod = 'GET';
+        $this->setHttpMethod('GET');
         $this->inject('response');
         $this->callback(function ($response) {
             $this->action($response);

@@ -9,7 +9,7 @@ class TestActionRedirect extends Action
     public function __construct()
     {
         $this->httpPath = '/redirect';
-        $this->httpMethod = 'GET';
+        $this->setHttpMethod('GET');
         $this->inject('response');
         $this->callback(function ($response) {
             $this->action($response);
