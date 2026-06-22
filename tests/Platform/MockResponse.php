@@ -15,9 +15,7 @@ class MockResponse extends Response
 
     public function write(string $content): bool
     {
-        if (! \is_null($content)) {
-            echo $content;
-        }
+        echo $content;
 
         return true;
     }

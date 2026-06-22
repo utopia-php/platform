@@ -16,10 +16,6 @@ abstract class Module
 
     /**
      * Add Service
-     *
-     * @param  string  $key
-     * @param  Service  $service
-     * @return Platform
      */
     public function addService(string $key, Service $service): self
     {
@@ -31,9 +27,6 @@ abstract class Module
 
     /**
      * Remove Service
-     *
-     * @param  string  $key
-     * @return Platform
      */
     public function removeService(string $key): self
     {

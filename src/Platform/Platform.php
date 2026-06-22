@@ -73,9 +73,6 @@ abstract class Platform
 
     /**
      * Init HTTP service
-     *
-     * @param  Service  $service
-     * @return void
      */
     protected function initHttp(array $services): void
     {
@@ -184,9 +181,6 @@ abstract class Platform
 
     /**
      * Init worker Services
-     *
-     * @param  array  $params
-     * @return void
      */
     protected function initWorker(array $services, string $workerName): void
     {
