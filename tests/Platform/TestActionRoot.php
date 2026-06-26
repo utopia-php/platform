@@ -12,12 +12,12 @@ class TestActionRoot extends Action
         $this->groups(['test']);
         $this->setHttpMethod('GET');
         $this->inject('response');
-        $this->callback(function ($response) {
+        $this->callback(function ($response): void {
             $this->action($response);
         });
     }
 
-    public function action($response)
+    public function action($response): void
     {
         $response->send('Hello World!');
     }

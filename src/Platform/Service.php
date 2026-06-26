@@ -18,9 +18,6 @@ abstract class Service
 
     /**
      * Set Type
-     *
-     * @param  string  $type
-     * @return Service
      */
     public function setType(string $type): Service
     {
@@ -31,8 +28,6 @@ abstract class Service
 
     /**
      * Get Type
-     *
-     * @return string|null
      */
     public function getType(): ?string
     {
@@ -41,10 +36,6 @@ abstract class Service
 
     /**
      * Add
-     *
-     * @param  string  $key
-     * @param  Action  $action
-     * @return Service
      */
     public function addAction(string $key, Action $action): Service
     {
@@ -55,9 +46,6 @@ abstract class Service
 
     /**
      * Remove Action
-     *
-     * @param  string  $key
-     * @return Service
      */
     public function removeAction(string $key): Service
     {
@@ -68,9 +56,6 @@ abstract class Service
 
     /**
      * Get Action
-     *
-     * @param  string  $key
-     * @return Action|null
      */
     public function getAction(string $key): ?Action
     {
@@ -79,8 +64,6 @@ abstract class Service
 
     /**
      * Get Actions
-     *
-     * @return array
      */
     public function getActions(): array
     {

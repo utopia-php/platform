@@ -43,9 +43,6 @@ abstract class Module
 
     /**
      * Get Service
-     *
-     * @param  string  $key
-     * @return Service|null
      */
     public function getService(string $key): ?Service
     {
@@ -59,8 +56,6 @@ abstract class Module
 
     /**
      * Get Services
-     *
-     * @return array
      */
     public function getServices(): array
     {
@@ -70,7 +65,6 @@ abstract class Module
     /**
      * Get services by type
      *
-     * @param  string  $type
      * @return array<Service>
      */
     public function getServicesByType(string $type): array

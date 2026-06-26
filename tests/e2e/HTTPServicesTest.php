@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Utopia\Tests;
 
 use PHPUnit\Framework\TestCase;
@@ -8,11 +10,11 @@ use Utopia\Http\Adapter\FPM\Request;
 use Utopia\Http\Adapter\FPM\Server;
 use Utopia\Http\Http;
 
-class HttpServicesTest extends TestCase
+final class HttpServicesTest extends TestCase
 {
-    protected ?string $method;
+    protected ?string $method = null;
 
-    protected ?string $uri;
+    protected ?string $uri = null;
 
     protected ?Http $http;
 
@@ -31,7 +33,7 @@ class HttpServicesTest extends TestCase
         $this->http = null;
     }
 
-    public function testRootAction()
+    public function testRootAction(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
@@ -44,10 +46,10 @@ class HttpServicesTest extends TestCase
         $result = ob_get_contents();
         ob_end_clean();
 
-        $this->assertEquals('Hello World!', $result);
+        $this->assertSame('Hello World!', $result);
     }
 
-    public function testChunkedAction()
+    public function testChunkedAction(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
@@ -60,10 +62,10 @@ class HttpServicesTest extends TestCase
         $result = ob_get_contents();
         ob_end_clean();
 
-        $this->assertEquals('Hello World!', $result);
+        $this->assertSame('Hello World!', $result);
     }
 
-    public function testRedirectAction()
+    public function testRedirectAction(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/redirect';
@@ -73,10 +75,10 @@ class HttpServicesTest extends TestCase
 
         $this->http->run($request, $response);
 
-        $this->assertEquals('/', $response->getHeaderLine('Location'));
+        $this->assertSame('/', $response->getHeaderLine('Location'));
     }
 
-    public function testHook()
+    public function testHook(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
@@ -89,8 +91,8 @@ class HttpServicesTest extends TestCase
         $result = ob_get_contents();
         ob_end_clean();
 
-        $this->assertEquals('Hello World!', $result);
-        $this->assertEquals('init-called', $response->getHeaderLine('x-init'));
+        $this->assertSame('Hello World!', $result);
+        $this->assertSame('init-called', $response->getHeaderLine('x-init'));
 
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
@@ -103,11 +105,11 @@ class HttpServicesTest extends TestCase
         $result = ob_get_contents();
         ob_end_clean();
 
-        $this->assertEquals('Hello World!', $result);
-        $this->assertEquals('', $response1->getHeaderLine('x-init'));
+        $this->assertSame('Hello World!', $result);
+        $this->assertSame('', $response1->getHeaderLine('x-init'));
     }
 
-    public function testAliasedAction()
+    public function testAliasedAction(): void
     {
         $paths = ['/aliased', '/alias-one', '/alias-two', '/alias-three'];
 
@@ -123,16 +125,16 @@ class HttpServicesTest extends TestCase
             $result = ob_get_contents();
             ob_end_clean();
 
-            $this->assertEquals('Aliased!', $result, "Alias '{$path}' should resolve to the aliased action");
+            $this->assertSame('Aliased!', $result, "Alias '{$path}' should resolve to the aliased action");
         }
     }
 
-    public function testActionParamFieldsForwardedToRoute()
+    public function testActionParamFieldsForwardedToRoute(): void
     {
         $routes = Http::getRoutes();
 
         $route = null;
-        foreach ($routes as $method => $methodRoutes) {
+        foreach ($routes as $methodRoutes) {
             foreach ($methodRoutes as $r) {
                 if ($r->getPath() === '/with-params') {
                     $route = $r;
@@ -141,7 +143,7 @@ class HttpServicesTest extends TestCase
             }
         }
 
-        $this->assertNotNull($route, 'Route /with-params should be registered');
+        $this->assertInstanceOf(\Utopia\Http\Route::class, $route, 'Route /with-params should be registered');
 
         $params = $route->getParams();
 
@@ -171,16 +173,16 @@ class HttpServicesTest extends TestCase
         // Verify enum is forwarded to Route params
         $this->assertArrayHasKey('enum', $params['status'], 'Param status should have enum key on Route');
         $this->assertInstanceOf(\Utopia\Platform\Enum::class, $params['status']['enum']);
-        $this->assertEquals('ArticleStatus', $params['status']['enum']->name);
-        $this->assertEquals(['draft' => 'Draft', 'published' => 'Published'], $params['status']['enum']->map);
+        $this->assertSame('ArticleStatus', $params['status']['enum']->name);
+        $this->assertSame(['draft' => 'Draft', 'published' => 'Published'], $params['status']['enum']->map);
 
         // Verify enum is stored on Action params
         $action = new TestActionWithParams();
         $actionParams = $action->getParams();
 
         $this->assertInstanceOf(\Utopia\Platform\Enum::class, $actionParams['status']['enum']);
-        $this->assertEquals('ArticleStatus', $actionParams['status']['enum']->name);
-        $this->assertEquals(['draft' => 'Draft', 'published' => 'Published'], $actionParams['status']['enum']->map);
+        $this->assertSame('ArticleStatus', $actionParams['status']['enum']->name);
+        $this->assertSame(['draft' => 'Draft', 'published' => 'Published'], $actionParams['status']['enum']->map);
 
         // Verify params without enum are null on Action
         $this->assertNull($actionParams['name']['enum']);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Utopia\Tests;
 
 use PHPUnit\Framework\TestCase;
@@ -7,13 +9,13 @@ use Utopia\CLI\Adapters\Generic;
 use Utopia\CLI\CLI;
 use Utopia\Platform\Service;
 
-class CLITest extends TestCase
+final class CLITest extends TestCase
 {
     public function setUp(): void {}
 
     public function tearDown(): void {}
 
-    public function testCLISetup()
+    public function testCLISetup(): void
     {
         ob_start();
 
@@ -28,7 +30,7 @@ class CLITest extends TestCase
 
         $result = ob_get_clean();
 
-        $this->assertEquals('me@example.com-item1-item2', $result);
+        $this->assertSame('me@example.com-item1-item2', $result);
         $this->assertCount(2, $cli->getTasks());
     }
 }

@@ -18,9 +18,6 @@ trait HTTP
 
     /**
      * Set Http path
-     *
-     * @param  string  $path
-     * @return self
      */
     public function setHttpPath(string $path): self
     {
@@ -31,9 +28,6 @@ trait HTTP
 
     /**
      * Set Http Method
-     *
-     * @param  string  $method
-     * @return self
      */
     public function setHttpMethod(string $method): self
     {
@@ -46,7 +40,6 @@ trait HTTP
      * Set Http Methods
      *
      * @param  array<string>  $methods
-     * @return self
      */
     public function setHttpMethods(array $methods): self
     {
@@ -57,8 +50,6 @@ trait HTTP
 
     /**
      * Get httpPath
-     *
-     * @return string
      */
     public function getHttpPath(): string
     {
@@ -97,9 +88,6 @@ trait HTTP
 
     /**
      * Append an httpAlias path. Can be called multiple times to register several aliases.
-     *
-     * @param  string  $path
-     * @return self
      */
     public function httpAlias(string $path): self
     {

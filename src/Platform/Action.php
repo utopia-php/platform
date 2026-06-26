@@ -57,9 +57,6 @@ abstract class Action
 
     /**
      * Set Type
-     *
-     * @param  string  $type
-     * @return self
      */
     public function setType(string $type): self
     {
@@ -70,8 +67,6 @@ abstract class Action
 
     /**
      * Get Type
-     *
-     * @return string
      */
     public function getType(): string
     {
@@ -90,9 +85,6 @@ abstract class Action
 
     /**
      * Set the value of description
-     *
-     * @param  string  $description
-     * @return self
      */
     public function desc(string $description): self
     {
@@ -103,8 +95,6 @@ abstract class Action
 
     /**
      * Get the value of groups
-     *
-     * @return array
      */
     public function getGroups(): array
     {
@@ -113,9 +103,6 @@ abstract class Action
 
     /**
      * Set Groups
-     *
-     * @param  array  $groups
-     * @return self
      */
     public function groups(array $groups): self
     {
@@ -126,8 +113,6 @@ abstract class Action
 
     /**
      * Get the value of callback
-     *
-     * @return mixed
      */
     public function getCallback(): mixed
     {
@@ -136,9 +121,6 @@ abstract class Action
 
     /**
      * Set Callback
-     *
-     * @param  mixed  $callback
-     * @return self
      */
     public function callback(mixed $callback): self
     {
@@ -149,8 +131,6 @@ abstract class Action
 
     /**
      * Get the value of params
-     *
-     * @return array
      */
     public function getParams(): array
     {
@@ -159,19 +139,6 @@ abstract class Action
 
     /**
      * Set Param
-     *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @param  Validator|callable  $validator
-     * @param  string  $description
-     * @param  bool  $optional
-     * @param  array  $injections
-     * @param  bool  $skipValidation
-     * @param  bool  $deprecated
-     * @param  string  $example
-     * @param  array  $aliases
-     * @param  Enum|null  $enum
-     * @return self
      */
     public function param(string $key, mixed $default, Validator|callable $validator, string $description = '', bool $optional = false, array $injections = [], bool $skipValidation = false, bool $deprecated = false, string $example = '', array $aliases = [], ?Enum $enum = null): self
     {
@@ -195,8 +162,6 @@ abstract class Action
 
     /**
      * Get the value of injections
-     *
-     * @return array
      */
     public function getInjections(): array
     {
@@ -206,8 +171,6 @@ abstract class Action
     /**
      * Inject
      *
-     * @param  string  $injection
-     * @return self
      *
      * @throws Exception
      */
@@ -228,8 +191,6 @@ abstract class Action
 
     /**
      * Get the value of labels
-     *
-     * @return array
      */
     public function getLabels(): array
     {
@@ -238,10 +199,6 @@ abstract class Action
 
     /**
      * Add Label
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return self
      */
     public function label(string $key, mixed $value): self
     {
@@ -252,8 +209,6 @@ abstract class Action
 
     /**
      * Get Http Options
-     *
-     * @return array
      */
     public function getOptions(): array
     {

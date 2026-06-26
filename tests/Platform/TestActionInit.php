@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Utopia\Tests;
 
 use Utopia\Http\Response;
@@ -12,12 +14,12 @@ class TestActionInit extends Action
         $this->type = Action::TYPE_INIT;
         $this->groups(['test']);
         $this->inject('response');
-        $this->callback(function ($response) {
+        $this->callback(function (\Utopia\Http\Response $response): void {
             $this->action($response);
         });
     }
 
-    public function action(Response $response)
+    public function action(Response $response): void
     {
         $response->addHeader('x-init', 'init-called');
     }

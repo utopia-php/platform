@@ -12,8 +12,6 @@ use Utopia\Queue\Server;
 
 abstract class Platform
 {
-    protected Module $core;
-
     /**
      * Modules
      *
@@ -25,16 +23,13 @@ abstract class Platform
 
     protected Server $worker;
 
-    public function __construct(Module $module)
+    public function __construct(protected Module $core)
     {
-        $this->core = $module;
-        $this->modules[] = $module;
+        $this->modules[] = $this->core;
     }
 
     /**
      * Initialize Application
-     *
-     * @return void
      */
     public function init(string $type, array $params = []): void
     {
@@ -111,7 +106,7 @@ abstract class Platform
                 foreach ($action->getOptions() as $key => $option) {
                     switch ($option['type']) {
                         case 'param':
-                            $key = substr($key, stripos($key, ':') + 1);
+                            $key = substr((string) $key, stripos((string) $key, ':') + 1);
                             $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections'], $option['skipValidation'], $option['deprecated'], $option['example'], aliases: $option['aliases'] ?? [], enum: $option['enum'] ?? null);
                             break;
                         case 'injection':
@@ -131,8 +126,6 @@ abstract class Platform
 
     /**
      * Init CLI Services
-     *
-     * @return void
      */
     protected function initTasks(array $services): void
     {
@@ -161,7 +154,7 @@ abstract class Platform
                 foreach ($action->getOptions() as $key => $option) {
                     switch ($option['type']) {
                         case 'param':
-                            $key = substr($key, stripos($key, ':') + 1);
+                            $key = substr((string) $key, stripos((string) $key, ':') + 1);
                             $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections'], $option['skipValidation'], $option['deprecated'], $option['example'], aliases: $option['aliases'] ?? [], enum: $option['enum'] ?? null);
                             break;
                         case 'injection':
@@ -187,7 +180,7 @@ abstract class Platform
         $worker = $this->worker;
         foreach ($services as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if ($action->getType() == Action::TYPE_DEFAULT && strtolower($key) !== $workerName) {
+                if ($action->getType() == Action::TYPE_DEFAULT && strtolower((string) $key) !== $workerName) {
                     continue;
                 }
                 switch ($action->getType()) {
@@ -215,7 +208,7 @@ abstract class Platform
                 foreach ($action->getOptions() as $key => $option) {
                     switch ($option['type']) {
                         case 'param':
-                            $key = substr($key, stripos($key, ':') + 1);
+                            $key = substr((string) $key, stripos((string) $key, ':') + 1);
                             $hook->param($key, $option['default'], $option['validator'], $option['description'], $option['optional'], $option['injections'], $option['skipValidation'], $option['deprecated'], $option['example'], aliases: $option['aliases'] ?? [], enum: $option['enum'] ?? null);
                             break;
                         case 'injection':
@@ -235,16 +228,11 @@ abstract class Platform
 
     /**
      * Initialize GraphQL Services
-     *
-     * @return void
      */
     protected function initGraphQL(): void {}
 
     /**
      * Add module
-     *
-     * @param  Module  $module
-     * @return self
      */
     public function addModule(Module $module): self
     {
@@ -255,10 +243,6 @@ abstract class Platform
 
     /**
      * Add Service
-     *
-     * @param  string  $key
-     * @param  Service  $service
-     * @return Platform
      */
     public function addService(string $key, Service $service): self
     {
@@ -269,9 +253,6 @@ abstract class Platform
 
     /**
      * Remove Service
-     *
-     * @param  string  $key
-     * @return Platform
      */
     public function removeService(string $key): self
     {
@@ -282,9 +263,6 @@ abstract class Platform
 
     /**
      * Get Service
-     *
-     * @param  string  $key
-     * @return Service|null
      */
     public function getService(string $key): ?Service
     {
@@ -293,8 +271,6 @@ abstract class Platform
 
     /**
      * Get Services
-     *
-     * @return array
      */
     public function getServices(): array
     {

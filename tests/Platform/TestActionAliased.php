@@ -14,12 +14,12 @@ class TestActionAliased extends Action
         $this->httpAlias('/alias-two');
         $this->httpAlias('/alias-three');
         $this->inject('response');
-        $this->callback(function ($response) {
+        $this->callback(function ($response): void {
             $this->action($response);
         });
     }
 
-    public function action($response)
+    public function action($response): void
     {
         $response->send('Aliased!');
     }
