@@ -39,6 +39,8 @@ abstract class Action
 
     public const TYPE_WORKER_START = 'WorkerStart';
 
+    public const TYPE_WORKER_STOP = 'WorkerStop';
+
     protected ?string $desc = null;
 
     protected array $groups = [];

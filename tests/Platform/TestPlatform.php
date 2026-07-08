@@ -13,5 +13,6 @@ class TestPlatform extends Platform
 
         $this->addService('testService', new TestService());
         $this->addService('testCli', new TestServiceCLI());
+        $this->addService('testWorker', new TestServiceWorker());
     }
 }
