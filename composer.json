@@ -23,12 +23,12 @@
         }
     },
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.5",
         "ext-json": "*",
         "ext-redis": "*",
         "utopia-php/cli": "^0.24",
         "utopia-php/http": "^2.0@RC",
-        "utopia-php/queue": "^0.21",
+        "utopia-php/queue": "^0.22",
         "utopia-php/servers": "^0.4"
     },
     "scripts": {

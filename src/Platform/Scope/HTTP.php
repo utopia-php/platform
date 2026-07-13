@@ -68,9 +68,8 @@ trait HTTP
 
     /**
      * Get the primary HTTP method.
-     *
-     * @deprecated Use getHttpMethods() instead.
      */
+    #[\Deprecated(message: 'Use getHttpMethods() instead.')]
     public function getHttpMethod(): string
     {
         return $this->httpMethods[0] ?? '';
