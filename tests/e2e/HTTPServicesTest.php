@@ -6,10 +6,9 @@ namespace Utopia\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Utopia\DI\Container;
+use Utopia\Http\Adapter\FPM\Request;
 use Utopia\Http\Adapter\FPM\Server;
 use Utopia\Http\Http;
-use Utopia\Psr7\ServerRequest;
-use Utopia\Psr7\Uri;
 
 final class HttpServicesTest extends TestCase
 {
@@ -34,22 +33,12 @@ final class HttpServicesTest extends TestCase
         $this->http = null;
     }
 
-    private function request(): ServerRequest
-    {
-        return new ServerRequest(
-            $_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN',
-            Uri::parse($_SERVER['REQUEST_URI'] ?? '/'),
-            queryParams: $_GET,
-            parsedBody: $_POST,
-        );
-    }
-
     public function testRootAction(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
 
-        $request = $this->request();
+        $request = new Request();
         $response = new MockResponse();
 
         ob_start();
@@ -65,7 +54,7 @@ final class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
 
-        $request = $this->request();
+        $request = new Request();
         $response = new MockResponse();
 
         ob_start();
@@ -81,7 +70,7 @@ final class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/redirect';
 
-        $request = $this->request();
+        $request = new Request();
         $response = new MockResponse();
 
         $this->http->run($request, $response);
@@ -94,7 +83,7 @@ final class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/';
 
-        $request = $this->request();
+        $request = new Request();
         $response = new MockResponse();
 
         ob_start();
@@ -108,7 +97,7 @@ final class HttpServicesTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/chunked';
 
-        $request1 = $this->request();
+        $request1 = new Request();
         $response1 = new MockResponse();
 
         ob_start();
@@ -128,7 +117,7 @@ final class HttpServicesTest extends TestCase
             $_SERVER['REQUEST_METHOD'] = 'GET';
             $_SERVER['REQUEST_URI'] = $path;
 
-            $request = $this->request();
+            $request = new Request();
             $response = new MockResponse();
 
             ob_start();
