@@ -9,13 +9,13 @@
 
 An object oriented way of writing Applications using Utopia libraries
 
-## Getting Started
+## Getting started
 
 This library contains abstract classes that assist in implementing services and actions for Utopia http framework and CLI. You must implement `Platform`, `Service` and `Action` classes to build your application.
 
 ## Example
 
-Install using composer
+Install using Composer
 
 ```
 composer require utopia-php/platform
@@ -78,7 +78,7 @@ $platform->init('http');
 
 ```
 
-## System Requirements
+## System requirements
 
 Utopia Framework requires PHP 8.3 or later. We recommend using the latest PHP version whenever possible.
 
