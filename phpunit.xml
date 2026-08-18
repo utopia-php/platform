@@ -10,6 +10,7 @@
         </testsuite>
         <testsuite name="Application Test Suite">
             <directory>./tests/</directory>
+            <exclude>./tests/unit</exclude>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -51,14 +51,16 @@ abstract class Platform
                     $workerName = $params['workerName'] ?? null;
 
                     if (! isset($this->worker)) {
-                        $consumer = $params['consumer'] ?? null;
+                        $consumer = $params['consumerFactory'] ?? $params['consumer'] ?? null;
+                        if ($consumer === null) {
+                            throw new Exception('Worker init requires consumerFactory or consumer');
+                        }
                         $workersNum = $params['workersNum'] ?? 0;
-                        $workerName = $params['workerName'] ?? null;
-                        $queueName = $params['queueName'] ?? 'v1-' . $workerName;
-                        $adapter = new Swoole($consumer, $workersNum, $queueName);
+                        $namespace = $params['namespace'] ?? 'utopia-queue';
+                        $adapter = new Swoole($consumer, $workersNum, $namespace);
                         $this->worker ??= new Server($adapter);
                     }
-                    $this->initWorker($services, $workerName);
+                    $this->initWorker($services, $workerName, $params);
                     break;
                 default:
                     throw new Exception('Please provide which type of initialization you want to carry out.');
@@ -174,14 +176,41 @@ abstract class Platform
 
     /**
      * Init worker Services
+     *
+     * Single-queue: `init(TYPE_WORKER, ['workerName' => 'functions', 'jobs' => [...]])`.
+     * Combined: pass `workers` (`['all']` or a list) and `jobs` keyed by
+     * action name with that queue's `queue` / `maxCoroutines` (default 1).
+     * Queue name and concurrency are defined only on jobs — never on the adapter.
+     *
+     * Prefer passing `consumerFactory` in `$params` so the Adapter owns the
+     * factory and per-queue isolation is automatic. `Server::consumer()` remains
+     * an optional override (including when using `setWorker()`).
+     *
+     * @param array<int|string, Service> $services
+     * @param array<string, mixed> $params
      */
-    protected function initWorker(array $services, string $workerName): void
+    protected function initWorker(array $services, ?string $workerName, array $params = []): void
     {
         $worker = $this->worker;
+        if (\is_callable($params['consumerFactory'] ?? null)) {
+            $worker->consumer($params['consumerFactory']);
+        }
+        $names = $params['workers'] ?? [];
+        if ($names === [] && $workerName !== null && $workerName !== '') {
+            $names = [$workerName];
+        }
+        $names = array_map(static fn($name): string => strtolower((string) $name), $names);
+        $all = $names === [] || \in_array('all', $names, true);
+        /** @var array<string, array{queue?: ?string, maxCoroutines?: int}> $jobs */
+        $jobs = $params['jobs'] ?? [];
+
         foreach ($services as $service) {
             foreach ($service->getActions() as $key => $action) {
-                if ($action->getType() == Action::TYPE_DEFAULT && strtolower((string) $key) !== $workerName) {
-                    continue;
+                if ($action->getType() == Action::TYPE_DEFAULT) {
+                    $name = strtolower((string) $key);
+                    if (!$all && !\in_array($name, $names, true)) {
+                        continue;
+                    }
                 }
                 switch ($action->getType()) {
                     case Action::TYPE_INIT:
@@ -201,7 +230,13 @@ abstract class Platform
                         break;
                     case Action::TYPE_DEFAULT:
                     default:
-                        $hook = $worker->job();
+                        $name = strtolower((string) $key);
+                        $config = $jobs[$name] ?? [];
+                        $queue = $config['queue'] ?? $params['queueName'] ?? ('v1-' . $name);
+                        $hook = $worker->job(
+                            $queue,
+                            max(1, (int) ($config['maxCoroutines'] ?? 1)),
+                        );
                         break;
                 }
                 $hook
