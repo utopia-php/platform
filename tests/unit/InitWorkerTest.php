@@ -105,7 +105,7 @@ final class RecordingAdapter extends Adapter
 {
     public function __construct(string $namespace = 'utopia-queue')
     {
-        parent::__construct(static fn (string $q): Consumer => new FakeConsumer(), 1, $namespace);
+        parent::__construct(static fn(string $q): Consumer => new FakeConsumer(), 1, $namespace);
     }
 
     public function start(): self
