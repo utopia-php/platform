@@ -179,8 +179,15 @@ abstract class Platform
      *
      * Single-queue: `init(TYPE_WORKER, ['workerName' => 'functions', 'jobs' => [...]])`.
      * Combined: pass `workers` (`['all']` or a list) and `jobs` keyed by
-     * action name with that queue's `queue` / `maxCoroutines` (default 1).
+     * action name with that queue's `queue` / `maxCoroutines` / `batch`
+     * (default 1 for both numbers).
      * Queue name and concurrency are defined only on jobs — never on the adapter.
+     *
+     * `batch` is how many messages one receive may claim at once, where the
+     * consumer supports it ({@see Server::job()}). It is bounded by
+     * `maxCoroutines` and refused above it when the server starts, so a caller
+     * that raises one without the other learns at boot rather than by watching
+     * claimed messages sit behind a handler that has no slot for them.
      *
      * Prefer passing `consumerFactory` in `$params` so the Adapter owns the
      * factory and per-queue isolation is automatic. `Server::consumer()` remains
@@ -201,7 +208,7 @@ abstract class Platform
         }
         $names = array_map(static fn($name): string => strtolower((string) $name), $names);
         $all = $names === [] || \in_array('all', $names, true);
-        /** @var array<string, array{queue?: ?string, maxCoroutines?: int}> $jobs */
+        /** @var array<string, array{queue?: ?string, maxCoroutines?: int, batch?: int}> $jobs */
         $jobs = $params['jobs'] ?? [];
 
         foreach ($services as $service) {
@@ -236,6 +243,7 @@ abstract class Platform
                         $hook = $worker->job(
                             $queue,
                             max(1, (int) ($config['maxCoroutines'] ?? 1)),
+                            max(1, (int) ($config['batch'] ?? 1)),
                         );
                         break;
                 }
