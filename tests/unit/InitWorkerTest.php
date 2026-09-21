@@ -89,9 +89,10 @@ final class InitWorkerTest extends TestCase
 
 final class FakeConsumer implements Consumer
 {
-    public function receive(Queue $queue, int $timeout): ?Message
+    // Initialization never receives; never is compatible with both queue contracts.
+    public function receive(Queue $queue, int $timeout, int $n = 1): never
     {
-        return null;
+        throw new \LogicException('Worker initialization must not receive messages');
     }
 
     public function commit(Queue $queue, Message $message): void {}
