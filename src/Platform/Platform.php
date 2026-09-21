@@ -179,15 +179,11 @@ abstract class Platform
      *
      * Single-queue: `init(TYPE_WORKER, ['workerName' => 'functions', 'jobs' => [...]])`.
      * Combined: pass `workers` (`['all']` or a list) and `jobs` keyed by
-     * action name with that queue's `queue` / `maxCoroutines` / `batch`
-     * (default 1 for both numbers).
+     * action name with that queue's `queue` / `coroutines` / `prefetch`.
+     * Coroutines defaults to one; prefetch defaults to coroutines and limits
+     * all unacknowledged messages, including those awaiting confirmation.
+     * Explicit prefetch below coroutines is rejected by {@see Server::job()}.
      * Queue name and concurrency are defined only on jobs — never on the adapter.
-     *
-     * `batch` is how many messages one receive may claim at once, where the
-     * consumer supports it ({@see Server::job()}). It is bounded by
-     * `maxCoroutines` and refused above it when the server starts, so a caller
-     * that raises one without the other learns at boot rather than by watching
-     * claimed messages sit behind a handler that has no slot for them.
      *
      * Prefer passing `consumerFactory` in `$params` so the Adapter owns the
      * factory and per-queue isolation is automatic. `Server::consumer()` remains
@@ -208,7 +204,7 @@ abstract class Platform
         }
         $names = array_map(static fn($name): string => strtolower((string) $name), $names);
         $all = $names === [] || \in_array('all', $names, true);
-        /** @var array<string, array{queue?: ?string, maxCoroutines?: int, batch?: int}> $jobs */
+        /** @var array<string, array{queue?: ?string, coroutines?: int, prefetch?: int}> $jobs */
         $jobs = $params['jobs'] ?? [];
 
         foreach ($services as $service) {
@@ -242,8 +238,8 @@ abstract class Platform
                         $queue = $config['queue'] ?? $params['queueName'] ?? ('v1-' . $name);
                         $hook = $worker->job(
                             $queue,
-                            max(1, (int) ($config['maxCoroutines'] ?? 1)),
-                            max(1, (int) ($config['batch'] ?? 1)),
+                            max(1, (int) ($config['coroutines'] ?? 1)),
+                            $config['prefetch'] ?? null,
                         );
                         break;
                 }
